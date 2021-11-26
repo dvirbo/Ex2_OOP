@@ -1,5 +1,5 @@
 # Ex2_OOP
- Design and implementation of directed and weighted graphs in Java
+ Design and implementation of directed and weighted graphs in Java.
 ## Ex2 - Links:
 1. Github link: https://github.com/benmoshe/OOP_2021/tree/main/Assignments/Ex2
 2. Document: https://docs.google.com/document/d/17h5VGIHtqWHrzgoRjH05_PjHgCn8-EDcecrkR9sVChQ/edit?usp=sharing
