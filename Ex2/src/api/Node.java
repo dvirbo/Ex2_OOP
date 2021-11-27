@@ -2,7 +2,7 @@ package src.api;
 
 import java.util.Objects;
 
-public class node implements NodeData,Comparable<NodeData> {
+public class Node implements NodeData,Comparable<NodeData> {
     /**
      * Each node contains few fields:
      * location: An object that represent the location of the node by 3d point.
@@ -12,21 +12,25 @@ public class node implements NodeData,Comparable<NodeData> {
      * key: A unique key that is used as each node's ID.
      */
 
+    private static int id = 0;
     private int key;
     private GeoLocation location;
-    private double weight = Double.MAX_VALUE;
-    private String info = "White";
-    private int tag = -1;
-    private static int uniqueKey = 0;
+    private double weight;
+    private String info;
+    private int tag;
+
 
     /**
      * Constructor.
      * @param l - geo_Location.
      */
 
-    public node(GeoLocation l){
-        this.key = uniqueKey++;
+    public Node(GeoLocation l){
+        this.key = id++;
         this.location = l;
+        this.weight = Double.MAX_VALUE;
+        this.info = "White";
+        this.tag = -1;
     }
 
     /**
@@ -34,9 +38,9 @@ public class node implements NodeData,Comparable<NodeData> {
      * @param other - node_gata.
      */
 
-    public node(NodeData other) {
+    public Node(NodeData other) {
         this.key = other.getKey();
-        this.location = new geo_Location(other.getLocation());
+        this.location = new Geo_Location(other.getLocation());
         this.weight = other.getWeight();
         this.info = other.getInfo();
         this.tag = other.getTag();
@@ -64,7 +68,7 @@ public class node implements NodeData,Comparable<NodeData> {
      */
     @Override
     public void setLocation(GeoLocation p) {
-        this.location = new geo_Location(p.x(),p.y(),p.z());
+        this.location = new Geo_Location(p.x(),p.y(),p.z());
     }
 
     /**
@@ -117,7 +121,7 @@ public class node implements NodeData,Comparable<NodeData> {
      */
     @Override
     public int compareTo(NodeData o) {
-        node p = this;
+        Node p = this;
         return Double.compare(p.getWeight(), o.getWeight());
     }
 
@@ -130,7 +134,7 @@ public class node implements NodeData,Comparable<NodeData> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        node node = (node) o;
+        Node node = (Node) o;
         return key == node.key &&
                 Double.compare(node.weight, weight) == 0 &&
                 tag == node.tag &&

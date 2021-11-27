@@ -21,7 +21,7 @@ public class DWGraph implements  DirectedWeightedGraph{
     private HashMap<Integer, HashMap<Integer, EdgeData>> edges;
     private int nodesNum;
     private int edgesNum;
-    private int modeCounter;
+    private int modeCount;
 
 
     public DWGraph(){
@@ -29,7 +29,7 @@ public class DWGraph implements  DirectedWeightedGraph{
         this.edges = new HashMap<>();
         this.edgesNum = 0;
         this.nodesNum = 0;
-        this.modeCounter = 0;
+        this.modeCount = 0;
 
     }
     public DWGraph(DirectedWeightedGraph other){
@@ -44,49 +44,53 @@ public class DWGraph implements  DirectedWeightedGraph{
 
     private HashMap<Integer, NodeData> nodes_DeepCopy(DirectedWeightedGraph other, HashMap nodes) {
         HashMap<Integer, NodeData> nodes_DC = nodes;
-        for (NodeData n: other.)
-              {
-
+        for (Iterator<NodeData> it = other.nodeIter(); it.hasNext(); ) {
+            NodeData n = it.next();
         }
+
     }
 
     private HashMap<Integer, HashMap<Integer, EdgeData>> edges_DeepCopy(DirectedWeightedGraph other, HashMap edges) {
     
     }
 
-
-
-
     /**
      * returns the node_data by the node_id,
      *
      * @param key - the node_id
-     * @return the node_data by the node_id, null if none.
+     * @return the NodeData by the node_id, null if none.
      */
     public NodeData getNode(int key) {
-        return null;
+        return this.nodes.get(key);
     }
 
     /**
      * returns the data of the edge (src,dest), null if none.
-     * Note: this method should run in O(1) time.
-     *
-     * @param src
-     * @param dest
-     * @return
+     * Complexity: should run in O(1) time.
+     * @param src: source node
+     * @param dest: destination node
+     * @return the Edge, else null
      */
     public EdgeData getEdge(int src, int dest) {
+        if(this.nodes.containsKey(src) && this.nodes.containsKey(dest)){
+            return this.edges.get(src).get(dest);
+        }
         return null;
     }
 
     /**
      * adds a new node to the graph with the given node_data.
-     * Note: this method should run in O(1) time.
-     *
-     * @param n
+     * Complexity: should run in O(1) time.
+     * @param n: NodeData
      */
     public void addNode(NodeData n) {
-
+        if(nodes.containsKey(n.getKey())){
+            return; //if that node already exist
+        }
+        nodes.put(n.getKey(), n);
+        edges.put(n.getKey(),new HashMap<>());
+        nodesNum++;
+        edgesNum++;
     }
 
     /**
@@ -108,8 +112,10 @@ public class DWGraph implements  DirectedWeightedGraph{
      * @return Iterator<NodeData>
      */
     public Iterator<NodeData> nodeIter() {
+
         Iterator it = nodes.entrySet().iterator();
         while (it.hasNext()){
+
 
 
         }
@@ -145,47 +151,55 @@ public class DWGraph implements  DirectedWeightedGraph{
      * @return the data of the removed node (null if none).
      */
     public NodeData removeNode(int key) {
-        return null;
+        if(!this.nodes.containsKey(key)){
+            return null;
+        }
+        int size = edges.get(key).size(); // size - how much
+        edges.remove(key);
+        edgesNum -= size;
+        modeCount += size; //add all the changes that occur
+
     }
 
     /**
      * Deletes the edge from the graph,
-     * Note: this method should run in O(1) time.
-     *
-     * @param src
-     * @param dest
+     * Complexity: run in O(1) time.
+     * @param src - edge source node.
+     * @param dest - edge destination node.
      * @return the data of the removed edge (null if none).
      */
     public EdgeData removeEdge(int src, int dest) {
-        return null;
+        EdgeData e = edges.get(src).remove(dest);
+        if(e != null){
+            edgesNum--;
+        }
+        return e;
     }
 
     /**
      * Returns the number of vertices (nodes) in the graph.
-     * Note: this method should run in O(1) time.
-     *
-     * @return
+     * Complexity: run in O(1) time.
+     * @return number of nodes in the graph.
      */
     public int nodeSize() {
-        return 0;
+        return this.nodesNum;
     }
 
     /**
      * Returns the number of edges (assume directional graph).
-     * Note: this method should run in O(1) time.
-     *
-     * @return
+     * Complexity: run in O(1) time.
+     * @return number of edges in the graph.
      */
     public int edgeSize() {
-        return 0;
+        return this.edgesNum;
     }
 
     /**
      * Returns the Mode Count - for testing changes in the graph.
-     *
-     * @return
+     * Complexity: run in O(1) time.
+     * @return number of changes in the graph.
      */
     public int getMC() {
-        return 0;
+        return this.modeCounter;
     }
 }

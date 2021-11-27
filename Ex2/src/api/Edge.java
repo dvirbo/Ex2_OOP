@@ -10,7 +10,7 @@ import java.util.Objects;
 
  */
 
-public class edge implements EdgeData{
+public class Edge implements EdgeData{
 
     private int src;
     private int dest;
@@ -24,7 +24,7 @@ public class edge implements EdgeData{
      * @param d - destination.
      * @param w - weight.
      */
-    public edge(int s, int d, double w) {
+    public Edge(int s, int d, double w) {
         this.src = s;
         this.dest = d;
         this.w = w;
@@ -36,8 +36,8 @@ public class edge implements EdgeData{
      * Deep copy constructor.
      * @param other - EdgeData.
      */
-    public edge(EdgeData other){
-        edge e = (edge)other;
+    public Edge(EdgeData other){
+        Edge e = (Edge)other;
         this.src = e.src;
         this.dest = e.dest;
         this.w = other.getWeight();
@@ -46,9 +46,7 @@ public class edge implements EdgeData{
     }
 
     /**
-     * The id of the source node of this edge.
-     *
-     * @return
+     * @return The id of the source node of this edge.
      */
     public int getSrc() {
         return this.getSrc();
@@ -57,7 +55,7 @@ public class edge implements EdgeData{
     /**
      * The id of the destination node of this edge
      *
-     * @return
+     * @return destination node of this edge
      */
     public int getDest() {
         return this.getDest();
@@ -71,9 +69,8 @@ public class edge implements EdgeData{
     }
 
     /**
-     * Returns the remark (meta data) associated with this edge.
      *
-     * @return
+     * @return the remark (meta data) associated with this edge.
      */
     public String getInfo() {
         return  this.info;
@@ -81,7 +78,6 @@ public class edge implements EdgeData{
 
     /**
      * Allows changing the remark (meta data) associated with this edge.
-     *
      * @param s
      */
     public void setInfo(String s) {
@@ -92,7 +88,7 @@ public class edge implements EdgeData{
      * Temporal data (aka color: e,g, white, gray, black)
      * which can be used be algorithms
      *
-     * @return
+     * @return the tag
      */
     public int getTag() {
         return this.tag;
@@ -121,7 +117,7 @@ public class edge implements EdgeData{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        edge edge = (edge) o;
+        Edge edge = (Edge) o;
         return src == edge.src &&
                 dest == edge.dest &&
                 Double.compare(edge.w, w) == 0 &&
