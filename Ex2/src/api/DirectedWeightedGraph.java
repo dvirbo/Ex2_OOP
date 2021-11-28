@@ -90,4 +90,6 @@ public interface DirectedWeightedGraph {
  * @return
  */
 	public int getMC();
+
+	boolean hasEdge(int i, int j);
 }

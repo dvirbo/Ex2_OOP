@@ -48,6 +48,7 @@ public class Edge implements EdgeData{
     /**
      * @return The id of the source node of this edge.
      */
+    @Override
     public int getSrc() {
         return this.getSrc();
     }
@@ -57,6 +58,7 @@ public class Edge implements EdgeData{
      *
      * @return destination node of this edge
      */
+    @Override
     public int getDest() {
         return this.getDest();
     }
@@ -64,6 +66,7 @@ public class Edge implements EdgeData{
     /**
      * @return the weight of this edge (positive value).
      */
+    @Override
     public double getWeight() {
         return this.getWeight();
     }
@@ -72,6 +75,7 @@ public class Edge implements EdgeData{
      *
      * @return the remark (meta data) associated with this edge.
      */
+    @Override
     public String getInfo() {
         return  this.info;
     }
@@ -80,6 +84,7 @@ public class Edge implements EdgeData{
      * Allows changing the remark (meta data) associated with this edge.
      * @param s
      */
+    @Override
     public void setInfo(String s) {
         this.info = s;
     }
@@ -90,6 +95,7 @@ public class Edge implements EdgeData{
      *
      * @return the tag
      */
+    @Override
     public int getTag() {
         return this.tag;
     }
@@ -100,6 +106,7 @@ public class Edge implements EdgeData{
      *
      * @param t - the new value of the tag
      */
+    @Override
     public void setTag(int t) {
        this.tag = t;
     }
