@@ -5,14 +5,14 @@ public class geo_Location implements GeoLocation{
 
     /**
      * constructor by variables.
-     * @param x1
-     * @param y1
-     * @param z1
+     * @param x
+     * @param y
+     * @param z
      */
-    public geo_Location(double x1 , double y1, double z1){
-        this.x = x1;
-        this.y = y1;
-        this.z = z1;
+    public geo_Location(double x , double y, double z){
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
     /**
@@ -40,7 +40,7 @@ public class geo_Location implements GeoLocation{
     public double z() {
         return this.z;
     }
-
+ 
     /**
      * Returns the distance between two geoLocations points.
      * @param g - geo_location
