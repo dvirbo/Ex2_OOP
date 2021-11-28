@@ -1,5 +1,7 @@
 package src.api;
 
+import src.interfaces.EdgeData;
+
 import java.util.Objects;
 
 /**
@@ -10,7 +12,7 @@ import java.util.Objects;
 
  */
 
-public class Edge implements EdgeData{
+public class Edge implements EdgeData {
 
     private int src;
     private int dest;

@@ -1,6 +1,8 @@
 package src.api;
 
-public class Geo_Location implements GeoLocation{
+import src.interfaces.GeoLocation;
+
+public class Geo_Location implements GeoLocation {
     private double x,y,z;
 
     /**

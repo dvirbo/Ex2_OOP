@@ -1,8 +1,11 @@
 package src.api;
 
+import src.interfaces.GeoLocation;
+import src.interfaces.NodeData;
+
 import java.util.Objects;
 
-public class Node implements NodeData,Comparable<NodeData> {
+public class Node implements NodeData, Comparable<NodeData> {
     /**
      * Each node contains few fields:
      * location: An object that represent the location of the node by 3d point.
@@ -12,30 +15,23 @@ public class Node implements NodeData,Comparable<NodeData> {
      * key: A unique key that is used as each node's ID.
      */
 
-    private static int id = 0;
     private int key;
     private GeoLocation location;
     private double weight;
     private String info;
     private int tag;
 
-
-    /**
-     * Constructor.
-     * @param l - geo_Location.
-     */
-
-    public Node(GeoLocation l){
-        this.key = id++;
-        this.location = l;
-        this.weight = Double.MAX_VALUE;
-        this.info = "White";
-        this.tag = -1;
+    public Node(int uniqueKey, Geo_Location g, int weight, String info, int tag) {
+        this.key = uniqueKey;
+        this.location = new Geo_Location(g);
+        this.weight = weight;
+        this.info = "white";
+        this.tag = tag;
     }
 
     /**
      * Deep copy constructor.
-     * @param other - node_gata.
+     * @param other - NodeData.
      */
 
     public Node(NodeData other) {
@@ -46,6 +42,7 @@ public class Node implements NodeData,Comparable<NodeData> {
         this.tag = other.getTag();
     }
 
+
     /**
      * Returns the key (id) associated with this node.
      * @return key
@@ -55,7 +52,8 @@ public class Node implements NodeData,Comparable<NodeData> {
         return this.key;
     }
 
-    /** Returns the location of this node, if none return null.
+    /**
+     * Returns the location of this node, if none return null.
      * @return the location of this node.
      */
     @Override
@@ -63,12 +61,13 @@ public class Node implements NodeData,Comparable<NodeData> {
         return this.location;
     }
 
-    /** Allows changing this node's location.
+    /**
+     * Allows changing this node's location.
      * @param p - new new location  (position) of this node.
      */
     @Override
     public void setLocation(GeoLocation p) {
-        this.location = new Geo_Location(p.x(),p.y(),p.z());
+        this.location = new Geo_Location(p.x(), p.y(), p.z());
     }
 
     /**
@@ -97,20 +96,31 @@ public class Node implements NodeData,Comparable<NodeData> {
     public String getInfo() {
         return this.info;
     }
+
     /**
      * Allows changing the remark (meta data) associated with this node.
      * @param s - the new info.
      */
-     @Override
-     public void setInfo(String s) {
-         this.info = s;
-     }
+    @Override
+    public void setInfo(String s) {
+        this.info = s;
+    }
 
+    /**
+     * Temporal data (aka color: e,g, white, gray, black)
+     * which can be used be algorithms
+     * @return
+     */
     @Override
     public int getTag() {
         return this.tag;
     }
 
+    /**
+     * Allows setting the "tag" value for temporal marking an node - common
+     * practice for marking by algorithms.
+     * @param t - the new value of the tag
+     */
     @Override
     public void setTag(int t) {
         this.tag = t;
@@ -126,7 +136,6 @@ public class Node implements NodeData,Comparable<NodeData> {
     }
 
     /**
-     *
      * @param o - an Object.
      * @return true if the arguments are equal to each other and false otherwise.
      */

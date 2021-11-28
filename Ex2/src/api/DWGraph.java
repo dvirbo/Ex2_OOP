@@ -1,5 +1,9 @@
 package src.api;
 
+import src.interfaces.DirectedWeightedGraph;
+import src.interfaces.EdgeData;
+import src.interfaces.NodeData;
+
 import java.util.*;
 
 /**

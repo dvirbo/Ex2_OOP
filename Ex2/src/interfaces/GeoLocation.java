@@ -1,4 +1,4 @@
-package src.api;
+package src.interfaces;
 /**
  * This interface represents a geo location <x,y,z>, (aka Point3D data).
  *
