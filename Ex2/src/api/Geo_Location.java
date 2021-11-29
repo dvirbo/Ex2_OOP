@@ -1,6 +1,8 @@
 package src.api;
 
-public class geo_Location implements GeoLocation{
+import src.interfaces.GeoLocation;
+
+public class Geo_Location implements GeoLocation {
     private double x,y,z;
 
     /**
@@ -9,7 +11,7 @@ public class geo_Location implements GeoLocation{
      * @param y1
      * @param z1
      */
-    public geo_Location(double x1 , double y1, double z1){
+    public Geo_Location(double x1 , double y1, double z1){
         this.x = x1;
         this.y = y1;
         this.z = z1;
@@ -19,7 +21,7 @@ public class geo_Location implements GeoLocation{
      * Deep copy constructor.
      * @param other - geo_location
      */
-    public geo_Location(GeoLocation other){
+    public Geo_Location(GeoLocation other){
         this.x = other.x();
         this.y = other.y();
         this.z = other.z();

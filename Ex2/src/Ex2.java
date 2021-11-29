@@ -1,7 +1,7 @@
 package src;
 
-import src.api.DirectedWeightedGraph;
-import src.api.DirectedWeightedGraphAlgorithms;
+import src.interfaces.DirectedWeightedGraph;
+import src.interfaces.DirectedWeightedGraphAlgorithms;
 
 
 /**

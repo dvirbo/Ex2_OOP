@@ -1,4 +1,4 @@
-package src.api;
+package src.interfaces;
 import java.util.Iterator;
 /**
  * This interface represents a Directional Weighted Graph,
@@ -90,4 +90,6 @@ public interface DirectedWeightedGraph {
  * @return
  */
 	public int getMC();
+
+	boolean hasEdge(int i, int j);
 }

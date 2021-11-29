@@ -1,8 +1,11 @@
 package src.api;
 
+import src.interfaces.GeoLocation;
+import src.interfaces.NodeData;
+
 import java.util.Objects;
 
-public class node implements NodeData,Comparable<NodeData> {
+public class Node implements NodeData, Comparable<NodeData> {
     /**
      * Each node contains few fields:
      * location: An object that represent the location of the node by 3d point.
@@ -14,33 +17,31 @@ public class node implements NodeData,Comparable<NodeData> {
 
     private int key;
     private GeoLocation location;
-    private double weight = Double.MAX_VALUE;
-    private String info = "White";
-    private int tag = -1;
-    private static int uniqueKey = 0;
+    private double weight;
+    private String info;
+    private int tag;
 
-    /**
-     * Constructor.
-     * @param l - geo_Location.
-     */
-
-    public node(GeoLocation l){
-        this.key = uniqueKey++;
-        this.location = l;
+    public Node(int uniqueKey, Geo_Location g, int weight, String info, int tag) {
+        this.key = uniqueKey;
+        this.location = new Geo_Location(g);
+        this.weight = weight;
+        this.info = info;
+        this.tag = tag;
     }
 
     /**
      * Deep copy constructor.
-     * @param other - node_gata.
+     * @param other - NodeData.
      */
 
-    public node(NodeData other) {
+    public Node(NodeData other) {
         this.key = other.getKey();
-        this.location = new geo_Location(other.getLocation());
+        this.location = new Geo_Location(other.getLocation());
         this.weight = other.getWeight();
         this.info = other.getInfo();
         this.tag = other.getTag();
     }
+
 
     /**
      * Returns the key (id) associated with this node.
@@ -51,7 +52,8 @@ public class node implements NodeData,Comparable<NodeData> {
         return this.key;
     }
 
-    /** Returns the location of this node, if none return null.
+    /**
+     * Returns the location of this node, if none return null.
      * @return the location of this node.
      */
     @Override
@@ -59,12 +61,13 @@ public class node implements NodeData,Comparable<NodeData> {
         return this.location;
     }
 
-    /** Allows changing this node's location.
+    /**
+     * Allows changing this node's location.
      * @param p - new new location  (position) of this node.
      */
     @Override
     public void setLocation(GeoLocation p) {
-        this.location = new geo_Location(p.x(),p.y(),p.z());
+        this.location = new Geo_Location(p.x(), p.y(), p.z());
     }
 
     /**
@@ -93,20 +96,31 @@ public class node implements NodeData,Comparable<NodeData> {
     public String getInfo() {
         return this.info;
     }
+
     /**
      * Allows changing the remark (meta data) associated with this node.
      * @param s - the new info.
      */
-     @Override
-     public void setInfo(String s) {
-         this.info = s;
-     }
+    @Override
+    public void setInfo(String s) {
+        this.info = s;
+    }
 
+    /**
+     * Temporal data (aka color: e,g, white, gray, black)
+     * which can be used be algorithms
+     * @return
+     */
     @Override
     public int getTag() {
         return this.tag;
     }
 
+    /**
+     * Allows setting the "tag" value for temporal marking an node - common
+     * practice for marking by algorithms.
+     * @param t - the new value of the tag
+     */
     @Override
     public void setTag(int t) {
         this.tag = t;
@@ -117,12 +131,11 @@ public class node implements NodeData,Comparable<NodeData> {
      */
     @Override
     public int compareTo(NodeData o) {
-        node p = this;
+        Node p = this;
         return Double.compare(p.getWeight(), o.getWeight());
     }
 
     /**
-     *
      * @param o - an Object.
      * @return true if the arguments are equal to each other and false otherwise.
      */
@@ -130,7 +143,7 @@ public class node implements NodeData,Comparable<NodeData> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        node node = (node) o;
+        Node node = (Node) o;
         return key == node.key &&
                 Double.compare(node.weight, weight) == 0 &&
                 tag == node.tag &&

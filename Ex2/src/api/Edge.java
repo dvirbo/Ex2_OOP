@@ -1,5 +1,7 @@
 package src.api;
 
+import src.interfaces.EdgeData;
+
 import java.util.Objects;
 
 /**
@@ -10,7 +12,7 @@ import java.util.Objects;
 
  */
 
-public class edge implements EdgeData{
+public class Edge implements EdgeData {
 
     private int src;
     private int dest;
@@ -24,7 +26,7 @@ public class edge implements EdgeData{
      * @param d - destination.
      * @param w - weight.
      */
-    public edge(int s, int d, double w) {
+    public Edge(int s, int d, double w) {
         this.src = s;
         this.dest = d;
         this.w = w;
@@ -36,8 +38,8 @@ public class edge implements EdgeData{
      * Deep copy constructor.
      * @param other - EdgeData.
      */
-    public edge(EdgeData other){
-        edge e = (edge)other;
+    public Edge(EdgeData other){
+        Edge e = (Edge)other;
         this.src = e.src;
         this.dest = e.dest;
         this.w = other.getWeight();
@@ -46,10 +48,9 @@ public class edge implements EdgeData{
     }
 
     /**
-     * The id of the source node of this edge.
-     *
-     * @return
+     * @return The id of the source node of this edge.
      */
+    @Override
     public int getSrc() {
         return this.getSrc();
     }
@@ -57,8 +58,9 @@ public class edge implements EdgeData{
     /**
      * The id of the destination node of this edge
      *
-     * @return
+     * @return destination node of this edge
      */
+    @Override
     public int getDest() {
         return this.getDest();
     }
@@ -66,24 +68,25 @@ public class edge implements EdgeData{
     /**
      * @return the weight of this edge (positive value).
      */
+    @Override
     public double getWeight() {
         return this.getWeight();
     }
 
     /**
-     * Returns the remark (meta data) associated with this edge.
      *
-     * @return
+     * @return the remark (meta data) associated with this edge.
      */
+    @Override
     public String getInfo() {
         return  this.info;
     }
 
     /**
      * Allows changing the remark (meta data) associated with this edge.
-     *
      * @param s
      */
+    @Override
     public void setInfo(String s) {
         this.info = s;
     }
@@ -92,8 +95,9 @@ public class edge implements EdgeData{
      * Temporal data (aka color: e,g, white, gray, black)
      * which can be used be algorithms
      *
-     * @return
+     * @return the tag
      */
+    @Override
     public int getTag() {
         return this.tag;
     }
@@ -104,6 +108,7 @@ public class edge implements EdgeData{
      *
      * @param t - the new value of the tag
      */
+    @Override
     public void setTag(int t) {
        this.tag = t;
     }
@@ -121,7 +126,7 @@ public class edge implements EdgeData{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        edge edge = (edge) o;
+        Edge edge = (Edge) o;
         return src == edge.src &&
                 dest == edge.dest &&
                 Double.compare(edge.w, w) == 0 &&
