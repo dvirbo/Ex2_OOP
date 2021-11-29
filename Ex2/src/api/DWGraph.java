@@ -29,8 +29,8 @@ public class DWGraph implements DirectedWeightedGraph {
     public DWGraph() {
         this.nodes = new HashMap<>();
         this.edges = new HashMap<>();
-        this.edgeSize = 0;
         this.nodeSize = 0;
+        this.edgeSize = 0;
         this.modeCount = 0;
 
     }
@@ -49,8 +49,16 @@ public class DWGraph implements DirectedWeightedGraph {
                 }
             }
         }
+        this.nodeSize=other.nodeSize();
+        this.edgeSize = other.edgeSize();
+        this.modeCount = getMC();
     }
-
+    /**
+     * Checks if two given nodes are connected.
+     * @param k1  first key of the node.
+     * @param k2  second key of the node.
+     * @return true if they are connected.
+     */
     public boolean hasEdge(int k1, int k2) {
         NodeData n1 = getNode(k1);
         NodeData n2 = getNode(k2);
@@ -95,15 +103,14 @@ public class DWGraph implements DirectedWeightedGraph {
      */
     @Override
     public void addNode(NodeData n) {
-        if (nodes.containsKey(n.getKey())) {
-            return; //if that node already exist
+        if (!nodes.containsKey(n.getKey())) {
+            nodes.put(n.getKey(), n);
+            edges.put(n.getKey(), new HashMap<>());
+            nodeSize++;
+            edgeSize++;
         }
-        nodes.put(n.getKey(), n);
-        edges.put(n.getKey(), new HashMap<>());
-        nodeSize++;
-        edgeSize++;
-    }
 
+    }
     /**
      * Connects an edge with weight w between node src to node dest.
      * This method run in O(1) time.
@@ -137,7 +144,8 @@ public class DWGraph implements DirectedWeightedGraph {
     @Override
     public Iterator<NodeData> nodeIter() {
         //how do I know if the graph was changed since the iterator was constructed??
-        return this.nodes.values().iterator();
+        Iterator iterator =this.nodes.values().iterator();
+        return iterator;
     }
 
     /**

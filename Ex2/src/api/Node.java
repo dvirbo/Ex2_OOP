@@ -25,7 +25,7 @@ public class Node implements NodeData, Comparable<NodeData> {
         this.key = uniqueKey;
         this.location = new Geo_Location(g);
         this.weight = weight;
-        this.info = "white";
+        this.info = info;
         this.tag = tag;
     }
 
