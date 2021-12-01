@@ -19,7 +19,7 @@ public class Edge implements EdgeData {
     private double w;
     private String info;
     private int tag;
-
+    public  static  int uniq = 0;
     /**
      * Constructor:
      * @param s - source.
@@ -32,6 +32,7 @@ public class Edge implements EdgeData {
         this.w = w;
         this.info = "White";
         this.tag = -1;
+        uniq++;
     }
 
     /**
@@ -45,6 +46,7 @@ public class Edge implements EdgeData {
         this.w = other.getWeight();
         this.info = other.getInfo();
         this.tag = other.getTag();
+        uniq++;
     }
 
     /**

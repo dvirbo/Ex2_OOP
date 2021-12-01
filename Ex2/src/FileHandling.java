@@ -9,12 +9,18 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import src.interfaces.EdgeData;
+import src.interfaces.NodeData;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 public class FileHandling {
     public static NodeEdge getJsonToObj(String json_file) {
 
@@ -88,6 +94,30 @@ public class FileHandling {
         NodeEdge ne = null;
         return ne;
     }
+
+
+//    public HashMap<Integer, NodeData> convertListAfterJava8(List<Node> list) {
+//        HashMap<Integer, NodeData> map = list.stream()
+//                .collect(Collectors.toMap(NodeData::getId, Function.identity()));
+//        return map;
+//    }
+
+    public HashMap<Integer, NodeData> convertListAfterJava8(List<Node> list) {
+        HashMap<Integer, NodeData> map = new HashMap<>();
+        for (NodeData node : list) {
+            map.put(node.getKey(), node);
+        }
+        return map;
+    }
+
+    public HashMap<Integer, EdgeData> convertListAfterJava8(List<Node> list) {
+        HashMap<Integer, EdgeData> map = new HashMap<>();
+        for (EdgeData edge : list) {
+            map.put(Edge.uniq , node);
+        }
+        return map;
+    }
+
 
     public static void main(String[] args) {
 
