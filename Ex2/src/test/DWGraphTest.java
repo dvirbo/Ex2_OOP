@@ -12,10 +12,16 @@ import java.util.Random;
 
 class DWGraphTest {
     private static Random _rnd = null;
-    private Node n1, n2, n3, n4, n5, n6;
-    Geo_Location g1, g2, g3, g4, g5, g6;
 
-    public void nodeCreator() {
+//    @BeforeAll
+//      void nodeCreator() {
+//
+//    }
+
+    @Test
+    void nodeSize() {
+        Node n1, n2, n3, n4, n5, n6;
+        Geo_Location g1, g2, g3, g4, g5, g6;
         g1 = new Geo_Location(1, 2, 3);
         g2 = new Geo_Location(2, 1, 3);
         g3 = new Geo_Location(-4, 7, 1);
@@ -29,24 +35,26 @@ class DWGraphTest {
         n4 = new Node(4, g4, 4, "White", -1);
         n5 = new Node(5, g5, 5, "White", -1);
         n6 = new Node(6, g6, 6, "White", -1);
-    }
 
-    @Test
-    void nodeSize() {
-        DWGraph g1 = new DWGraph();
-        g1.addNode(n1);
-        g1.addNode(n2);
-        g1.addNode(n3);
-        g1.addNode(n4);
-        g1.addNode(n5);
-        g1.addNode(n6);
-        g1.connect(n1.getKey(),n3.getKey(),1.1);
-        int e_size =  g1.edgeSize();
-        assertEquals(6, e_size);
-        EdgeData w03 = g1.getEdge(0,3);
-        EdgeData w30 = g1.getEdge(3,0);
+        DWGraph graph = new DWGraph();
+        graph.addNode(n1);
+        graph.addNode(n2);
+        graph.addNode(n3);
+        graph.addNode(n4);
+        graph.addNode(n5);
+        graph.addNode(n6);
+
+        int node_in_g1 = graph.nodeSize();
+        assertEquals(node_in_g1,6);
+
+        graph.connect(n1.getKey(),n3.getKey(),1.1);
+
+        int edge_in_g1 = graph.edgeSize();
+        assertEquals(edge_in_g1,1);
+
+        EdgeData w03 = graph.getEdge(1,2);
+        EdgeData w30 = graph.getEdge(2,1);
         assertEquals(w03, w30);
-        assertEquals(w03, 3);
 
     }
 

@@ -3,6 +3,8 @@ package src;
 import src.interfaces.DirectedWeightedGraph;
 import src.interfaces.DirectedWeightedGraphAlgorithms;
 
+import static src.FileHandling.getJsonToObj;
+
 
 /**
  * This class is the main class for Ex2 - your implementation will be tested using this class.
@@ -28,7 +30,7 @@ public class Ex2 {
     public static DirectedWeightedGraphAlgorithms getGrapgAlgo(String json_file) {
         DirectedWeightedGraphAlgorithms ans = null;
         // ****** Add your code here ******
-        //
+        getJsonToObj(json_file);
         // ********************************
         return ans;
     }

@@ -62,7 +62,7 @@ public class DWGraph implements DirectedWeightedGraph {
     public boolean hasEdge(int k1, int k2) {
         NodeData n1 = getNode(k1);
         NodeData n2 = getNode(k2);
-        if (n1 == null || n2 == null || k1 == k2)
+        if (n1 == null || n2 == null || k1 == k2 || n1.getKey() == n2.getKey())
             return false;
         return edges.get(k1).containsKey(n2);
     }
@@ -103,13 +103,13 @@ public class DWGraph implements DirectedWeightedGraph {
      */
     @Override
     public void addNode(NodeData n) {
-        if (!nodes.containsKey(n.getKey())) {
-            nodes.put(n.getKey(), n);
-            edges.put(n.getKey(), new HashMap<>());
-            nodeSize++;
-            edgeSize++;
+        if (n != null) {
+            if (!nodes.containsKey(n.getKey())) {
+                nodes.put(n.getKey(), n);
+                edges.put(n.getKey(), new HashMap<>());
+                nodeSize++;
+            }
         }
-
     }
     /**
      * Connects an edge with weight w between node src to node dest.
@@ -131,6 +131,7 @@ public class DWGraph implements DirectedWeightedGraph {
         if (!hasEdge(src, dest)) {
             Edge e = new Edge(src, dest, w);
             edges.get(src).put(n2, e);
+            edgeSize++;
         }
     }
 
@@ -157,9 +158,9 @@ public class DWGraph implements DirectedWeightedGraph {
     @Override
     public Iterator<EdgeData> edgeIter() {
         //how do I know if the graph was changed since the iterator was constructed??
-        Iterator iterator = this.edges.entrySet().iterator();
+        Iterator iterator = this.edges.values().stream().iterator();
         return iterator;
-    }
+    }//entrySet().iterator();
 
     /**
      * This method returns an Iterator for edges getting out of the given node (all the edges starting (source) at the given node).

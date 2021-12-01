@@ -41,6 +41,15 @@ public class Node implements NodeData, Comparable<NodeData> {
         this.info = other.getInfo();
         this.tag = other.getTag();
     }
+//double str1 = Double.parseDouble(str);
+    public Node(String pos, String id) {
+        this.key = Integer.parseInt(id);
+        String[] arr = pos.split(",");
+        this.location = new Geo_Location (Double.parseDouble(arr[0]),Double.parseDouble(arr[1]),0.0);
+        this.weight = 0;
+        this.info ="white";
+        this.tag = -1;
+    }
 
 
     /**
@@ -159,4 +168,16 @@ public class Node implements NodeData, Comparable<NodeData> {
     public int hashCode() {
         return Objects.hash(key, location, weight, info, tag);
     }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "key=" + key +
+                ", location=" + location +
+                ", weight=" + weight +
+                ", info='" + info + '\'' +
+                ", tag=" + tag +
+                '}';
+    }
 }
+
