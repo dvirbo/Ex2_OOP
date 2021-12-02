@@ -37,7 +37,8 @@ public class DWGraph implements DirectedWeightedGraph {
 
 
     public DWGraph(DirectedWeightedGraph other) {
-        for (Iterator<NodeData> it = other.nodeIter(); it.hasNext(); it.next()) {
+        Iterator<NodeData> it = other.nodeIter();
+        while(!it.hasNext()) {
             NodeData n = it.next();
             nodes.put(n.getKey(), new Node(n));
             edges.put(n.getKey(), new HashMap<>());

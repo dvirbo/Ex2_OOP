@@ -96,13 +96,7 @@ public class FileHandling {
     }
 
 
-//    public HashMap<Integer, NodeData> convertListAfterJava8(List<Node> list) {
-//        HashMap<Integer, NodeData> map = list.stream()
-//                .collect(Collectors.toMap(NodeData::getId, Function.identity()));
-//        return map;
-//    }
-
-    public HashMap<Integer, NodeData> convertListAfterJava8(List<Node> list) {
+    public HashMap<Integer, NodeData> convertNodesList(List<Node> list) {
         HashMap<Integer, NodeData> map = new HashMap<>();
         for (NodeData node : list) {
             map.put(node.getKey(), node);
@@ -110,10 +104,14 @@ public class FileHandling {
         return map;
     }
 
-    public HashMap<Integer, EdgeData> convertListAfterJava8(List<Node> list) {
-        HashMap<Integer, EdgeData> map = new HashMap<>();
-        for (EdgeData edge : list) {
-            map.put(Edge.uniq , node);
+    public HashMap<Integer, HashMap<Node, Edge>> convertEdgesList(List<EdgeData> edgeDataList,List<Node> nodeDataList){
+        HashMap<Integer,  HashMap<Node, Edge>> map = new HashMap<>();
+        for (EdgeData edge : edgeDataList) {
+            Edge e= new Edge(edge.getSrc(),edge.getDest(),edge.getWeight());
+            Node n = nodeDataList.get(e.getSrc());
+            HashMap<Node, Edge> p = new  HashMap<>();
+            p.put(n,e);
+            map.put(edge.getSrc() , p);
         }
         return map;
     }
