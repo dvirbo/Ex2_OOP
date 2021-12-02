@@ -54,7 +54,7 @@ public class Edge implements EdgeData {
      */
     @Override
     public int getSrc() {
-        return this.getSrc();
+        return this.src;
     }
 
     /**
@@ -64,7 +64,7 @@ public class Edge implements EdgeData {
      */
     @Override
     public int getDest() {
-        return this.getDest();
+        return this.dest;
     }
 
     /**
@@ -72,7 +72,7 @@ public class Edge implements EdgeData {
      */
     @Override
     public double getWeight() {
-        return this.getWeight();
+        return this.w;
     }
 
     /**

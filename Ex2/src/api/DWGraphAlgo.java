@@ -185,13 +185,8 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
                     count++; //increase the counter
                 }
             }
-            return (count == this.graph.nodeSize());
         }
-
-
-
-
-
+        return (count == this.graph.nodeSize());
     }
 
 

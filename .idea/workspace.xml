@@ -4,23 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74ac4661-d87b-43fe-a20d-1bd5f7977d9e" name="Changes" comment="add DWGraphAlgo">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/google_code_gson.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ex2/src/FileHandling.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ex2/src/api/NodeEdge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Ex2_OOP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Ex2_OOP.iml" afterDir="false" />
+    <list default="true" id="74ac4661-d87b-43fe-a20d-1bd5f7977d9e" name="Changes" comment="fin convert">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ex2/src/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/Ex2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ex2/src/api/DWGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/api/DWGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ex2/src/api/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/api/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ex2/src/test/DWGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/test/DWGraphTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ex2/src/test/NodeDataTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/test/NodeDataTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ex2/src/FileHandling.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/FileHandling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ex2/src/api/DWGraphAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/api/DWGraphAlgo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ex2/src/api/Edge.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/api/Edge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ex2/src/api/NodeEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/api/NodeEdge.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +93,7 @@
       <recent name="src.api" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DWGraphTest.nodeSize">
+  <component name="RunManager" selected="Application.FileHandling">
     <configuration name="FileHandling" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.FileHandling" />
       <module name="Ex2_OOP" />
@@ -179,8 +171,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DWGraphTest.nodeSize" />
         <item itemvalue="Application.FileHandling" />
+        <item itemvalue="JUnit.DWGraphTest.nodeSize" />
         <item itemvalue="JUnit.NodeDataTest" />
         <item itemvalue="JUnit.NodeDataTest.getKey" />
         <item itemvalue="JUnit.DWGraphTest" />
@@ -196,7 +188,8 @@
       <option name="presentableId" value="Default" />
       <updated>1637921793949</updated>
       <workItem from="1637921796043" duration="394000" />
-      <workItem from="1637922342667" duration="82462000" />
+      <workItem from="1637922342667" duration="90977000" />
+      <workItem from="1638464601557" duration="8557000" />
     </task>
     <task id="LOCAL‎00001" summary="add the files">
       <created>1637922506068</created>
@@ -258,7 +251,25 @@
       <option name="presentableId" value="LOCAL‎00010" />
       <updated>1638284661189</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL‎00011" summary="file handling">
+      <created>1638389705066</created>
+      <option name="number" value="LOCAL‎00011" />
+      <option name="presentableId" value="LOCAL‎00011" />
+      <updated>1638389705066</updated>
+    </task>
+    <task id="LOCAL‎00012" summary="convert from list to hashmap">
+      <created>1638391185376</created>
+      <option name="number" value="LOCAL‎00012" />
+      <option name="presentableId" value="LOCAL‎00012" />
+      <updated>1638391185376</updated>
+    </task>
+    <task id="LOCAL‎00013" summary="fin convert">
+      <created>1638469643427</created>
+      <option name="number" value="LOCAL‎00013" />
+      <option name="presentableId" value="LOCAL‎00013" />
+      <updated>1638469643427</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,6 +310,20 @@
     <MESSAGE value="last sunday work" />
     <MESSAGE value="monday work" />
     <MESSAGE value="add DWGraphAlgo" />
-    <option name="LAST_COMMIT_MESSAGE" value="add DWGraphAlgo" />
+    <MESSAGE value="file handling" />
+    <MESSAGE value="convert from list to hashmap" />
+    <MESSAGE value="fin convert" />
+    <option name="LAST_COMMIT_MESSAGE" value="fin convert" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Ex2/src/api/Edge.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

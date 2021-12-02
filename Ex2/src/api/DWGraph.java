@@ -21,8 +21,8 @@ public class DWGraph implements DirectedWeightedGraph {
      * numOfEdge: stored the amount of edges in this graph.
      * mc: Mode Count - for testing changes (add/remove node,add/remove edge) in the graph.
      */
-    private HashMap<Integer, NodeData> nodes;
-    private HashMap<Integer, HashMap<NodeData, EdgeData>> edges;
+    private HashMap<Integer, Node> nodes;
+    private HashMap<Integer, HashMap<Node, Edge>> edges;
     private int nodeSize, edgeSize, modeCount;
 
 
@@ -31,6 +31,15 @@ public class DWGraph implements DirectedWeightedGraph {
         this.edges = new HashMap<>();
         this.nodeSize = 0;
         this.edgeSize = 0;
+        this.modeCount = 0;
+
+    }
+
+    public DWGraph( HashMap<Integer, Node> nodes,HashMap<Integer, HashMap<Node, Edge>> edges ) {
+        this.nodes = nodes;
+        this.edges = edges;
+        this.nodeSize = nodes.size();
+        this.edgeSize = edges.size();
         this.modeCount = 0;
 
     }
@@ -106,7 +115,8 @@ public class DWGraph implements DirectedWeightedGraph {
     public void addNode(NodeData n) {
         if (n != null) {
             if (!nodes.containsKey(n.getKey())) {
-                nodes.put(n.getKey(), n);
+                // of casting or new Node need to check
+                nodes.put(n.getKey(), (Node)n);
                 edges.put(n.getKey(), new HashMap<>());
                 nodeSize++;
             }
@@ -131,7 +141,7 @@ public class DWGraph implements DirectedWeightedGraph {
             return;
         if (!hasEdge(src, dest)) {
             Edge e = new Edge(src, dest, w);
-            edges.get(src).put(n2, e);
+            edges.get(src).put((Node)n2, e);
             edgeSize++;
         }
     }

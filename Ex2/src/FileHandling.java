@@ -75,12 +75,22 @@ public class FileHandling {
                         Double.parseDouble(w));
                 edges.add(edge);
             }
-
             // Print :
-            System.out.println("All my nodes are: " + nodes);
-            System.out.println("All my edges are: " + edges);
+//            System.out.println("All my nodes are: " + nodes);
+//            System.out.println("All my edges are: " + edges);
 
-            NodeEdge ne = new NodeEdge(nodes, edges);
+            HashMap<Integer, Node> hp_nodes=  convertNodesList(nodes);
+            HashMap<Integer, HashMap<Node, Edge>> hp_edges = convertEdgesList(edges, nodes);
+
+//            hp_nodes.entrySet().forEach(entry -> {
+//                System.out.println(entry.getKey() + " " + entry.getValue());
+//            });
+//            System.out.println("*******************************");
+//            hp_edges.entrySet().forEach(entry -> {
+//                System.out.println(entry.getKey() + " " + entry.getValue());
+//            });
+
+            NodeEdge ne = new NodeEdge(hp_nodes,hp_edges);
             return ne;
 
         } catch (FileNotFoundException e) {
@@ -96,17 +106,17 @@ public class FileHandling {
     }
 
 
-    public HashMap<Integer, NodeData> convertNodesList(List<Node> list) {
-        HashMap<Integer, NodeData> map = new HashMap<>();
-        for (NodeData node : list) {
+    public static HashMap<Integer, Node> convertNodesList(List<Node> list) {
+        HashMap<Integer, Node> map = new HashMap<>();
+        for (Node node : list) {
             map.put(node.getKey(), node);
         }
         return map;
     }
 
-    public HashMap<Integer, HashMap<Node, Edge>> convertEdgesList(List<EdgeData> edgeDataList,List<Node> nodeDataList){
+    public static HashMap<Integer, HashMap<Node, Edge>> convertEdgesList(List<Edge> edgeDataList,List<Node> nodeDataList){
         HashMap<Integer,  HashMap<Node, Edge>> map = new HashMap<>();
-        for (EdgeData edge : edgeDataList) {
+        for (Edge edge : edgeDataList) {
             Edge e= new Edge(edge.getSrc(),edge.getDest(),edge.getWeight());
             Node n = nodeDataList.get(e.getSrc());
             HashMap<Node, Edge> p = new  HashMap<>();
