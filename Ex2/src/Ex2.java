@@ -1,9 +1,11 @@
 package src;
 
 import src.api.DWGraph;
+import src.api.Node;
 import src.api.NodeEdge;
 import src.interfaces.DirectedWeightedGraph;
 import src.interfaces.DirectedWeightedGraphAlgorithms;
+import src.interfaces.NodeData;
 
 import static src.FileHandling.getJsonToObj;
 
@@ -20,9 +22,19 @@ public class Ex2 {
      */
     public static DirectedWeightedGraph getGrapg(String json_file) {
         NodeEdge ne = getJsonToObj(json_file);
-        DirectedWeightedGraph ans = new DWGraph(ne.nodes,ne.edges);
-
-
+       DirectedWeightedGraph ans = new DWGraph(ne.nodes,ne.edges);
+             ans.nodeIter();
+//             NodeData n = new Node("35.21007339305892,32.10107446554622,0.0", "500"); // ok
+//            ans.addNode(n); // ok
+      //      ans.edgeSize()
+      //      ans.edgeIter()
+      //      ans.connect();
+      //      ans.getMC()
+      //      ans.getNode()
+      //      ans.hasEdge()
+      //      ans.nodeSize()
+      //      ans.removeEdge()
+      //      ans.removeNode()
         return ans;
     }
     /**

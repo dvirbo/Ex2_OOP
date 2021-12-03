@@ -25,6 +25,15 @@ public class DWGraph implements DirectedWeightedGraph {
     private HashMap<Integer, HashMap<Node, EdgeData>> edges;
     private int nodeSize, edgeSize, modeCount;
 
+    private static int it_change_edge1 = 0;
+    static boolean first_time_edge1 = true;
+
+    private static int it_change_edge2 = 0;
+    static boolean first_time_edge2 = true;
+
+    private static int it_change_nodes = 0;
+    static boolean first_time_node = true;
+
 
     public DWGraph() {
         this.nodes = new HashMap<>();
@@ -35,7 +44,7 @@ public class DWGraph implements DirectedWeightedGraph {
 
     }
 
-    public DWGraph( HashMap<Integer, Node> nodes,HashMap<Integer, HashMap<Node, EdgeData>> edges ) {
+    public DWGraph(HashMap<Integer, Node> nodes, HashMap<Integer, HashMap<Node, EdgeData>> edges) {
         this.nodes = nodes;
         this.edges = edges;
         this.nodeSize = nodes.size();
@@ -47,7 +56,7 @@ public class DWGraph implements DirectedWeightedGraph {
 
     public DWGraph(DirectedWeightedGraph other) {
         Iterator<NodeData> it = other.nodeIter();
-        while(!it.hasNext()) {
+        while (!it.hasNext()) {
             NodeData n = it.next();
             nodes.put(n.getKey(), new Node(n));
             edges.put(n.getKey(), new HashMap<>());
@@ -59,14 +68,16 @@ public class DWGraph implements DirectedWeightedGraph {
                 }
             }
         }
-        this.nodeSize=other.nodeSize();
+        this.nodeSize = other.nodeSize();
         this.edgeSize = other.edgeSize();
         this.modeCount = getMC();
     }
+
     /**
      * Checks if two given nodes are connected.
-     * @param k1  first key of the node.
-     * @param k2  second key of the node.
+     *
+     * @param k1 first key of the node.
+     * @param k2 second key of the node.
      * @return true if they are connected.
      */
     public boolean hasEdge(int k1, int k2) {
@@ -116,12 +127,14 @@ public class DWGraph implements DirectedWeightedGraph {
         if (n != null) {
             if (!nodes.containsKey(n.getKey())) {
                 // of casting or new Node need to check
-                nodes.put(n.getKey(), (Node)n);
+                nodes.put(n.getKey(), (Node) n);
                 edges.put(n.getKey(), new HashMap<>());
                 nodeSize++;
+                modeCount++;
             }
         }
     }
+
     /**
      * Connects an edge with weight w between node src to node dest.
      * This method run in O(1) time.
@@ -141,7 +154,7 @@ public class DWGraph implements DirectedWeightedGraph {
             return;
         if (!hasEdge(src, dest)) {
             Edge e = new Edge(src, dest, w);
-            edges.get(src).put((Node)n2, e);
+            edges.get(src).put((Node) n2, e);
             edgeSize++;
         }
     }
@@ -155,10 +168,17 @@ public class DWGraph implements DirectedWeightedGraph {
      */
     @Override
     public Iterator<NodeData> nodeIter() {
-        //how do I know if the graph was changed since the iterator was constructed??
-        Iterator iterator =this.nodes.values().iterator();
-        return iterator;
+        if (first_time_node) {
+            it_change_nodes = modeCount;
+            first_time_node = false;
+        }
+        if ( it_change_nodes == modeCount){
+            Iterator iterator = this.nodes.values().iterator();
+            return iterator;
+        }
+        throw new RuntimeException("node were changed since the iterator was constructed");
     }
+
 
     /**
      * This method returns an Iterator for all the edges in this graph.
@@ -168,9 +188,17 @@ public class DWGraph implements DirectedWeightedGraph {
      */
     @Override
     public Iterator<EdgeData> edgeIter() {
-        //how do I know if the graph was changed since the iterator was constructed??
-        Iterator iterator = this.edges.values().stream().iterator();
-        return iterator;
+        if (first_time_edge1) {
+            it_change_edge1 = modeCount;
+            first_time_edge1 = false;
+        }
+
+        if (it_change_edge1 == modeCount) {
+            //how do I know if the graph was changed since the iterator was constructed??
+            Iterator iterator = this.edges.values().stream().iterator();
+            return iterator;
+        }
+        throw new RuntimeException("node were changed since the iterator was constructed");
     }//entrySet().iterator();
 
     /**
@@ -181,14 +209,21 @@ public class DWGraph implements DirectedWeightedGraph {
      */
     @Override
     public Iterator<EdgeData> edgeIter(int node_id) {
-        //how do I know if the graph was changed since the iterator was constructed??
-        return this.edges.get(node_id).values().iterator();
+        if (first_time_edge2) {
+            it_change_edge2 = modeCount;
+            first_time_edge2 = false;
+        }
+        if (it_change_edge2 == modeCount) {
+            return this.edges.get(node_id).values().iterator();
+        }
+        throw new RuntimeException("edges were changed since the iterator was constructed");
     }
 
     /**
      * Deletes the node (with the given ID) from the graph -
      * and removes all edges which starts or ends at this node.
      * This method run in O(k), V.degree=k, as all the edges should be removed.
+     *
      * @param key of the node that need to remove
      * @return the data of the removed node (null if none).
      */
@@ -209,6 +244,7 @@ public class DWGraph implements DirectedWeightedGraph {
     /**
      * Deletes the edge from the graph,
      * Complexity: run in O(1) time.
+     *
      * @param src  - edge source node.
      * @param dest - edge destination node.
      * @return the data of the removed edge (null if none).
@@ -218,6 +254,7 @@ public class DWGraph implements DirectedWeightedGraph {
         EdgeData e = edges.get(src).remove(dest);
         if (e != null) {
             edgeSize--;
+            modeCount++;
         }
         return e;
     }
@@ -225,6 +262,7 @@ public class DWGraph implements DirectedWeightedGraph {
     /**
      * Returns the number of vertices (nodes) in the graph.
      * Complexity: run in O(1) time.
+     *
      * @return number of nodes in the graph.
      */
     @Override
@@ -235,6 +273,7 @@ public class DWGraph implements DirectedWeightedGraph {
     /**
      * Returns the number of edges (assume directional graph).
      * Complexity: run in O(1) time.
+     *
      * @return number of edges in the graph.
      */
     @Override
@@ -245,6 +284,7 @@ public class DWGraph implements DirectedWeightedGraph {
     /**
      * Returns the Mode Count - for testing changes in the graph.
      * Complexity: run in O(1) time.
+     *
      * @return number of changes in the graph.
      */
     @Override

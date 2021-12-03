@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74ac4661-d87b-43fe-a20d-1bd5f7977d9e" name="Changes" comment="fin convert">
+    <list default="true" id="74ac4661-d87b-43fe-a20d-1bd5f7977d9e" name="Changes" comment="try">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ex2/src/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/Ex2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ex2/src/api/DWGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/api/DWGraph.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +184,7 @@
       <updated>1637921793949</updated>
       <workItem from="1637921796043" duration="394000" />
       <workItem from="1637922342667" duration="90977000" />
-      <workItem from="1638464601557" duration="10000000" />
+      <workItem from="1638464601557" duration="13279000" />
     </task>
     <task id="LOCAL‎00001" summary="add the files">
       <created>1637922506068</created>
@@ -268,7 +270,13 @@
       <option name="presentableId" value="LOCAL‎00014" />
       <updated>1638473983584</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL‎00015" summary="try">
+      <created>1638533861034</created>
+      <option name="number" value="LOCAL‎00015" />
+      <option name="presentableId" value="LOCAL‎00015" />
+      <updated>1638533861034</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,7 +320,8 @@
     <MESSAGE value="file handling" />
     <MESSAGE value="convert from list to hashmap" />
     <MESSAGE value="fin convert" />
-    <option name="LAST_COMMIT_MESSAGE" value="fin convert" />
+    <MESSAGE value="try" />
+    <option name="LAST_COMMIT_MESSAGE" value="try" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
