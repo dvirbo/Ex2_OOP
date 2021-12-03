@@ -34,7 +34,7 @@ public class FileHandling {
             JsonArray jsonArrayEdges = fileObject.get("Edges").getAsJsonArray();
 
             List<Node> nodes = new ArrayList<>();
-            List<Edge> edges = new ArrayList<>();
+            List<EdgeData> edges = new ArrayList<>();
 
             for (JsonElement jnode : jsonArrayNodes) {
                 JsonObject nodeJsonObject = jnode.getAsJsonObject();
@@ -80,7 +80,7 @@ public class FileHandling {
 //            System.out.println("All my edges are: " + edges);
 
             HashMap<Integer, Node> hp_nodes=  convertNodesList(nodes);
-            HashMap<Integer, HashMap<Node, Edge>> hp_edges = convertEdgesList(edges, nodes);
+            HashMap<Integer, HashMap<Node, EdgeData>> hp_edges = convertEdgesList(edges, nodes);
 
 //            hp_nodes.entrySet().forEach(entry -> {
 //                System.out.println(entry.getKey() + " " + entry.getValue());
@@ -114,12 +114,12 @@ public class FileHandling {
         return map;
     }
 
-    public static HashMap<Integer, HashMap<Node, Edge>> convertEdgesList(List<Edge> edgeDataList,List<Node> nodeDataList){
-        HashMap<Integer,  HashMap<Node, Edge>> map = new HashMap<>();
-        for (Edge edge : edgeDataList) {
+    public static HashMap<Integer, HashMap<Node, EdgeData>> convertEdgesList(List<EdgeData> edgeDataList,List<Node> nodeDataList){
+        HashMap<Integer,  HashMap<Node, EdgeData>> map = new HashMap<>();
+        for (EdgeData edge : edgeDataList) {
             Edge e= new Edge(edge.getSrc(),edge.getDest(),edge.getWeight());
             Node n = nodeDataList.get(e.getSrc());
-            HashMap<Node, Edge> p = new  HashMap<>();
+            HashMap<Node, EdgeData> p = new  HashMap<>();
             p.put(n,e);
             map.put(edge.getSrc() , p);
         }

@@ -22,7 +22,7 @@ public class DWGraph implements DirectedWeightedGraph {
      * mc: Mode Count - for testing changes (add/remove node,add/remove edge) in the graph.
      */
     private HashMap<Integer, Node> nodes;
-    private HashMap<Integer, HashMap<Node, Edge>> edges;
+    private HashMap<Integer, HashMap<Node, EdgeData>> edges;
     private int nodeSize, edgeSize, modeCount;
 
 
@@ -35,7 +35,7 @@ public class DWGraph implements DirectedWeightedGraph {
 
     }
 
-    public DWGraph( HashMap<Integer, Node> nodes,HashMap<Integer, HashMap<Node, Edge>> edges ) {
+    public DWGraph( HashMap<Integer, Node> nodes,HashMap<Integer, HashMap<Node, EdgeData>> edges ) {
         this.nodes = nodes;
         this.edges = edges;
         this.nodeSize = nodes.size();

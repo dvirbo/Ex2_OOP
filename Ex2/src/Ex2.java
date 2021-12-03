@@ -20,8 +20,8 @@ public class Ex2 {
      */
     public static DirectedWeightedGraph getGrapg(String json_file) {
         NodeEdge ne = getJsonToObj(json_file);
-        System.out.println(ne.nodes);
-        DirectedWeightedGraph ans = new DWGraph();
+        DirectedWeightedGraph ans = new DWGraph(ne.nodes,ne.edges);
+
 
         return ans;
     }
@@ -47,5 +47,9 @@ public class Ex2 {
         // ****** Add your code here ******
         //
         // ********************************
+    }
+
+    public static void main(String[] args) {
+        getGrapg("Ex2/data/G1.json");
     }
 }

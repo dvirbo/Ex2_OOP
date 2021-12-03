@@ -1,5 +1,6 @@
 package src.api;
 
+import src.interfaces.EdgeData;
 import src.interfaces.NodeData;
 
 import java.util.HashMap;
@@ -10,9 +11,9 @@ public class NodeEdge {
 
 
     public HashMap<Integer, Node> nodes;
-    public HashMap<Integer, HashMap<Node, Edge>> edges;
+    public HashMap<Integer, HashMap<Node, EdgeData>> edges;
 
-    public NodeEdge(HashMap<Integer, Node> nodes, HashMap<Integer, HashMap<Node, Edge>> edges) {
+    public NodeEdge(HashMap<Integer, Node> nodes, HashMap<Integer, HashMap<Node, EdgeData>> edges) {
         this.nodes = nodes;
         this.edges = edges;
 
