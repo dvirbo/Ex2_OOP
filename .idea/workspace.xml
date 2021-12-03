@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74ac4661-d87b-43fe-a20d-1bd5f7977d9e" name="Changes" comment="try">
+    <list default="true" id="74ac4661-d87b-43fe-a20d-1bd5f7977d9e" name="Changes" comment="iterator functions checks">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ex2/src/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/Ex2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ex2/src/api/DWGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/api/DWGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ex2/src/api/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/api/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ex2/src/test/DWGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/test/DWGraphTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +74,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -88,7 +91,7 @@
       <recent name="src.api" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.FileHandling">
+  <component name="RunManager" selected="JUnit.DWGraphTest.nodeSize">
     <configuration name="FileHandling" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.FileHandling" />
       <module name="Ex2_OOP" />
@@ -166,8 +169,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.FileHandling" />
         <item itemvalue="JUnit.DWGraphTest.nodeSize" />
+        <item itemvalue="Application.FileHandling" />
         <item itemvalue="JUnit.NodeDataTest" />
         <item itemvalue="JUnit.NodeDataTest.getKey" />
         <item itemvalue="JUnit.DWGraphTest" />
@@ -184,7 +187,7 @@
       <updated>1637921793949</updated>
       <workItem from="1637921796043" duration="394000" />
       <workItem from="1637922342667" duration="90977000" />
-      <workItem from="1638464601557" duration="13279000" />
+      <workItem from="1638464601557" duration="17843000" />
     </task>
     <task id="LOCAL‎00001" summary="add the files">
       <created>1637922506068</created>
@@ -276,7 +279,13 @@
       <option name="presentableId" value="LOCAL‎00015" />
       <updated>1638533861034</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL‎00016" summary="iterator functions checks">
+      <created>1638537218577</created>
+      <option name="number" value="LOCAL‎00016" />
+      <option name="presentableId" value="LOCAL‎00016" />
+      <updated>1638537218577</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,7 +330,8 @@
     <MESSAGE value="convert from list to hashmap" />
     <MESSAGE value="fin convert" />
     <MESSAGE value="try" />
-    <option name="LAST_COMMIT_MESSAGE" value="try" />
+    <MESSAGE value="iterator functions checks" />
+    <option name="LAST_COMMIT_MESSAGE" value="iterator functions checks" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -331,7 +341,18 @@
           <line>57</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Ex2/src/test/DWGraphTest.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="n.getEdge(dest)" language="JAVA" />
+        <watch expression="n.outEdges" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

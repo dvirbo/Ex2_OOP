@@ -1,8 +1,10 @@
 package src.api;
 
+import src.interfaces.EdgeData;
 import src.interfaces.GeoLocation;
 import src.interfaces.NodeData;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Node implements NodeData, Comparable<NodeData> {
@@ -20,6 +22,7 @@ public class Node implements NodeData, Comparable<NodeData> {
     private double weight;
     private String info;
     private int tag;
+    private HashMap<Integer, EdgeData> outEdges;
 
     public Node(int uniqueKey, Geo_Location g, int weight, String info, int tag) {
         this.key = uniqueKey;
@@ -27,6 +30,7 @@ public class Node implements NodeData, Comparable<NodeData> {
         this.weight = weight;
         this.info = info;
         this.tag = tag;
+        this.outEdges = new HashMap<>();
     }
 
     /**
@@ -40,6 +44,8 @@ public class Node implements NodeData, Comparable<NodeData> {
         this.weight = other.getWeight();
         this.info = other.getInfo();
         this.tag = other.getTag();
+      // need to fix it  this.outEdges = other.
+
     }
 //double str1 = Double.parseDouble(str);
     public Node(String pos, String id) {
@@ -49,6 +55,15 @@ public class Node implements NodeData, Comparable<NodeData> {
         this.weight = 0;
         this.info ="white";
         this.tag = -1;
+        this.outEdges = new HashMap<>();
+    }
+
+    public void addEdge(int dest,EdgeData e){
+        this.outEdges.put(dest,e);
+    }
+
+    public EdgeData getEdge(int dest){
+        return this.outEdges.get(dest);
     }
 
 

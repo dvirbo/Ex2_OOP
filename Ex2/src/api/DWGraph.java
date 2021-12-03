@@ -108,10 +108,15 @@ public class DWGraph implements DirectedWeightedGraph {
      * @param dest: destination node
      * @return the Edge, else null
      */
+    //    private HashMap<Integer, HashMap<Node, EdgeData>> edges;
     @Override
     public EdgeData getEdge(int src, int dest) {
-        if (this.nodes.containsKey(src) && this.nodes.containsKey(dest)) {
-            return this.edges.get(src).get(dest);
+        if (this.nodes.containsKey(src) && this.nodes.containsKey(dest)){ //if there is 2 nodes that part of the edge
+           NodeData nd = this.getNode(src);
+           Node n = (Node) nd;
+//            HashMap<Node, EdgeData> hp = this.edges.get(src);
+//            EdgeData ret =hp.get(dest);
+            return  n.getEdge(dest);
         }
         return null;
     }
@@ -153,8 +158,10 @@ public class DWGraph implements DirectedWeightedGraph {
         if (n1 == null || n2 == null || src == dest)
             return;
         if (!hasEdge(src, dest)) {
+            //ask boaz if there is an option that we have 2 edges from same sre && dest but diff weight
             Edge e = new Edge(src, dest, w);
             edges.get(src).put((Node) n2, e);
+            ((Node) n2).addEdge(dest,e);
             edgeSize++;
         }
     }
@@ -172,7 +179,7 @@ public class DWGraph implements DirectedWeightedGraph {
             it_change_nodes = modeCount;
             first_time_node = false;
         }
-        if ( it_change_nodes == modeCount){
+        if (it_change_nodes == modeCount) {
             Iterator iterator = this.nodes.values().iterator();
             return iterator;
         }
