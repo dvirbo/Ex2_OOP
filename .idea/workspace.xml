@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74ac4661-d87b-43fe-a20d-1bd5f7977d9e" name="Changes" comment="iterator functions checks">
+    <list default="true" id="74ac4661-d87b-43fe-a20d-1bd5f7977d9e" name="Changes" comment="add outEdges">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ex2/src/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/Ex2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ex2/src/api/DWGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/api/DWGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ex2/src/api/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/api/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ex2/src/test/DWGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/test/DWGraphTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ex2/src/api/DWGraphAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/api/DWGraphAlgo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ex2/src/interfaces/DirectedWeightedGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ex2/src/interfaces/DirectedWeightedGraph.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +186,7 @@
       <updated>1637921793949</updated>
       <workItem from="1637921796043" duration="394000" />
       <workItem from="1637922342667" duration="90977000" />
-      <workItem from="1638464601557" duration="17843000" />
+      <workItem from="1638464601557" duration="20277000" />
     </task>
     <task id="LOCAL‎00001" summary="add the files">
       <created>1637922506068</created>
@@ -285,7 +284,13 @@
       <option name="presentableId" value="LOCAL‎00016" />
       <updated>1638537218577</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL‎00017" summary="add outEdges">
+      <created>1638542168081</created>
+      <option name="number" value="LOCAL‎00017" />
+      <option name="presentableId" value="LOCAL‎00017" />
+      <updated>1638542168081</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -331,7 +336,8 @@
     <MESSAGE value="fin convert" />
     <MESSAGE value="try" />
     <MESSAGE value="iterator functions checks" />
-    <option name="LAST_COMMIT_MESSAGE" value="iterator functions checks" />
+    <MESSAGE value="add outEdges" />
+    <option name="LAST_COMMIT_MESSAGE" value="add outEdges" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -342,15 +348,22 @@
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Ex2/src/api/DWGraph.java</url>
+          <line>117</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Ex2/src/test/DWGraphTest.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="17" />
+          <line>49</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="n.getEdge(dest)" language="JAVA" />
+        <watch expression="nd.getEdge(dest)" language="JAVA" />
+        <watch expression="nd.outEdges" language="JAVA" />
         <watch expression="n.outEdges" language="JAVA" />
       </configuration>
     </watches-manager>

@@ -21,17 +21,17 @@ public class DWGraph implements DirectedWeightedGraph {
      * numOfEdge: stored the amount of edges in this graph.
      * mc: Mode Count - for testing changes (add/remove node,add/remove edge) in the graph.
      */
-    private HashMap<Integer, Node> nodes;
-    private HashMap<Integer, HashMap<Node, EdgeData>> edges;
-    private int nodeSize, edgeSize, modeCount;
+    public HashMap<Integer, Node> nodes;
+    public HashMap<Integer, HashMap<Node, EdgeData>> edges;
+    public int nodeSize, edgeSize, modeCount;
 
-    private static int it_change_edge1 = 0;
+    public static int it_change_edge1 = 0;
     static boolean first_time_edge1 = true;
 
-    private static int it_change_edge2 = 0;
+    public static int it_change_edge2 = 0;
     static boolean first_time_edge2 = true;
 
-    private static int it_change_nodes = 0;
+    public static int it_change_nodes = 0;
     static boolean first_time_node = true;
 
 
@@ -54,7 +54,7 @@ public class DWGraph implements DirectedWeightedGraph {
     }
 
 
-    public DWGraph(DirectedWeightedGraph other) {
+    public DWGraph(DWGraph other) {
         Iterator<NodeData> it = other.nodeIter();
         while (!it.hasNext()) {
             NodeData n = it.next();
@@ -111,12 +111,11 @@ public class DWGraph implements DirectedWeightedGraph {
     //    private HashMap<Integer, HashMap<Node, EdgeData>> edges;
     @Override
     public EdgeData getEdge(int src, int dest) {
-        if (this.nodes.containsKey(src) && this.nodes.containsKey(dest)){ //if there is 2 nodes that part of the edge
-           NodeData nd = this.getNode(src);
-           Node n = (Node) nd;
+        if (this.nodes.containsKey(src) && this.nodes.containsKey(dest)) { //if there is 2 nodes that part of the edge
+            Node nd = nodes.get(src);
 //            HashMap<Node, EdgeData> hp = this.edges.get(src);
 //            EdgeData ret =hp.get(dest);
-            return  n.getEdge(dest);
+            return nd.getEdge(dest);
         }
         return null;
     }
@@ -153,15 +152,15 @@ public class DWGraph implements DirectedWeightedGraph {
         if (w < 0) {
             throw new RuntimeException("Only Positive Numbers");
         }
-        NodeData n1 = getNode(src);
-        NodeData n2 = getNode(dest);
+        Node n1 = nodes.get(src);
+        Node n2 = nodes.get(dest);
         if (n1 == null || n2 == null || src == dest)
             return;
         if (!hasEdge(src, dest)) {
             //ask boaz if there is an option that we have 2 edges from same sre && dest but diff weight
             Edge e = new Edge(src, dest, w);
             edges.get(src).put((Node) n2, e);
-            ((Node) n2).addEdge(dest,e);
+             n2.addEdge(dest, e);
             edgeSize++;
         }
     }

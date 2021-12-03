@@ -63,7 +63,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
      */
     @Override
     public DirectedWeightedGraph copy() {
-        return new DWGraph(this.graph);
+        return new DWGraph((DWGraph) this.graph);
     }
 
     /**
