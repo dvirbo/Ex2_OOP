@@ -1,7 +1,18 @@
-# Ex2_OOP
- Design and implementation of directed and weighted graphs in Java.
-## Ex2 - Links:
-1. Github link: https://github.com/benmoshe/OOP_2021/tree/main/Assignments/Ex2
-2. Document: https://docs.google.com/document/d/17h5VGIHtqWHrzgoRjH05_PjHgCn8-EDcecrkR9sVChQ/edit?usp=sharing
-3. Submit form: https://docs.google.com/forms/d/e/1FAIpQLScmgk5yGtBSPvkb1YitSogv7quqSo8HqY-vKcEq656Yh9oRAg/viewform?usp=sf_link
-4. Ex2 all submitted: https://docs.google.com/spreadsheets/d/1Is8cuBjo1bOAvPoeLIQ5VCLWvlilEAOzVzv6tbIt-u8/edit?usp=sharing
+## Getting Started
+
+Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+
+## Folder Structure
+
+The workspace contains two folders by default, where:
+
+- `src`: the folder to maintain sources
+- `lib`: the folder to maintain dependencies
+
+Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+
+> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+
+## Dependency Management
+
+The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
