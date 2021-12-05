@@ -40,7 +40,6 @@ public class G implements DirectedWeightedGraph {
     public G(G other) {
         this.nodes = new HashMap<>();
         this.edges = new HashMap<>();
-        // need to check if deep copy or shallow
         other.nodes.forEach((key, value) -> {
             this.addNode(value);
         });
@@ -51,9 +50,9 @@ public class G implements DirectedWeightedGraph {
         this.modeCount = other.getMC();
     }
 
-    private boolean hasEdge(int i, int j) {
-        return edges.containsKey("src_" + i + "_dest_" + j);
-    }
+//    public boolean hasEdge(int i, int j) {
+//        return edges.containsKey("src_" + i + "_dest_" + j);
+//    }
 
     @Override
     public NodeData getNode(int key) {
@@ -96,10 +95,16 @@ public class G implements DirectedWeightedGraph {
         }
         EdgeData e = new CEdge(src, dest, w);
         edges.put("src_" + src + "_dest_" + dest, e);
-
+        modeCount++;
         CNode n1 = nodes.get(src);
         n1.addEdge(dest, e); //add the new edge to outEdges hashMap
     }
+    /**
+     * This method returns an Iterator for the
+     * collection representing all the nodes in the graph.
+     * Note: if the graph was changed since the iterator was constructed - a RuntimeException should be thrown.
+     * @return Iterator<node_data>
+     */
 
     @Override
     public Iterator<NodeData> nodeIter() {
@@ -108,7 +113,7 @@ public class G implements DirectedWeightedGraph {
             first_time_node = false;
         }
         if (it_change_nodes == modeCount) {
-            List<NodeData> list = new ArrayList<NodeData>(this.nodes.values());
+            List<NodeData> list = new ArrayList<>(this.nodes.values());
             Iterator<NodeData> it = list.iterator();
             // maybe need to fix to NodeC in the end
             return it;
@@ -117,6 +122,11 @@ public class G implements DirectedWeightedGraph {
         throw new RuntimeException("node were changed since the iterator was constructed");
     }
 
+    /**
+     * This method returns an Iterator for all the edges in this graph.
+     * Note: if any of the edges going out of this node were changed since the iterator was constructed - a RuntimeException should be thrown.
+     * @return Iterator<EdgeData>
+     */
     @Override
     public Iterator<EdgeData> edgeIter() {
         if (first_time_edge1) {
@@ -133,7 +143,11 @@ public class G implements DirectedWeightedGraph {
 
         throw new RuntimeException("node were changed since the iterator was constructed");
     }
-
+    /**
+     * This method returns an Iterator for edges getting out of the given node (all the edges starting (source) at the given node).
+     * Note: if the graph was changed since the iterator was constructed - a RuntimeException should be thrown.
+     * @return Iterator<EdgeData>
+     */
     @Override
     public Iterator<EdgeData> edgeIter(int node_id) {
         if (first_time_edge2) {
