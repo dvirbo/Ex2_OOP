@@ -7,8 +7,10 @@ import Classes.G;
 import Interfaces.EdgeData;
 import Interfaces.NodeData;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,6 +45,7 @@ class GTest {
     }
 
     @Test
+    @Timeout(value = 2, unit = TimeUnit.MILLISECONDS)
     void getNode() {
         G graph = new G();
         g1 = new CGeo(1, 2, 3);
