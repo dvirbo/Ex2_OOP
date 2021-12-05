@@ -15,29 +15,19 @@ public class Ex2 {
     /**
      * This static function will be used to test your implementation
      * for testing: "Ex2/data/G1.json"
+     *
      * @param json_file - a json file (e.g., G1.json - G3.gson)
      * @return
      */
     public static DirectedWeightedGraph getGrapg(String json_file) {
         StoreNE ne = getJsonToObj(json_file);
-        DirectedWeightedGraph ans = new G(ne.nodes,ne.edges);
-         //    ans.nodeIter(); ok
-        //    NodeData n = new Node("35.21007339305892,32.10107446554622,0.0", "500"); // ok
-//            ans.addNode(n); // ok
-      //      ans.edgeSize()//ok
-      //      ans.edgeIter() ok
-      //      ans.connect(); //ok but check with boaz
-        //   ans.edgeIter(n.getKey()); ok
-      //      ans.getMC() ok
-      //      ans.getNode()
-      //      ans.hasEdge()
-      //      ans.nodeSize()
-      //      ans.removeEdge()
-      //      ans.removeNode()
+        DirectedWeightedGraph ans = new G(ne.nodes, ne.edges);
         return ans;
     }
+
     /**
      * This static function will be used to test your implementation
+     *
      * @param json_file - a json file (e.g., G1.json - G3.gson)
      * @return
      */
@@ -48,10 +38,11 @@ public class Ex2 {
         // ********************************
         return ans;
     }
+
     /**
      * This static function will run your GUI using the json fime.
-     * @param json_file - a json file (e.g., G1.json - G3.gson)
      *
+     * @param json_file - a json file (e.g., G1.json - G3.gson)
      */
     public static void runGUI(String json_file) {
         DirectedWeightedGraphAlgorithms alg = getGrapgAlgo(json_file);

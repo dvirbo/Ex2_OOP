@@ -8,20 +8,15 @@ import Classes.CNode;
 import Interfaces.EdgeData;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Random;
 
 class DWGraphTest {
-    private static Random _rnd = null;
 
-//    @BeforeAll
-//      void nodeCreator() {
-//
-//    }
+    private static CNode n1, n2, n3, n4, n5, n6;
+    private static CGeo g1, g2, g3, g4, g5, g6;
 
-    @Test
-    void nodeSize() {
-        CNode n1, n2, n3, n4, n5, n6;
-        CGeo g1, g2, g3, g4, g5, g6;
+    public DWGraphTest() {
         g1 = new CGeo(1, 2, 3);
         g2 = new CGeo(2, 1, 3);
         g3 = new CGeo(-4, 7, 1);
@@ -35,6 +30,22 @@ class DWGraphTest {
         n4 = new CNode(4, g4, 4, "White", -1);
         n5 = new CNode(5, g5, 5, "White", -1);
         n6 = new CNode(6, g6, 6, "White", -1);
+    }
+    @Test
+    void deep_copy() {
+        G graph1 = new G();
+        graph1.addNode(n1);
+        graph1.addNode(n2);
+
+        G graph2 = new G(graph1);
+        int node_in_g1 = graph1.nodeSize();
+        int node_in_g2 = graph2.nodeSize();
+        assertEquals(node_in_g1,node_in_g2);
+
+    }
+
+    @Test
+    void add_nodeSize() {
 
         G graph = new G();
         graph.addNode(n1);
@@ -44,19 +55,27 @@ class DWGraphTest {
         graph.addNode(n5);
         graph.addNode(n6);
 
-        int node_in_g1 = graph.nodeSize();
-        assertEquals(node_in_g1,6);
+        int node_in_graph = graph.nodeSize();
+        assertEquals(node_in_graph, 6);
+    }
 
-        graph.connect(n1.getKey(),n3.getKey(),1.1);
+    @Test
+    void connect() {
+        G graph = new G();
+        graph.addNode(n1);
+        graph.addNode(n3);
+        graph.connect(n1.getKey(), n3.getKey(), 1.1);
 
         int edge_in_g1 = graph.edgeSize();
-        assertEquals(edge_in_g1,1);
+        assertEquals(edge_in_g1, 1);
 
-        EdgeData w03 = graph.getEdge(n1.getKey(),n3.getKey());
+        EdgeData w03 = graph.getEdge(n1.getKey(), n3.getKey());
 
         assertEquals(w03.getSrc(), 1);
         assertEquals(w03.getDest(), 3);
         assertEquals(w03.getWeight(), 1.1);
+
+
     }
 
 }

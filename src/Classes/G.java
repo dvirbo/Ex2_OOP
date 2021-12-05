@@ -38,6 +38,8 @@ public class G implements DirectedWeightedGraph {
     }
 
     public G(G other) {
+        this.nodes = new HashMap<>();
+        this.edges = new HashMap<>();
         // need to check if deep copy or shallow
         other.nodes.forEach((key, value) -> {
             this.addNode(value);
