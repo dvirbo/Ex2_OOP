@@ -2,6 +2,8 @@ package Classes;
 
 import Interfaces.GeoLocation;
 
+import java.util.Objects;
+
 /**
  * Geo_Class
  */
@@ -61,4 +63,16 @@ public class CGeo implements GeoLocation {
         return this.x + ", " + this.y + ", " + this.z;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CGeo cGeo = (CGeo) o;
+        return Double.compare(cGeo.x, x) == 0 && Double.compare(cGeo.y, y) == 0 && Double.compare(cGeo.z, z) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, z);
+    }
 }

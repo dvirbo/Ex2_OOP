@@ -1,11 +1,9 @@
-
+import Classes.G;
 import FileHandling.StoreNE;
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
 
 import static FileHandling.FileHandling.getJsonToObj;
-
-import Classes.G;
 
 
 /**
@@ -13,7 +11,7 @@ import Classes.G;
  */
 public class Ex2 {
     /**
-     * This static function will be used to test your implementation
+     * This static function will be used to Classestest your implementation
      * for testing: "Ex2/data/G1.json"
      *
      * @param json_file - a json file (e.g., G1.json - G3.gson)
@@ -26,7 +24,7 @@ public class Ex2 {
     }
 
     /**
-     * This static function will be used to test your implementation
+     * This static function will be used to Classestest your implementation
      *
      * @param json_file - a json file (e.g., G1.json - G3.gson)
      * @return
@@ -52,6 +50,6 @@ public class Ex2 {
     }
 
     public static void main(String[] args) {
-        getGrapg("Ex2/data/G1.json");
+        getGrapg("./json_data/G1.json");
     }
 }
