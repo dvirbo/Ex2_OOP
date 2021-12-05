@@ -1,25 +1,15 @@
-package Classestest;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+package ClassesTest;
 
 import Classes.CEdge;
 import Classes.CGeo;
 import Classes.CNode;
 import Interfaces.NodeData;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CNodeTest {
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
 
     @Test
     void getKey() {

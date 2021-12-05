@@ -11,7 +11,7 @@ import static FileHandling.FileHandling.getJsonToObj;
  */
 public class Ex2 {
     /**
-     * This static function will be used to Classestest your implementation
+     * This static function will be used to ClassesTest your implementation
      * for testing: "Ex2/data/G1.json"
      *
      * @param json_file - a json file (e.g., G1.json - G3.gson)
@@ -24,7 +24,7 @@ public class Ex2 {
     }
 
     /**
-     * This static function will be used to Classestest your implementation
+     * This static function will be used to ClassesTest your implementation
      *
      * @param json_file - a json file (e.g., G1.json - G3.gson)
      * @return

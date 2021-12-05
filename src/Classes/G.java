@@ -11,19 +11,15 @@ import java.util.List;
 
 public class G implements DirectedWeightedGraph {
 
+    public static int it_change_edge1 = 0;
+    public static int it_change_edge2 = 0;
+    public static int it_change_nodes = 0;
+    static boolean first_time_edge1 = true;
+    static boolean first_time_edge2 = true;
+    static boolean first_time_node = true;
     public HashMap<Integer, CNode> nodes;
     public HashMap<String, EdgeData> edges;  // String ="src_" + src + "_dest_" + dest
-
     public int modeCount;
-
-    public static int it_change_edge1 = 0;
-    static boolean first_time_edge1 = true;
-
-    public static int it_change_edge2 = 0;
-    static boolean first_time_edge2 = true;
-
-    public static int it_change_nodes = 0;
-    static boolean first_time_node = true;
 
     public G() {
         this.nodes = new HashMap<>();
@@ -32,8 +28,16 @@ public class G implements DirectedWeightedGraph {
     }
 
     public G(HashMap<Integer, CNode> nodes, HashMap<String, EdgeData> edges) {
-        this.nodes = nodes;
-        this.edges = edges;
+
+        this.nodes = new HashMap<>();
+        this.edges = new HashMap<>();
+        nodes.forEach((key, value) -> {
+            this.addNode(value);
+        });
+        edges.forEach((key, value) -> {
+            this.connect(Integer.parseInt(key.substring(4, 5)), Integer.parseInt(key.substring(key.length() - 1)),
+                    value.getWeight());
+        });
         this.modeCount = 0;
     }
 
@@ -81,9 +85,10 @@ public class G implements DirectedWeightedGraph {
     /**
      * this function connect 2 nodes by create new edge between them
      * eventually, we add the new  edge to outEdges hashMap
-     * @param src - the source of the edge.
+     *
+     * @param src  - the source of the edge.
      * @param dest - the destination of the edge.
-     * @param w - positive weight representing the cost (aka time, price, etc) between src-->dest.
+     * @param w    - positive weight representing the cost (aka time, price, etc) between src-->dest.
      */
     @Override
     public void connect(int src, int dest, double w) {
@@ -99,10 +104,12 @@ public class G implements DirectedWeightedGraph {
         CNode n1 = nodes.get(src);
         n1.addEdge(dest, e); //add the new edge to outEdges hashMap
     }
+
     /**
      * This method returns an Iterator for the
      * collection representing all the nodes in the graph.
      * Note: if the graph was changed since the iterator was constructed - a RuntimeException should be thrown.
+     *
      * @return Iterator<node_data>
      */
 
@@ -123,11 +130,11 @@ public class G implements DirectedWeightedGraph {
     /**
      * This method returns an Iterator for all the edges in this graph.
      * Note: if any of the edges going out of this node were changed since the iterator was constructed - a RuntimeException should be thrown.
+     *
      * @return Iterator<EdgeData>
      */
     @Override
-    public Iterator<EdgeData> edgeIter()
-    {
+    public Iterator<EdgeData> edgeIter() {
         if (first_time_edge1) {
             it_change_edge1 = modeCount;
             first_time_edge1 = false;
@@ -143,6 +150,7 @@ public class G implements DirectedWeightedGraph {
     /**
      * This method returns an Iterator for edges getting out of the given node (all the edges starting (source) at the given node).
      * Note: if the graph was changed since the iterator was constructed - a RuntimeException should be thrown.
+     *
      * @return Iterator<EdgeData>
      */
     @Override
@@ -168,7 +176,7 @@ public class G implements DirectedWeightedGraph {
                     removeEdge(NodeId, Integer.parseInt(key.substring(key.length() - 1)));
                 }
             }
-
+            this.nodes.remove(NodeId);
             modeCount++;
 
             return n;

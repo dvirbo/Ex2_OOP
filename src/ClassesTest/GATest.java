@@ -1,4 +1,4 @@
-package test;
+package ClassesTest;
 
 import Classes.CGeo;
 import Classes.CNode;
@@ -7,20 +7,20 @@ import Classes.GA;
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
 import Interfaces.NodeData;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GATest {
     private static DirectedWeightedGraph g = new G();
     private static DirectedWeightedGraphAlgorithms ga = new GA();
 
-    @BeforeAll
-    static void createG() {
-
+    @BeforeEach
+    void createG() {
         for (int i = 1; i < 5; i++) {
-            NodeData n = new CNode(i+1,new CGeo(i, i, i),i+1.1,"White",-1);
+            NodeData n = new CNode(i + 1, new CGeo(i, i, i), i + 1.1, "white", -1);
             g.addNode(n);
         }
         g.connect(1, 2, 1.1);
@@ -33,19 +33,27 @@ class GATest {
         ga.init(g);
     }
 
-    /**
-     * checking: init, getGraph and copy methods
-     */
+    @AfterEach
+    void tearDown() {
+    }
+
     @Test
-    void init_getGraph_copy() {
+    void init() {
         DirectedWeightedGraph gCopy = new G((G) g);
         DirectedWeightedGraphAlgorithms gaCopy = new GA();
-        gaCopy.init(gCopy);  //reset the graph by init
-        assertEquals(gCopy, gaCopy.getGraph()); //equals cause
+        gaCopy.init(gCopy); // reset the graph by init
+        assertEquals(gCopy, gaCopy.getGraph()); // equals cause
 
         DirectedWeightedGraph gc = gaCopy.copy(); // check the copy
-        assertEquals(gc.toString(),gCopy.toString());
+        assertEquals(gc.toString(), gCopy.toString());
+    }
 
+    @Test
+    void getGraph() {
+    }
+
+    @Test
+    void copy() {
     }
 
     @Test
