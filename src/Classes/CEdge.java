@@ -22,7 +22,7 @@ public class CEdge implements EdgeData {
         this.src = s;
         this.dest = d;
         this.w = w;
-        this.info = "White";
+        this.info = "white";
         this.tag = -1;
     }
 

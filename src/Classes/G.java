@@ -1,13 +1,13 @@
 package Classes;
 
+import Interfaces.DirectedWeightedGraph;
+import Interfaces.EdgeData;
+import Interfaces.NodeData;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
-import Interfaces.DirectedWeightedGraph;
-import Interfaces.EdgeData;
-import Interfaces.NodeData;
 
 public class G implements DirectedWeightedGraph {
 
@@ -119,7 +119,7 @@ public class G implements DirectedWeightedGraph {
             return it;
            // return this.nodes.values().iterator(); didn't work..
         }
-        throw new RuntimeException("node were changed since the iterator was constructed");
+        throw new RuntimeException("graph changed since the iterator was constructed");
     }
 
     /**
@@ -128,7 +128,8 @@ public class G implements DirectedWeightedGraph {
      * @return Iterator<EdgeData>
      */
     @Override
-    public Iterator<EdgeData> edgeIter() {
+    public Iterator<EdgeData> edgeIter()
+    {
         if (first_time_edge1) {
             it_change_edge1 = modeCount;
             first_time_edge1 = false;
@@ -140,9 +141,9 @@ public class G implements DirectedWeightedGraph {
             return this.edges.values().iterator();
 
         }
-
-        throw new RuntimeException("node were changed since the iterator was constructed");
+        throw new RuntimeException("graph changed since the iterator was constructed");
     }
+
     /**
      * This method returns an Iterator for edges getting out of the given node (all the edges starting (source) at the given node).
      * Note: if the graph was changed since the iterator was constructed - a RuntimeException should be thrown.
@@ -172,7 +173,7 @@ public class G implements DirectedWeightedGraph {
             // return list.iterator();
 
         }
-        throw new RuntimeException("edges were changed since the iterator was constructed");
+        throw new RuntimeException("graph changed since the iterator was constructed");
     }
 
     @Override

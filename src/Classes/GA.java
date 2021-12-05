@@ -1,10 +1,10 @@
 package Classes;
 
-import java.util.List;
-
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
 import Interfaces.NodeData;
+
+import java.util.List;
 
 public class GA implements DirectedWeightedGraphAlgorithms {
     private DirectedWeightedGraph graph;
