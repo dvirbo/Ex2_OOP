@@ -115,9 +115,7 @@ public class G implements DirectedWeightedGraph {
         if (it_change_nodes == modeCount) {
             List<NodeData> list = new ArrayList<>(this.nodes.values());
             Iterator<NodeData> it = list.iterator();
-            // maybe need to fix to NodeC in the end
             return it;
-           // return this.nodes.values().iterator(); didn't work..
         }
         throw new RuntimeException("node were changed since the iterator was constructed");
     }
@@ -135,8 +133,6 @@ public class G implements DirectedWeightedGraph {
         }
 
         if (it_change_edge1 == modeCount) {
-            // List<EdgeData> list = new ArrayList<EdgeData>(this.edges.values());
-            // Iterator<EdgeData> it = list.iterator();
             return this.edges.values().iterator();
 
         }
@@ -155,22 +151,7 @@ public class G implements DirectedWeightedGraph {
             first_time_edge2 = false;
         }
         if (it_change_edge2 == modeCount) {
-            // List<EdgeData> list = new
-            // ArrayList<EdgeData>(this.nodes.get(node_id).outEdges.values());
-            // Iterator<EdgeData> it = list.iterator();
-
-            // working
             return this.nodes.get(node_id).outEdges.values().iterator();
-
-            // if we want to give up the outEdges idea
-            // List<EdgeData> list = new ArrayList<>();
-            // for (String key : this.edges.keySet()) {
-            // if (key.substring(4, 5).equals(node_id)) {
-            // list.add(this.edges.get(key));
-            // }
-            // }
-            // return list.iterator();
-
         }
         throw new RuntimeException("edges were changed since the iterator was constructed");
     }
@@ -221,4 +202,12 @@ public class G implements DirectedWeightedGraph {
         return this.modeCount;
     }
 
+    @Override
+    public String toString() {
+        return "G{" +
+                "nodes=" + nodes +
+                ", edges=" + edges +
+                ", modeCount=" + modeCount +
+                '}';
+    }
 }

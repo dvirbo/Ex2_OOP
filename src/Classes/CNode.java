@@ -17,7 +17,7 @@ public class CNode implements NodeData ,Comparable<NodeData>{
     private int tag;
     public HashMap<Integer, EdgeData> outEdges;
 
-    public CNode(int uniqueKey, CGeo g, int weight, String info, int tag) {
+    public CNode(int uniqueKey, CGeo g, double weight, String info, int tag) {
         this.key = uniqueKey;
         this.location = new CGeo(g);
         this.weight = weight;
