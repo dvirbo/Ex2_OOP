@@ -3,3 +3,6 @@ out/
 .vscode/
 *.xml
 *.iml
+**/.idea/
+.idea
+
