@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e018cb8-b19d-4912-9a32-1f9a24603515" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ex2_OOP.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Classes/G.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Classes/G.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Classestest/CEdgeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClassesTest/CEdgeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Classestest/CGeoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClassesTest/CGeoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Classestest/CNodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClassesTest/CNodeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Classestest/DWGraphTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Classestest/GATest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClassesTest/GATest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Classestest/GTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClassesTest/GTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ex2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/GATest.java" beforeDir="false" />
-    </list>
+    <list default="true" id="5e018cb8-b19d-4912-9a32-1f9a24603515" name="Changes" comment="fixing tests" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -35,14 +26,23 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
     <property name="format.on.save" value="true" />
     <property name="optimize.imports.on.save" value="true" />
     <property name="rearrange.code.on.save" value="true" />
     <property name="settings.editor.selected.configurable" value="actions.on.save" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="ClassesTest" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="FileTest" />
     </key>
   </component>
   <component name="RunManager" selected="JUnit.GTest">
@@ -144,6 +144,13 @@
       <option name="presentableId" value="Default" />
       <updated>1638734521833</updated>
     </task>
+    <task id="LOCAL‎00001" summary="fixing tests">
+      <created>1638744265048</created>
+      <option name="number" value="LOCAL‎00001" />
+      <option name="presentableId" value="LOCAL‎00001" />
+      <updated>1638744265048</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,20 +164,8 @@
       </map>
     </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ClassesTest/GTest.java</url>
-          <line>187</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ClassesTest/GTest.java</url>
-          <line>241</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixing tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing tests" />
   </component>
 </project>
