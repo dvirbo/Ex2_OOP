@@ -10,6 +10,8 @@ import Interfaces.NodeData;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -82,6 +84,10 @@ class GATest {
      */
     @Test
     void shortestPath() {
+        List<NodeData> ans = ga.shortestPath(1,3);
+        assertEquals(ans.size(), 4);
+        ans = ga.shortestPath(1,1);
+        assertEquals(ans.size(), 1);
     }
 
     @Test

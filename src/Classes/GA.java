@@ -74,10 +74,11 @@ public class GA implements DirectedWeightedGraphAlgorithms {
     /**
      * Computes the length of the shortest path between 2 nodes
      * we use Dijkstra algorithm to compute that.
+     *
      * @param src  - start node
      * @param dest - end (target) node
      * @return the shortestPath if existed. ath between src to dest
-     *      * Note:
+     * * Note:
      */
     @Override
     public double shortestPathDist(int src, int dest) {
@@ -98,22 +99,44 @@ public class GA implements DirectedWeightedGraphAlgorithms {
 
 
     /**
-     * Computes the shortest path between src to dest - as an ordered List of
-     * nodes:
-     * src--> n1-->n2-->...dest
-     * see: https://en.wikipedia.org/wiki/Shortest_path_problem
-     * Note if no such path --> returns null;
-     *
+     * This method Computes the shortest path between src to dest - as an ordered List of
+     * by using Dijkstra algorithm and with the fact that all node contain the prev node that
+     * was before him (the tag) and after we're done with Dijkstra we can go back and find
+     * the shortestPath of the nodes and pot then into a list
+     *  if no such path --> returns null;
      * @param src  - start node
      * @param dest - end (target) node
      * @return
      */
     @Override
     public List<NodeData> shortestPath(int src, int dest) {
-        List<NodeData>  ans = new ArrayList<>(this.graph.nodeSize());
-
-
-        return null;
+        List<NodeData> ans = new LinkedList<>();
+        if (this.graph.getNode(src) == null || this.graph.getNode(dest) == null) {
+            throw new RuntimeException("bad input");
+        }
+        if (src == dest) {
+            ans.add(this.graph.getNode(src));
+            return ans;
+        }
+        if (shortestPathDist(src, dest) == -1) {//if no such path
+            return null;
+        }
+        resetInfo();
+        resetTags();
+        resetWeight();
+        double d = Dijkstra(this.graph.getNode(src), this.graph.getNode(dest));
+        if (d != Integer.MAX_VALUE) {
+            int stop = this.graph.getNode(src).getKey(); // were to stop - when we get to the src node
+            int ptr = this.graph.getNode(dest).getKey(); // start from the last node
+            while (ptr != stop) {
+                NodeData curr = this.graph.getNode(ptr);
+                ans.add(0, curr); // add in th first place
+                ptr = this.graph.getNode(ptr).getTag();
+            }
+            NodeData first = this.graph.getNode(stop);
+            ans.add(0, first);
+        }
+        return ans;
     }
 
     @Override
@@ -161,7 +184,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
             while (it.hasNext()) {
                 EdgeData curr = it.next(); //current edge in the iterator
                 NodeData neighborNode = this.graph.getNode(curr.getDest()); //create a neighbor node
-                if (Objects.equals(neighborNode.getInfo(), "White")) { //check if we already "saw" him
+                if (Objects.equals(neighborNode.getInfo(), "White")) { //check if we already visit the node
                     if (pointerNode.getWeight() + curr.getWeight() < neighborNode.getWeight()) { // compare between the neighbor node w and pointerNode + the edge that connect to the neighbor
                         neighborNode.setWeight(Math.min(pointerNode.getWeight() + curr.getWeight(), neighborNode.getWeight()));
                         neighborNode.setTag(pointerNode.getKey()); //to track where he came from
@@ -217,6 +240,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
             it.next().setTag(-1);
         }
     }
+
     /**
      * This method reset all the info of the graph nodes
      * by iterate all the nodes in the graph
@@ -227,6 +251,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
             it.next().setInfo("White");
         }
     }
+
     /**
      * This method reset all the weight of the graph nodes to MAX_VALUE
      * by iterate all the nodes in the graph
