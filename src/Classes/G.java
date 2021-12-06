@@ -11,7 +11,7 @@ import java.util.List;
 
 public class G implements DirectedWeightedGraph {
 
-    public HashMap<Integer, CNode> nodes;
+    public HashMap<Integer, NodeData> nodes;
     public HashMap<String, EdgeData> edges;  // String ="src_" + src + "_dest_" + dest
 
     public int modeCount;
@@ -32,7 +32,7 @@ public class G implements DirectedWeightedGraph {
 
     }
 
-    public G(HashMap<Integer, CNode> nodes, HashMap<String, EdgeData> edges) {
+    public G(HashMap<Integer, NodeData> nodes, HashMap<String, EdgeData> edges) {
         this.nodes = nodes;
         this.edges = edges;
         this.modeCount = 0;
@@ -45,7 +45,7 @@ public class G implements DirectedWeightedGraph {
         this.nodes = new HashMap<>();
         this.edges = new HashMap<>();
         other.nodes.forEach((key, value) -> {
-            this.addNode(value);
+            this.addNode(new CNode(value));
         });
         other.edges.forEach((key, value) -> {
             this.connect(Integer.parseInt(key.substring(4, 5)), Integer.parseInt(key.substring(key.length() - 1)),
@@ -84,7 +84,7 @@ public class G implements DirectedWeightedGraph {
     public void addNode(NodeData n) {
         if (n != null) {
             if (!nodes.containsKey(n.getKey())) {
-                CNode nc = new CNode(n);
+                NodeData nc = new CNode(n);
                 nodes.put(n.getKey(), nc);
                 modeCount++;
             }
@@ -110,8 +110,6 @@ public class G implements DirectedWeightedGraph {
         EdgeData e = new CEdge(src, dest, w);
         edges.put("src_" + src + "_dest_" + dest, e);
         modeCount++;
-        CNode n1 = nodes.get(src);
-        n1.addEdge(dest, e); //add the new edge to outEdges hashMap
     }
 
     /**
@@ -169,7 +167,13 @@ public class G implements DirectedWeightedGraph {
             first_time = false;
         }
         if (it_change == modeCount) {
-            return this.nodes.get(node_id).outEdges.values().iterator();
+            List<EdgeData> edgeList = new ArrayList<>();
+            this.edges.values().forEach((Edg)-> {
+                if(Edg.getSrc() == node_id){
+                    edgeList.add(Edg);
+                }
+            });
+            return edgeList.iterator();
         }
         throw new RuntimeException("graph changed since the iterator was constructed");
     }
@@ -185,7 +189,7 @@ public class G implements DirectedWeightedGraph {
                     removeEdge(NodeId, Integer.parseInt(key.substring(key.length() - 1)));
                 }
             }
-            this.nodes.remove(NodeId);
+    this.nodes.remove(NodeId);
             modeCount++;
 
             return n;

@@ -13,11 +13,10 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GATest {
-    private static DirectedWeightedGraph g = new G();
-    private static DirectedWeightedGraphAlgorithms ga = new GA();
+    private static final DirectedWeightedGraph g = new G();
+    private static final DirectedWeightedGraphAlgorithms ga = new GA();
 
     @BeforeAll
     static void createG() {
@@ -74,19 +73,20 @@ class GATest {
     @Test
     void shortestPathDist() {
 
-    double ans =ga.shortestPathDist(1,3);
-        assertEquals(ans,4.0);
-        ans = ga.shortestPathDist(1,1);
-        assertEquals(ans,0);
+        double ans = ga.shortestPathDist(1, 3);
+        assertEquals(ans, 4.0);
+        ans = ga.shortestPathDist(1, 1);
+        assertEquals(ans, 0);
     }
+
     /**
      * return list<NodeData> of  the shortest Path in the graph
      */
     @Test
     void shortestPath() {
-        List<NodeData> ans = ga.shortestPath(1,3);
+        List<NodeData> ans = ga.shortestPath(1, 3);
         assertEquals(ans.size(), 4);
-        ans = ga.shortestPath(1,1);
+        ans = ga.shortestPath(1, 1);
         assertEquals(ans.size(), 1);
     }
 
@@ -104,5 +104,6 @@ class GATest {
 
     @Test
     void load() {
+        ga.load("./json_data/G1.json");
     }
 }

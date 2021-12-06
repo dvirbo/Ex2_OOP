@@ -2,7 +2,7 @@ package FileTest;
 
 import org.junit.jupiter.api.Test;
 
-class FileHandlingTest {
+class CImportTest {
 
     @Test
     void getJsonToObj() {

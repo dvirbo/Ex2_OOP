@@ -3,7 +3,7 @@ import FileHandling.StoreNE;
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
 
-import static FileHandling.FileHandling.getJsonToObj;
+import static FileHandling.CImport.importJson;
 
 
 /**
@@ -18,7 +18,7 @@ public class Ex2 {
      * @return
      */
     public static DirectedWeightedGraph getGrapg(String json_file) {
-        StoreNE ne = getJsonToObj(json_file);
+        StoreNE ne = importJson(json_file);
         DirectedWeightedGraph ans = new G(ne.nodes, ne.edges);
         return ans;
     }
@@ -32,7 +32,7 @@ public class Ex2 {
     public static DirectedWeightedGraphAlgorithms getGrapgAlgo(String json_file) {
         DirectedWeightedGraphAlgorithms ans = null;
         // ****** Add your code here ******
-        getJsonToObj(json_file);
+        importJson(json_file);
         // ********************************
         return ans;
     }

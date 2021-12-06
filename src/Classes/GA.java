@@ -1,15 +1,16 @@
 package Classes;
 
 
-import java.util.*;
-
-
+import FileHandling.CImport;
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
 import Interfaces.EdgeData;
 import Interfaces.NodeData;
 
-import java.util.List;
+import java.io.File;
+import java.util.*;
+
+import static FileHandling.CExport.GAsave;
 
 public class GA implements DirectedWeightedGraphAlgorithms {
 
@@ -103,7 +104,8 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      * by using Dijkstra algorithm and with the fact that all node contain the prev node that
      * was before him (the tag) and after we're done with Dijkstra we can go back and find
      * the shortestPath of the nodes and pot then into a list
-     *  if no such path --> returns null;
+     * if no such path --> returns null;
+     *
      * @param src  - start node
      * @param dest - end (target) node
      * @return
@@ -153,13 +155,20 @@ public class GA implements DirectedWeightedGraphAlgorithms {
 
     @Override
     public boolean save(String file) {
-        /* TODO Auto-generated method stub */
-        return false;
+        return GAsave(file, getGraph());
     }
 
     @Override
     public boolean load(String file) {
-        // TODO Auto-generated method stub
+        try {
+            if (new File(file).isFile() && new File(file).canRead()) {
+                DirectedWeightedGraph g = CImport.GAload(file);
+                init(g);
+                return true;
+            }
+        } catch (Exception e) {
+
+        }
         return false;
     }
 
