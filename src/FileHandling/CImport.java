@@ -1,14 +1,17 @@
 package FileHandling;
 
-// import FileHandling.StoreNE;
+// import CImport.StoreNE;
+
 import Classes.CEdge;
 import Classes.CNode;
-
+import Classes.G;
+import Interfaces.DirectedWeightedGraph;
+import Interfaces.EdgeData;
+import Interfaces.NodeData;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import Interfaces.EdgeData;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,8 +20,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class FileHandling {
-    public static StoreNE getJsonToObj(String json_file) {
+public class CImport {
+    public static StoreNE importJson(String json_file) {
 
         File input = new File(json_file);
         try {
@@ -29,7 +32,7 @@ public class FileHandling {
             JsonArray jsonArrayNodes = fileObject.get("Nodes").getAsJsonArray();
             JsonArray jsonArrayEdges = fileObject.get("Edges").getAsJsonArray();
 
-            List<CNode> nodes = new ArrayList<>();
+            List<NodeData> nodes = new ArrayList<>();
             List<EdgeData> edges = new ArrayList<>();
 
             for (JsonElement jnode : jsonArrayNodes) {
@@ -44,7 +47,7 @@ public class FileHandling {
                     id = nodeJsonObject.get("id").getAsString();
                 }
 
-                CNode node = new CNode(pos, id);
+                NodeData node = new CNode(pos, id);
                 nodes.add(node);
             }
 
@@ -71,22 +74,9 @@ public class FileHandling {
                         Double.parseDouble(w));
                 edges.add(edge);
             }
-            // Print :
-            // System.out.println("All my nodes are: " + nodes);
-            // System.out.println("All my edges are: " + edges);
 
-            HashMap<Integer, CNode> hp_nodes = convertNodesList(nodes);
+            HashMap<Integer, NodeData> hp_nodes = convertNodesList(nodes);
             HashMap<String, EdgeData> hp_edges = convertEdgesList(edges);
-            // The method convertEdgesList(List<EdgeData>, List<NodeC>) in the type
-            // FileHandling is not applicable for the arguments (List<CEdge>,
-            // List<NodeC>)Java(67108979)
-            // hp_nodes.entrySet().forEach(entry -> {
-            // System.out.println(entry.getKey() + " " + entry.getValue());
-            // });
-            // System.out.println("*******************************");
-            // hp_edges.entrySet().forEach(entry -> {
-            // System.out.println(entry.getKey() + " " + entry.getValue());
-            // });
 
             StoreNE ne = new StoreNE(hp_nodes, hp_edges);
             return ne;
@@ -99,13 +89,12 @@ public class FileHandling {
             e.printStackTrace();
         }
 
-        StoreNE ne = null;
-        return ne;
+        return null;
     }
 
-    public static HashMap<Integer, CNode> convertNodesList(List<CNode> list) {
-        HashMap<Integer, CNode> map = new HashMap<>();
-        for (CNode node : list) {
+    public static HashMap<Integer, NodeData> convertNodesList(List<NodeData> list) {
+        HashMap<Integer, NodeData> map = new HashMap<>();
+        for (NodeData node : list) {
             map.put(node.getKey(), node);
         }
         return map;
@@ -120,8 +109,11 @@ public class FileHandling {
         return map;
     }
 
-    // public static void main(String[] args) {
+    public static DirectedWeightedGraph GAload(String fileName) {
+        StoreNE NodeEdges = importJson(fileName);
 
-    // StoreNE ne = getJsonToObj("Ex2/data/G1.json");
-    // }
+        G g = new G(NodeEdges.nodes, NodeEdges.edges);
+        return g;
+
+    }
 }
