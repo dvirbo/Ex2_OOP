@@ -141,23 +141,54 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         return ans;
     }
 
+    /**
+     * Finds the NodeData which minimizes the max distance to all the other nodes.
+     * Assuming the graph isConnected, else return null.
+     * See: https://en.wikipedia.org/wiki/Graph_center
+     *
+     * @return the Node data to which the max shortest path to all the other nodes
+     *         is minimized.
+     */
     @Override
     public NodeData center() {
         // TODO Auto-generated method stub
         return null;
     }
 
+    /**
+     * Computes a list of consecutive nodes which go over all the nodes in cities.
+     * the sum of the weights of all the consecutive (pairs) of nodes (directed) is
+     * the "cost" of the solution -
+     * the lower the better.
+     * See: https://en.wikipedia.org/wiki/Travelling_salesman_problem
+     */
     @Override
     public List<NodeData> tsp(List<NodeData> cities) {
         // TODO Auto-generated method stub
         return null;
     }
 
+    /**
+     * Saves this weighted (directed) graph to the given
+     * file name - in JSON format
+     *
+     * @param file - the file name (may include a relative path).
+     * @return true - iff the file was successfully saved
+     */
     @Override
     public boolean save(String file) {
         return GAsave(file, getGraph());
     }
 
+    /**
+     * This method loads a graph to this graph algorithm.
+     * if the file was successfully loaded - the underlying graph
+     * of this class will be changed (to the loaded one), in case the
+     * graph was not loaded the original graph should remain "as is".
+     *
+     * @param file - file name of JSON file
+     * @return true - iff the graph was successfully loaded.
+     */
     @Override
     public boolean load(String file) {
         try {
@@ -180,7 +211,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      *
      * @param src  the id of the sre node
      * @param dest the id of the dest node
-     * @return the shortest path between them
+     * @return the weight (double) of the shortest path between the src and the dest
      */
     private double Dijkstra(NodeData src, NodeData dest) {
         double shortestPath = Integer.MAX_VALUE;

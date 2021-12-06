@@ -15,14 +15,11 @@ public class CExport {
             FileWriter myWriter = new FileWriter(fileName);
             myWriter.write(json);
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            return true;
         } catch (IOException e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
+            return false;
         }
-
-
-        return true;
     }
 
 
