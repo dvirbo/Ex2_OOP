@@ -11,46 +11,34 @@ import java.util.List;
 
 public class G implements DirectedWeightedGraph {
 
+    public static int it_change_edge1 = 0;
+    public static int it_change_edge2 = 0;
+    public static int it_change_nodes = 0;
+    static boolean first_time_edge1 = true;
+    static boolean first_time_edge2 = true;
+    static boolean first_time_node = true;
     public HashMap<Integer, CNode> nodes;
     public HashMap<String, EdgeData> edges;  // String ="src_" + src + "_dest_" + dest
-
     public int modeCount;
 
-    static int it_change_edge1;
-    boolean first_time_edge1;
-
-    static int it_change_edge2;
-    boolean first_time_edge2;
-
-    static int it_change_nodes;
-    boolean first_time_node;
-
-    /**
-     * constructor
-     */
     public G() {
         this.nodes = new HashMap<>();
         this.edges = new HashMap<>();
-        modeCount = 0;
-        it_change_edge1 = 0;
-        first_time_edge1 = true;
-        it_change_edge2 = 0;
-        first_time_edge2 = true;
-        it_change_nodes = 0;
-        first_time_node = true;
-
+        this.modeCount = 0;
     }
 
     public G(HashMap<Integer, CNode> nodes, HashMap<String, EdgeData> edges) {
-        this.nodes = nodes;
-        this.edges = edges;
+
+        this.nodes = new HashMap<>();
+        this.edges = new HashMap<>();
+        nodes.forEach((key, value) -> {
+            this.addNode(value);
+        });
+        edges.forEach((key, value) -> {
+            this.connect(Integer.parseInt(key.substring(4, 5)), Integer.parseInt(key.substring(key.length() - 1)),
+                    value.getWeight());
+        });
         this.modeCount = 0;
-        it_change_edge1 = 0;
-        first_time_edge1 = true;
-        it_change_edge2 = 0;
-        first_time_edge2 = true;
-        it_change_nodes = 0;
-        first_time_node = true;
     }
 
     public G(G other) {
@@ -64,12 +52,6 @@ public class G implements DirectedWeightedGraph {
                     value.getWeight());
         });
         this.modeCount = other.getMC();
-        it_change_edge1 = 0;
-        first_time_edge1 = true;
-        it_change_edge2 = 0;
-        first_time_edge2 = true;
-        it_change_nodes = 0;
-        first_time_node = true;
     }
 
 //    public boolean hasEdge(int i, int j) {
@@ -194,7 +176,7 @@ public class G implements DirectedWeightedGraph {
                     removeEdge(NodeId, Integer.parseInt(key.substring(key.length() - 1)));
                 }
             }
-
+            this.nodes.remove(NodeId);
             modeCount++;
 
             return n;
