@@ -11,34 +11,34 @@ import java.util.List;
 
 public class G implements DirectedWeightedGraph {
 
-    public static int it_change_edge1 = 0;
-    public static int it_change_edge2 = 0;
-    public static int it_change_nodes = 0;
-    static boolean first_time_edge1 = true;
-    static boolean first_time_edge2 = true;
-    static boolean first_time_node = true;
     public HashMap<Integer, CNode> nodes;
     public HashMap<String, EdgeData> edges;  // String ="src_" + src + "_dest_" + dest
+
     public int modeCount;
 
+    int it_change;
+    boolean first_time;
+
+
+    /**
+     * constructor
+     */
     public G() {
         this.nodes = new HashMap<>();
         this.edges = new HashMap<>();
-        this.modeCount = 0;
+        modeCount = 0;
+        it_change = 0;
+        first_time = true;
+
     }
 
     public G(HashMap<Integer, CNode> nodes, HashMap<String, EdgeData> edges) {
-
-        this.nodes = new HashMap<>();
-        this.edges = new HashMap<>();
-        nodes.forEach((key, value) -> {
-            this.addNode(value);
-        });
-        edges.forEach((key, value) -> {
-            this.connect(Integer.parseInt(key.substring(4, 5)), Integer.parseInt(key.substring(key.length() - 1)),
-                    value.getWeight());
-        });
+        this.nodes = nodes;
+        this.edges = edges;
         this.modeCount = 0;
+        it_change = 0;
+        first_time = true;
+
     }
 
     public G(G other) {
@@ -52,8 +52,17 @@ public class G implements DirectedWeightedGraph {
                     value.getWeight());
         });
         this.modeCount = other.getMC();
+        it_change = 0;
+        first_time = true;
+
     }
 
+//    /**
+//     *
+//     * @param i
+//     * @param j
+//     * @return
+//     */
 //    public boolean hasEdge(int i, int j) {
 //        return edges.containsKey("src_" + i + "_dest_" + j);
 //    }
@@ -115,11 +124,11 @@ public class G implements DirectedWeightedGraph {
 
     @Override
     public Iterator<NodeData> nodeIter() {
-        if (first_time_node) {
-            it_change_nodes = modeCount;
-            first_time_node = false;
+        if (first_time) {
+            it_change = modeCount;
+            first_time = false;
         }
-        if (it_change_nodes == modeCount) {
+        if (it_change == modeCount) {
             List<NodeData> list = new ArrayList<>(this.nodes.values());
             Iterator<NodeData> it = list.iterator();
             return it;
@@ -135,12 +144,12 @@ public class G implements DirectedWeightedGraph {
      */
     @Override
     public Iterator<EdgeData> edgeIter() {
-        if (first_time_edge1) {
-            it_change_edge1 = modeCount;
-            first_time_edge1 = false;
+        if (first_time) {
+            it_change = modeCount;
+            first_time = false;
         }
 
-        if (it_change_edge1 == modeCount) {
+        if (it_change == modeCount) {
             return this.edges.values().iterator();
 
         }
@@ -155,11 +164,11 @@ public class G implements DirectedWeightedGraph {
      */
     @Override
     public Iterator<EdgeData> edgeIter(int node_id) {
-        if (first_time_edge2) {
-            it_change_edge2 = modeCount;
-            first_time_edge2 = false;
+        if (first_time) {
+            it_change = modeCount;
+            first_time = false;
         }
-        if (it_change_edge2 == modeCount) {
+        if (it_change == modeCount) {
             return this.nodes.get(node_id).outEdges.values().iterator();
         }
         throw new RuntimeException("graph changed since the iterator was constructed");

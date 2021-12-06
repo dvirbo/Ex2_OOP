@@ -8,7 +8,7 @@ import Interfaces.EdgeData;
 import Interfaces.GeoLocation;
 import Interfaces.NodeData;
 
-public class CNode implements NodeData, Comparable<NodeData> {
+public class CNode implements NodeData{
 
     private int key;
     private GeoLocation location;
@@ -34,6 +34,7 @@ public class CNode implements NodeData, Comparable<NodeData> {
         this.info = other.getInfo();
         this.tag = other.getTag();
         this.outEdges = new HashMap<>();
+
     }
 
     public CNode(String pos, String id) {
@@ -105,11 +106,6 @@ public class CNode implements NodeData, Comparable<NodeData> {
                 '}';
     }
 
-    @Override
-    public int compareTo(NodeData o) {
-        CNode p = this;
-        return Double.compare(p.getWeight(), o.getWeight());
-    }
 
     /**
      * @param o - an Object.

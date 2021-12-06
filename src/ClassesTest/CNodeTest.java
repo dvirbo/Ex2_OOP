@@ -85,10 +85,6 @@ class CNodeTest {
                 '}', n.toString());
     }
 
-    @Test
-    void compareTo() {
-
-    }
 
     @Test
     void testEquals() {
