@@ -1,13 +1,13 @@
 package Classes;
 
+import Interfaces.DirectedWeightedGraph;
+import Interfaces.EdgeData;
+import Interfaces.NodeData;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
-import Interfaces.DirectedWeightedGraph;
-import Interfaces.EdgeData;
-import Interfaces.NodeData;
 
 public class G implements DirectedWeightedGraph {
 
@@ -16,25 +16,41 @@ public class G implements DirectedWeightedGraph {
 
     public int modeCount;
 
-    public static int it_change_edge1 = 0;
-    static boolean first_time_edge1 = true;
+    static int it_change_edge1;
+    boolean first_time_edge1;
 
-    public static int it_change_edge2 = 0;
-    static boolean first_time_edge2 = true;
+    static int it_change_edge2;
+    boolean first_time_edge2;
 
-    public static int it_change_nodes = 0;
-    static boolean first_time_node = true;
+    static int it_change_nodes;
+    boolean first_time_node;
 
+    /**
+     * constructor
+     */
     public G() {
         this.nodes = new HashMap<>();
         this.edges = new HashMap<>();
-        this.modeCount = 0;
+        modeCount = 0;
+        it_change_edge1 = 0;
+        first_time_edge1 = true;
+        it_change_edge2 = 0;
+        first_time_edge2 = true;
+        it_change_nodes = 0;
+        first_time_node = true;
+
     }
 
     public G(HashMap<Integer, CNode> nodes, HashMap<String, EdgeData> edges) {
         this.nodes = nodes;
         this.edges = edges;
         this.modeCount = 0;
+        it_change_edge1 = 0;
+        first_time_edge1 = true;
+        it_change_edge2 = 0;
+        first_time_edge2 = true;
+        it_change_nodes = 0;
+        first_time_node = true;
     }
 
     public G(G other) {
@@ -48,6 +64,12 @@ public class G implements DirectedWeightedGraph {
                     value.getWeight());
         });
         this.modeCount = other.getMC();
+        it_change_edge1 = 0;
+        first_time_edge1 = true;
+        it_change_edge2 = 0;
+        first_time_edge2 = true;
+        it_change_nodes = 0;
+        first_time_node = true;
     }
 
 //    public boolean hasEdge(int i, int j) {
@@ -81,9 +103,10 @@ public class G implements DirectedWeightedGraph {
     /**
      * this function connect 2 nodes by create new edge between them
      * eventually, we add the new  edge to outEdges hashMap
-     * @param src - the source of the edge.
+     *
+     * @param src  - the source of the edge.
      * @param dest - the destination of the edge.
-     * @param w - positive weight representing the cost (aka time, price, etc) between src-->dest.
+     * @param w    - positive weight representing the cost (aka time, price, etc) between src-->dest.
      */
     @Override
     public void connect(int src, int dest, double w) {
@@ -99,10 +122,12 @@ public class G implements DirectedWeightedGraph {
         CNode n1 = nodes.get(src);
         n1.addEdge(dest, e); //add the new edge to outEdges hashMap
     }
+
     /**
      * This method returns an Iterator for the
      * collection representing all the nodes in the graph.
      * Note: if the graph was changed since the iterator was constructed - a RuntimeException should be thrown.
+     *
      * @return Iterator<node_data>
      */
 
@@ -117,12 +142,13 @@ public class G implements DirectedWeightedGraph {
             Iterator<NodeData> it = list.iterator();
             return it;
         }
-        throw new RuntimeException("node were changed since the iterator was constructed");
+        throw new RuntimeException("graph changed since the iterator was constructed");
     }
 
     /**
      * This method returns an Iterator for all the edges in this graph.
      * Note: if any of the edges going out of this node were changed since the iterator was constructed - a RuntimeException should be thrown.
+     *
      * @return Iterator<EdgeData>
      */
     @Override
@@ -136,12 +162,13 @@ public class G implements DirectedWeightedGraph {
             return this.edges.values().iterator();
 
         }
-
-        throw new RuntimeException("node were changed since the iterator was constructed");
+        throw new RuntimeException("graph changed since the iterator was constructed");
     }
+
     /**
      * This method returns an Iterator for edges getting out of the given node (all the edges starting (source) at the given node).
      * Note: if the graph was changed since the iterator was constructed - a RuntimeException should be thrown.
+     *
      * @return Iterator<EdgeData>
      */
     @Override
@@ -153,7 +180,7 @@ public class G implements DirectedWeightedGraph {
         if (it_change_edge2 == modeCount) {
             return this.nodes.get(node_id).outEdges.values().iterator();
         }
-        throw new RuntimeException("edges were changed since the iterator was constructed");
+        throw new RuntimeException("graph changed since the iterator was constructed");
     }
 
     @Override

@@ -15,6 +15,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
 
     /**
      * Inits the graph on which this set of algorithms operates on.
+     *
      * @param g DirectedWeightedGraph
      */
     @Override
@@ -45,11 +46,10 @@ public class GA implements DirectedWeightedGraphAlgorithms {
     }
 
     /**
-     * Returns true if and only if (iff) there is a valid path from each node to
-     * each other node.
+     * This method check if strongly connected by using BFS
      * NOTE: assume directional graph (all n*(n-1) ordered pairs).
-     * check if strongly connected by using BFS
      * wiki: https://en.wikipedia.org/wiki/Breadth-first_search
+     *
      * @return true if the graph is strongly connected, else false
      */
     @Override
@@ -61,17 +61,21 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         while (it.hasNext()) {
             NodeData n = it.next();
             boolean check = this.bfs(n);
-            if (check){ //if
-                resetTags();
-            }
-            else{
+            resetTags();
+            if (!check){
                 return false;
             }
         }
         return true;
     }
-
-
+    /**
+     * Computes the length of the shortest path between src to dest
+     * Note: if no such path --> returns -1
+     *
+     * @param src  - start node
+     * @param dest - end (target) node
+     * @return
+     */
     @Override
     public double shortestPathDist(int src, int dest) {
         // TODO Auto-generated method stub
@@ -121,7 +125,8 @@ public class GA implements DirectedWeightedGraphAlgorithms {
 
     /**
      * This method check the sum of the nodes in the graph by iterate with BFS
-     *  Using queue we
+     * Using queue we
+     *
      * @param n node that the search start from
      * @return true if the number of nodes that visited and count are equals to the sum of the nodes in the graph
      */
@@ -133,7 +138,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         while (!queue.isEmpty()) { //contain all the nodes that we need to check
             NodeData np = queue.poll();
             Iterator<EdgeData> it = this.graph.edgeIter(np.getKey());
-            while (!it.hasNext()) {
+            while (it.hasNext()) {
                 NodeData AdjNode = this.graph.getNode(it.next().getDest()); //get the neighbor nodes
                 if (AdjNode.getTag() == -1) { //check his tag - if we didn't visit yet:
                     AdjNode.setTag(1); //change to visit

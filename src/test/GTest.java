@@ -1,27 +1,25 @@
 package test;
 
-import Classes.CEdge;
-import Interfaces.NodeData;
-import org.junit.jupiter.api.Test;
-
-import Classes.G;
 import Classes.CGeo;
 import Classes.CNode;
+import Classes.G;
 import Interfaces.EdgeData;
-
-import static org.junit.jupiter.api.Assertions.*;
+import Interfaces.NodeData;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Iterator;
 
-class DWGraphTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class GTest {
 
     private static CNode n1, n2, n3, n4, n5, n6;
     private static CGeo g1, g2, g3, g4, g5, g6;
     private static HashMap<Integer, CNode> nodes = new HashMap<>();
     private static HashMap<String, EdgeData> edges = new HashMap<>();
 
-    public DWGraphTest() {
+    public GTest() {
         g1 = new CGeo(1, 2, 3);
         g2 = new CGeo(2, 1, 3);
         g3 = new CGeo(-4, 7, 1);
@@ -29,12 +27,13 @@ class DWGraphTest {
         g5 = new CGeo(-3, 6, 4);
         g6 = new CGeo(-1, 5, 4);
 
-        n1 = new CNode(1, g1, 1, "White", -1);
-        n2 = new CNode(2, g2, 2, "White", -1);
-        n3 = new CNode(3, g3, 3, "White", -1);
-        n4 = new CNode(4, g4, 4, "White", -1);
-        n5 = new CNode(5, g5, 5, "White", -1);
-        n6 = new CNode(6, g6, 6, "White", -1);
+        n1 = new CNode(1, g1, 1.0, "White", -1);
+        n2 = new CNode(2, g2, 2.0, "White", -1);
+        n3 = new CNode(3, g3, 3.0, "White", -1);
+        n4 = new CNode(4, g4, 4.0, "White", -1);
+        n5 = new CNode(5, g5, 5.0, "White", -1);
+        n6 = new CNode(6, g6, 6.0, "White", -1);
+
     }
 
     /**
@@ -103,9 +102,9 @@ class DWGraphTest {
         assertEquals(w03.getDest(), 3);
         assertEquals(w03.getWeight(), 1.1);
 
-/**
- * check getNode + getEdge
- */
+        /**
+         * check getNode + getEdge
+         */
     }
 
     @Test
@@ -125,7 +124,8 @@ class DWGraphTest {
     }
 
     /**
-     * check the iterator that iterate the collection representing all the nodes in the graph.
+     * check the iterator that iterate the collection representing all the nodes in
+     * the graph.
      */
     @Test
     void nodeIter() {
@@ -147,8 +147,15 @@ class DWGraphTest {
 
         NodeData node3 = new CNode(n3);
         graph.addNode(node3);
-        iterator = graph.nodeIter();  //trow RuntimeException: node were changed since the iterator was constructed
 
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            graph.nodeIter(); // trow RuntimeException: node were changed since the iterator was constructed
+        });
+
+        String expectedMessage = "graph changed since the iterator was constructed";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
@@ -164,8 +171,8 @@ class DWGraphTest {
         graph.addNode(node3);
         graph.addNode(node4);
 
-        graph.connect(n1.getKey(),n3.getKey(),1.1);
-        graph.connect(n2.getKey(),n4.getKey(),1.2);
+        graph.connect(n1.getKey(), n3.getKey(), 1.1);
+        graph.connect(n2.getKey(), n4.getKey(), 1.2);
 
         Iterator<EdgeData> iterator = graph.edgeIter();
         int count = 0;
@@ -178,16 +185,13 @@ class DWGraphTest {
         NodeData node5 = new CNode(n5);
         graph.addNode(node5);
 
-
         graph.connect(n2.getKey(), n5.getKey(), 1.6);
-        iterator = graph.edgeIter();
-
 
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            Integer.parseInt("1a");
+            graph.edgeIter();
         });
 
-        String expectedMessage = "node were changed since the iterator was constructed";
+        String expectedMessage = "graph changed since the iterator was constructed";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
@@ -210,17 +214,16 @@ class DWGraphTest {
         graph.connect(n1.getKey(), n3.getKey(), 1.2);
         graph.connect(n1.getKey(), n4.getKey(), 1.4);
 
-
         Iterator<EdgeData> iterator = graph.edgeIter(n1.getKey());
         int count = 0;
         while (iterator.hasNext()) {
-            //didn't go inside cause the graph was changed since the iterator was constructed
+            // didn't go inside cause the graph was changed since the iterator was
+            // constructed
             count++;
             iterator.next();
         }
         System.out.println(count);
         assertEquals(2, count);
     }
-
 
 }
