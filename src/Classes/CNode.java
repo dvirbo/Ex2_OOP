@@ -15,7 +15,6 @@ public class CNode implements NodeData{
     private double weight;
     private String info;
     private int tag;
-    public HashMap<Integer, EdgeData> outEdges;
 
 
     public CNode(int uniqueKey, CGeo g, double weight, String info, int tag) {
@@ -24,7 +23,6 @@ public class CNode implements NodeData{
         this.weight = weight;
         this.info = info;
         this.tag = tag;
-        this.outEdges = new HashMap<>();
     }
 
     public CNode(NodeData other) {
@@ -33,7 +31,6 @@ public class CNode implements NodeData{
         this.weight = other.getWeight();
         this.info = other.getInfo();
         this.tag = other.getTag();
-        this.outEdges = new HashMap<>();
 
     }
 
@@ -44,7 +41,6 @@ public class CNode implements NodeData{
         this.weight = 0;
         this.info = "white";
         this.tag = -1;
-        this.outEdges = new HashMap<>();
     }
 
     @Override
@@ -135,11 +131,4 @@ public class CNode implements NodeData{
         return Objects.hash(key, location.x(), location.y(), location.z(), weight, info, tag);
     }
 
-    public void addEdge(int dest, EdgeData e) {
-        this.outEdges.put(dest, e);
-    }
-
-    public EdgeData getEdge(int dest) {
-        return this.outEdges.get(dest);
-    }
 }

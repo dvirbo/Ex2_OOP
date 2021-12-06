@@ -102,19 +102,5 @@ class CNodeTest {
         assertEquals(n1.hashCode(), n2.hashCode());
     }
 
-    @Test
-    void addEdge() {
-        CNode n1 = new CNode(1, new CGeo(1, 2, 3), 1.0, "white", -1);
-        CEdge e = new CEdge(1, 2, 3);
-        n1.addEdge(2, e);
-        assertEquals(n1.outEdges.get(2), e);
-    }
 
-    @Test
-    void getEdge() {
-        CNode n1 = new CNode(1, new CGeo(1, 2, 3), 1.0, "white", -1);
-        CEdge e = new CEdge(1, 2, 3);
-        n1.addEdge(2, e);
-        assertEquals(n1.getEdge(2), e);
-    }
 }
