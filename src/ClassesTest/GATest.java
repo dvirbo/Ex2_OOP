@@ -9,6 +9,8 @@ import Interfaces.DirectedWeightedGraphAlgorithms;
 import Interfaces.NodeData;
 import org.junit.jupiter.api.*;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -131,6 +133,21 @@ class GATest {
     @Test
     @Order(6)
     void tsp() {
+        DirectedWeightedGraph g1 = new G();
+        NodeData n1 = new CNode(1, new CGeo(1.0, 2.0, 3.0), 0, "White", -1);
+        NodeData n2 = new CNode(2, new CGeo(3.0, 4.0, 5.0), 0, "White", -1);
+        g1.addNode(n1);
+        g1.addNode(n2);
+        g1.connect(1, 2, 500);
+        g1.connect(2, 1, 1);
+        List<NodeData> list1 = new LinkedList<>();
+        list1.add(n2);
+        list1.add(n1);
+
+        DirectedWeightedGraphAlgorithms ga1 = new GA();
+        ga1.init(g1);
+        assertEquals(list1, ga1.tsp(list1));
+
     }
 
     @Test

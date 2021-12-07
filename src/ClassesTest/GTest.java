@@ -328,7 +328,7 @@ class GTest {
         graph.connect(1, 2, 1.0);
         assertEquals(1, graph.edgeSize());
         assertEquals(new CEdge(1, 2, 1.0), graph.getEdge(1, 2));
-        graph.removeEdge(1, 2);
+        assertEquals(new CEdge(1, 2, 1.0), graph.removeEdge(1, 2));
         assertEquals(0, graph.edgeSize());
         assertNull(graph.getEdge(1, 2));
 
