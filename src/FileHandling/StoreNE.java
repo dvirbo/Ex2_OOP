@@ -2,7 +2,6 @@ package FileHandling;
 
 import java.util.HashMap;
 
-import Classes.CNode;
 import Interfaces.EdgeData;
 import Interfaces.NodeData;
 
