@@ -109,7 +109,7 @@ public class G implements DirectedWeightedGraph {
             return;
         }
         EdgeData e = new CEdge(src, dest, w);
-        edges.put("src_" + src + "_dest_" + dest, e);
+        this.edges.put("src_" + src + "_dest_" + dest, e);
         modeCount++;
     }
 
@@ -188,12 +188,12 @@ public class G implements DirectedWeightedGraph {
         if (this.nodes.containsKey(NodeId)) {
             NodeData n = new CNode(this.nodes.get(NodeId));
 
-            for (String key : this.edges.keySet()) {
-                String strSrc = Integer.toString(NodeId);
-                if (key.substring(4, 5).equals(strSrc)) {
-                    removeEdge(NodeId, Integer.parseInt(key.substring(key.length() - 1)));
-                }
-            }
+
+            this.edges.entrySet().removeIf((entry) -> {
+                modeCount++;
+                return Integer.toString(NodeId).equals(entry.getKey().substring(4, 5));
+            });
+          
             this.nodes.remove(NodeId);
             modeCount++;
 

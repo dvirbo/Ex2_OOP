@@ -29,8 +29,8 @@ class GTest {
         G graph1 = new G();
         g1 = new CGeo(1, 2, 3);
         g2 = new CGeo(2, 1, 3);
-        n1 = new CNode(1, g1, 1.0, "white", -1);
-        n2 = new CNode(2, g2, 2.0, "white", -1);
+        n1 = new CNode(1, g1, 1.0, "White", -1);
+        n2 = new CNode(2, g2, 2.0, "White", -1);
         graph1.addNode(n1);
         graph1.addNode(n2);
 
@@ -49,7 +49,7 @@ class GTest {
     void getNode() {
         G graph = new G();
         g1 = new CGeo(1, 2, 3);
-        n1 = new CNode(1, g1, 1.0, "white", -1);
+        n1 = new CNode(1, g1, 1.0, "White", -1);
         graph.addNode(n1);
         assertEquals(n1, graph.getNode(1));
         assertEquals(1, graph.nodeSize());
@@ -64,10 +64,10 @@ class GTest {
         g2 = new CGeo(2, 1, 3);
         g3 = new CGeo(-4, 7, 1);
         g4 = new CGeo(-5, 8, 2);
-        n1 = new CNode(1, g1, 1.0, "white", -1);
-        n2 = new CNode(2, g2, 2.0, "white", -1);
-        n3 = new CNode(3, g3, 3.0, "white", -1);
-        n4 = new CNode(4, g4, 4.0, "white", -1);
+        n1 = new CNode(1, g1, 1.0, "White", -1);
+        n2 = new CNode(2, g2, 2.0, "White", -1);
+        n3 = new CNode(3, g3, 3.0, "White", -1);
+        n4 = new CNode(4, g4, 4.0, "White", -1);
 
         NodeData node1 = new CNode(n1);
         NodeData node2 = new CNode(n2);
@@ -89,6 +89,18 @@ class GTest {
 
     @Test
     void addNode() {
+        G graph = new G();
+        g1 = new CGeo(1, 2, 3);
+        g2 = new CGeo(2, 1, 3);
+        n1 = new CNode(1, g1, 1.0, "White", -1);
+        n2 = new CNode(2, g2, 2.0, "White", -1);
+        NodeData node1 = new CNode(n1);
+        NodeData node2 = new CNode(n2);
+        graph.addNode(node1);
+        graph.addNode(node2);
+        assertEquals(2, graph.nodeSize());
+        assertEquals(new CNode(1, g1, 1.0, "White", -1), graph.getNode(1));
+        assertEquals(new CNode(2, g2, 2.0, "White", -1), graph.getNode(2));
 
     }
 
@@ -97,8 +109,8 @@ class GTest {
         G graph = new G();
         g1 = new CGeo(1, 2, 3);
         g2 = new CGeo(2, 1, 3);
-        n1 = new CNode(1, g1, 1.0, "white", -1);
-        n2 = new CNode(2, g2, 2.0, "white", -1);
+        n1 = new CNode(1, g1, 1.0, "White", -1);
+        n2 = new CNode(2, g2, 2.0, "White", -1);
         NodeData node1 = new CNode(n1);
         NodeData node2 = new CNode(n2);
         graph.addNode(node1);
@@ -114,8 +126,8 @@ class GTest {
         G graph = new G();
         g1 = new CGeo(1, 2, 3);
         g2 = new CGeo(2, 1, 3);
-        n1 = new CNode(1, g1, 1.0, "white", -1);
-        n2 = new CNode(2, g2, 2.0, "white", -1);
+        n1 = new CNode(1, g1, 1.0, "White", -1);
+        n2 = new CNode(2, g2, 2.0, "White", -1);
         NodeData node1 = new CNode(n1);
         NodeData node2 = new CNode(n2);
         graph.addNode(node1);
@@ -130,7 +142,7 @@ class GTest {
         assertEquals(count, 2);
 
         g3 = new CGeo(-4, 7, 1);
-        n3 = new CNode(3, g3, 3.0, "white", -1);
+        n3 = new CNode(3, g3, 3.0, "White", -1);
         NodeData node3 = new CNode(n3);
         graph.addNode(node3);
 
@@ -153,10 +165,10 @@ class GTest {
         g2 = new CGeo(2, 1, 3);
         g3 = new CGeo(-4, 7, 1);
         g4 = new CGeo(-5, 8, 2);
-        n1 = new CNode(1, g1, 1.0, "white", -1);
-        n2 = new CNode(2, g2, 2.0, "white", -1);
-        n3 = new CNode(3, g3, 3.0, "white", -1);
-        n4 = new CNode(4, g4, 4.0, "white", -1);
+        n1 = new CNode(1, g1, 1.0, "White", -1);
+        n2 = new CNode(2, g2, 2.0, "White", -1);
+        n3 = new CNode(3, g3, 3.0, "White", -1);
+        n4 = new CNode(4, g4, 4.0, "White", -1);
 
         NodeData node1 = new CNode(n1);
         NodeData node2 = new CNode(n2);
@@ -180,7 +192,7 @@ class GTest {
         assertEquals(count, 2);
         // check if after changing the graph
         g5 = new CGeo(-3, 6, 4);
-        n5 = new CNode(5, g5, 5.0, "white", -1);
+        n5 = new CNode(5, g5, 5.0, "White", -1);
         NodeData node5 = new CNode(n5);
         graph.addNode(node5);
 
@@ -206,10 +218,10 @@ class GTest {
         g2 = new CGeo(2, 1, 3);
         g3 = new CGeo(-4, 7, 1);
         g4 = new CGeo(-5, 8, 2);
-        n1 = new CNode(1, g1, 1.0, "white", -1);
-        n2 = new CNode(2, g2, 2.0, "white", -1);
-        n3 = new CNode(3, g3, 3.0, "white", -1);
-        n4 = new CNode(4, g4, 4.0, "white", -1);
+        n1 = new CNode(1, g1, 1.0, "White", -1);
+        n2 = new CNode(2, g2, 2.0, "White", -1);
+        n3 = new CNode(3, g3, 3.0, "White", -1);
+        n4 = new CNode(4, g4, 4.0, "White", -1);
 
         NodeData node1 = new CNode(n1);
         NodeData node2 = new CNode(n2);
@@ -237,7 +249,7 @@ class GTest {
 
         // check if after changing the graph
         g5 = new CGeo(-3, 6, 4);
-        n5 = new CNode(5, g5, 5.0, "white", -1);
+        n5 = new CNode(5, g5, 5.0, "White", -1);
         NodeData node5 = new CNode(n5);
         graph.addNode(node5);
         // need to show dvir that if i remove the node id from the inside it is problem
@@ -260,12 +272,12 @@ class GTest {
         g4 = new CGeo(-5, 8, 2);
         g5 = new CGeo(-3, 6, 4);
         g6 = new CGeo(-1, 5, 4);
-        n1 = new CNode(1, g1, 1.0, "white", -1);
-        n2 = new CNode(2, g2, 2.0, "white", -1);
-        n3 = new CNode(3, g3, 3.0, "white", -1);
-        n4 = new CNode(4, g4, 4.0, "white", -1);
-        n5 = new CNode(5, g5, 5.0, "white", -1);
-        n6 = new CNode(6, g6, 6.0, "white", -1);
+        n1 = new CNode(1, g1, 1.0, "White", -1);
+        n2 = new CNode(2, g2, 2.0, "White", -1);
+        n3 = new CNode(3, g3, 3.0, "White", -1);
+        n4 = new CNode(4, g4, 4.0, "White", -1);
+        n5 = new CNode(5, g5, 5.0, "White", -1);
+        n6 = new CNode(6, g6, 6.0, "White", -1);
 
         G graph = new G();
         graph.addNode(n1);
@@ -279,6 +291,16 @@ class GTest {
         assertEquals(new CNode(n5), graph.removeNode(5));
         assertEquals(5, graph.nodeSize());
         assertNull(graph.getNode(5));
+
+        graph.connect(1, 2, 1.0);
+        graph.connect(1, 3, 1.0);
+        graph.connect(1, 4, 1.0);
+        assertEquals(3, graph.edgeSize());
+        graph.removeNode(1);
+        assertNull(graph.getNode(1));
+        assertEquals(4, graph.nodeSize());
+        assertEquals(0, graph.edgeSize());
+
     }
 
     @Test
@@ -289,12 +311,12 @@ class GTest {
         g4 = new CGeo(-5, 8, 2);
         g5 = new CGeo(-3, 6, 4);
         g6 = new CGeo(-1, 5, 4);
-        n1 = new CNode(1, g1, 1.0, "white", -1);
-        n2 = new CNode(2, g2, 2.0, "white", -1);
-        n3 = new CNode(3, g3, 3.0, "white", -1);
-        n4 = new CNode(4, g4, 4.0, "white", -1);
-        n5 = new CNode(5, g5, 5.0, "white", -1);
-        n6 = new CNode(6, g6, 6.0, "white", -1);
+        n1 = new CNode(1, g1, 1.0, "White", -1);
+        n2 = new CNode(2, g2, 2.0, "White", -1);
+        n3 = new CNode(3, g3, 3.0, "White", -1);
+        n4 = new CNode(4, g4, 4.0, "White", -1);
+        n5 = new CNode(5, g5, 5.0, "White", -1);
+        n6 = new CNode(6, g6, 6.0, "White", -1);
 
         G graph = new G();
         graph.addNode(n1);
@@ -321,12 +343,12 @@ class GTest {
         g4 = new CGeo(-5, 8, 2);
         g5 = new CGeo(-3, 6, 4);
         g6 = new CGeo(-1, 5, 4);
-        n1 = new CNode(1, g1, 1.0, "white", -1);
-        n2 = new CNode(2, g2, 2.0, "white", -1);
-        n3 = new CNode(3, g3, 3.0, "white", -1);
-        n4 = new CNode(4, g4, 4.0, "white", -1);
-        n5 = new CNode(5, g5, 5.0, "white", -1);
-        n6 = new CNode(6, g6, 6.0, "white", -1);
+        n1 = new CNode(1, g1, 1.0, "White", -1);
+        n2 = new CNode(2, g2, 2.0, "White", -1);
+        n3 = new CNode(3, g3, 3.0, "White", -1);
+        n4 = new CNode(4, g4, 4.0, "White", -1);
+        n5 = new CNode(5, g5, 5.0, "White", -1);
+        n6 = new CNode(6, g6, 6.0, "White", -1);
 
         G graph = new G();
         graph.addNode(n1);
@@ -349,12 +371,12 @@ class GTest {
         g4 = new CGeo(-5, 8, 2);
         g5 = new CGeo(-3, 6, 4);
         g6 = new CGeo(-1, 5, 4);
-        n1 = new CNode(1, g1, 1.0, "white", -1);
-        n2 = new CNode(2, g2, 2.0, "white", -1);
-        n3 = new CNode(3, g3, 3.0, "white", -1);
-        n4 = new CNode(4, g4, 4.0, "white", -1);
-        n5 = new CNode(5, g5, 5.0, "white", -1);
-        n6 = new CNode(6, g6, 6.0, "white", -1);
+        n1 = new CNode(1, g1, 1.0, "White", -1);
+        n2 = new CNode(2, g2, 2.0, "White", -1);
+        n3 = new CNode(3, g3, 3.0, "White", -1);
+        n4 = new CNode(4, g4, 4.0, "White", -1);
+        n5 = new CNode(5, g5, 5.0, "White", -1);
+        n6 = new CNode(6, g6, 6.0, "White", -1);
 
         G graph = new G();
         graph.addNode(n1);
@@ -380,12 +402,12 @@ class GTest {
         g4 = new CGeo(-5, 8, 2);
         g5 = new CGeo(-3, 6, 4);
         g6 = new CGeo(-1, 5, 4);
-        n1 = new CNode(1, g1, 1.0, "white", -1);
-        n2 = new CNode(2, g2, 2.0, "white", -1);
-        n3 = new CNode(3, g3, 3.0, "white", -1);
-        n4 = new CNode(4, g4, 4.0, "white", -1);
-        n5 = new CNode(5, g5, 5.0, "white", -1);
-        n6 = new CNode(6, g6, 6.0, "white", -1);
+        n1 = new CNode(1, g1, 1.0, "White", -1);
+        n2 = new CNode(2, g2, 2.0, "White", -1);
+        n3 = new CNode(3, g3, 3.0, "White", -1);
+        n4 = new CNode(4, g4, 4.0, "White", -1);
+        n5 = new CNode(5, g5, 5.0, "White", -1);
+        n6 = new CNode(6, g6, 6.0, "White", -1);
 
         G graph = new G();
         assertEquals(0, graph.getMC());

@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CEdgeTest {
 
-
     @Test
     void getSrc() {
         EdgeData e = new CEdge(1, 2, 3);
@@ -30,13 +29,13 @@ class CEdgeTest {
     @Test
     void getInfo() {
         EdgeData e = new CEdge(1, 2, 3);
-        assertEquals("white", e.getInfo());
+        assertEquals("White", e.getInfo());
     }
 
     @Test
     void setInfo() {
         EdgeData e = new CEdge(1, 2, 3);
-        assertEquals("white", e.getInfo());
+        assertEquals("White", e.getInfo());
         e.setInfo("gray");
         assertEquals("gray", e.getInfo());
         e.setInfo("black");
