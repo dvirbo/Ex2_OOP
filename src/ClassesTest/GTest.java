@@ -85,7 +85,6 @@ class GTest {
         assertEquals(new CEdge(1, 3, 1.1), graph.getEdge(1, 3));
         assertEquals(new CEdge(2, 4, 1.2), graph.getEdge(2, 4));
 
-
     }
 
     @Test
@@ -107,7 +106,6 @@ class GTest {
         graph.connect(1, 2, 1.0);
         assertEquals(1, graph.edgeSize());
         assertEquals(new CEdge(1, 2, 1.0), graph.getEdge(1, 2));
-
 
     }
 
@@ -278,7 +276,7 @@ class GTest {
         graph.addNode(n6);
         assertEquals(6, graph.nodeSize());
         assertEquals(new CNode(n5), graph.getNode(5));
-        graph.removeNode(5);
+        assertEquals(new CNode(n5), graph.removeNode(5));
         assertEquals(5, graph.nodeSize());
         assertNull(graph.getNode(5));
     }
@@ -311,7 +309,6 @@ class GTest {
         graph.removeEdge(1, 2);
         assertEquals(0, graph.edgeSize());
         assertNull(graph.getEdge(1, 2));
-
 
     }
 

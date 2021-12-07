@@ -1,6 +1,5 @@
 package ClassesTest;
 
-import Classes.CEdge;
 import Classes.CGeo;
 import Classes.CNode;
 import Interfaces.NodeData;
