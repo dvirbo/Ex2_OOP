@@ -93,6 +93,9 @@ public class GA implements DirectedWeightedGraphAlgorithms {
 
         double ans = Dijkstra(this.graph.getNode(src), this.graph.getNode(dest));
 
+        resetInfo();
+        resetTags();
+        resetWeight();
         if (ans == Integer.MAX_VALUE) {
             return -1;
         }
@@ -153,6 +156,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
     @Override
     public NodeData center() {
         if (this.isConnected()) {
+
             int minKey = findAvg();
             NodeData center = this.graph.getNode(minKey);
             return center;
@@ -178,11 +182,11 @@ public class GA implements DirectedWeightedGraphAlgorithms {
             double countDeg = 0;//count the shortest path to all the nodes in the graph
             Iterator<NodeData> inner = this.graph.nodeIter();
             int fatherKey = outer.next().getKey();
-            System.out.println("father: " + fatherKey);
+            //System.out.println("father: " + fatherKey);
             while (inner.hasNext()) {
                 int sonKey = inner.next().getKey();
                 if (sonKey != fatherKey) {
-                    System.out.println("son : " + sonKey);
+                  //  System.out.println("son : " + sonKey);
                     countDeg += this.shortestPathDist(fatherKey ,sonKey);
                 }
             }

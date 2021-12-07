@@ -95,47 +95,35 @@ class GATest {
         DirectedWeightedGraph gg = new G();
         DirectedWeightedGraphAlgorithms gga = new GA();
 
-        for (int i = 1; i < 4; i++) {
+        for (int i = 0; i < 9; i++) {
             NodeData n = new CNode(i, new CGeo(i, i, i), 0, "White", -1);
             gg.addNode(n);
         }
-        gg.connect(1, 2, 1.3);
-        gg.connect(2, 1, 1.3);
-        gg.connect(1, 3, 2.7);
-        gg.connect(3, 1, 1.0);
+        gg.connect(0, 1, 1.0);
+        gg.connect(1, 0, 1.0);
+        gg.connect(1, 2, 1.0);
+        gg.connect(2, 1, 1.0);
+        gg.connect(2, 9, 1.0);
+        gg.connect(9, 2, 1.0);
+        gg.connect(2, 6, 1.0);
+        gg.connect(6, 2, 1.0);
+        gg.connect(6, 7, 1.0);
+        gg.connect(7, 6, 1.0);
+        gg.connect(6, 8, 1.0);
+        gg.connect(8, 6, 1.0);
+        gg.connect(2, 3, 1.0);
+        gg.connect(3, 2, 1.0);
+        gg.connect(3, 4, 1.0);
+        gg.connect(4, 3, 1.0);
+        gg.connect(3, 5, 1.0);
+        gg.connect(5, 3, 1.0);
+
 
         gga.init(gg);
 
         System.out.println(gga.center());
 
-        // example
-        // Iterator<NodeData> iter = gg.nodeIter();
-        // while (iter.hasNext()) {
-        // Iterator<NodeData> iter1 = gg.nodeIter();
-        // int fatherKey = iter.next().getKey();
-        // System.out.println(fatherKey);
-        // System.out.println("father ^ sons :");
-        // while (iter1.hasNext()) {
-        // int sonKey = iter1.next().getKey();
-        // if (sonKey != fatherKey) {
-        // System.out.println("son : " + sonKey);
-        // }
-        // }
-        // }
 
-        // example 2
-        // for (Iterator<NodeData> outer = gg.nodeIter(); outer.hasNext();) {
-        // Iterator<NodeData> inner = gg.nodeIter();
-        // int fatherKey = outer.next().getKey();
-        // System.out.println(fatherKey);
-        // System.out.println("father ^ sons :");
-        // while (inner.hasNext()) {
-        // int sonKey = inner.next().getKey();
-        // if (sonKey != fatherKey) {
-        // System.out.println("son : " + sonKey);
-        // }
-        // }
-        // }
 
     }
 
