@@ -7,14 +7,13 @@ import Classes.GA;
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
 import Interfaces.NodeData;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
-import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class GATest {
     private static final DirectedWeightedGraph g = new G();
     private static final DirectedWeightedGraphAlgorithms ga = new GA();
@@ -40,9 +39,10 @@ class GATest {
      * checking: init, getGraph and copy methods
      */
     @Test
+    @Order(1)
     void init_getGraph_copy() {
 
-        DirectedWeightedGraph gCopy = new G((G) g);
+        DirectedWeightedGraph gCopy = new G(g);
         DirectedWeightedGraphAlgorithms gaCopy = new GA();
         gaCopy.init(gCopy); // reset the graph by init
         assertEquals(gCopy, gaCopy.getGraph()); // equals cause
@@ -53,6 +53,7 @@ class GATest {
     }
 
     @Test
+    @Order(2)
     void isConnected() {
 
         assertTrue(ga.isConnected()); // the graph that made BeforeAll
@@ -71,6 +72,7 @@ class GATest {
      * return the shortestPathDist (double)
      */
     @Test
+    @Order(3)
     void shortestPathDist() {
 
         double ans = ga.shortestPathDist(1, 3);
@@ -83,6 +85,7 @@ class GATest {
      * return list<NodeData> of the shortest Path in the graph
      */
     @Test
+    @Order(4)
     void shortestPath() {
         List<NodeData> ans = ga.shortestPath(1, 3);
         assertEquals(ans.size(), 4);
@@ -91,6 +94,7 @@ class GATest {
     }
 
     @Test
+    @Order(5)
     void center() {
         DirectedWeightedGraph gg = new G();
         DirectedWeightedGraphAlgorithms gga = new GA();
@@ -118,7 +122,6 @@ class GATest {
         gg.connect(3, 5, 1.0);
         gg.connect(5, 3, 1.0);
 
-
         gga.init(gg);
         NodeData center = gga.center();
         assertEquals(2, center.getKey());
@@ -126,15 +129,20 @@ class GATest {
     }
 
     @Test
+    @Order(6)
     void tsp() {
     }
 
     @Test
+    @Order(7)
     void save() {
     }
 
     @Test
+    @Order(8)
     void load() {
         ga.load("./json_data/G1.json");
+
     }
+
 }

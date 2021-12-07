@@ -128,11 +128,8 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         if (shortestPathDist(src, dest) == -1) {//if no such path
             return null;
         }
-        resetInfo();
-        resetTags();
-        resetWeight();
         double d = Dijkstra(this.graph.getNode(src), this.graph.getNode(dest));
-        if (d != Integer.MAX_VALUE) {
+        if (d != Double.MAX_VALUE) {
             int stop = this.graph.getNode(src).getKey(); // were to stop - when we get to the src node
             int ptr = this.graph.getNode(dest).getKey(); // start from the last node
             while (ptr != stop) {
@@ -143,6 +140,9 @@ public class GA implements DirectedWeightedGraphAlgorithms {
             NodeData first = this.graph.getNode(stop);
             ans.add(0, first);
         }
+        resetInfo();
+        resetTags();
+        resetWeight();
         return ans;
     }
 
@@ -179,7 +179,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         double min = Double.MAX_VALUE;
         int minKey = 0;
 
-        for (Iterator<NodeData> outer = this.graph.nodeIter(); outer.hasNext();) {
+        for (Iterator<NodeData> outer = this.graph.nodeIter(); outer.hasNext(); ) {
             double countDeg = 0;//count the shortest path to all the nodes in the graph
             Iterator<NodeData> inner = this.graph.nodeIter();
             int fatherKey = outer.next().getKey();
@@ -187,8 +187,8 @@ public class GA implements DirectedWeightedGraphAlgorithms {
             while (inner.hasNext()) {
                 int sonKey = inner.next().getKey();
                 if (sonKey != fatherKey) {
-                  //  System.out.println("son : " + sonKey);
-                    countDeg += this.shortestPathDist(fatherKey ,sonKey);
+                    //  System.out.println("son : " + sonKey);
+                    countDeg += this.shortestPathDist(fatherKey, sonKey);
                 }
             }
             countDeg = (countDeg / this.graph.nodeSize()); //the avg dist to all the node in the graph
