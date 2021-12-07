@@ -1,10 +1,8 @@
 package Classes;
 
-import java.util.HashMap;
 import java.util.Objects;
-// import java.util.Objects;
 
-import Interfaces.EdgeData;
+
 import Interfaces.GeoLocation;
 import Interfaces.NodeData;
 
