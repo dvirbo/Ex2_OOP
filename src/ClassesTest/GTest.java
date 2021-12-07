@@ -288,7 +288,7 @@ class GTest {
         graph.addNode(n6);
         assertEquals(6, graph.nodeSize());
         assertEquals(new CNode(n5), graph.getNode(5));
-        graph.removeNode(5);
+        assertEquals(new CNode(n5), graph.removeNode(5));
         assertEquals(5, graph.nodeSize());
         assertNull(graph.getNode(5));
 

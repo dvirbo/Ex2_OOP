@@ -15,6 +15,7 @@ import static FileHandling.CExport.GAsave;
 public class GA implements DirectedWeightedGraphAlgorithms {
 
     private DirectedWeightedGraph graph;
+    //  private HashMap<Integer, Integer> nodesDegree = new HashMap<>(this.graph.nodeSize());
 
     /**
      * Inits the graph on which this set of algorithms operates on.
@@ -92,7 +93,11 @@ public class GA implements DirectedWeightedGraphAlgorithms {
 
         double ans = Dijkstra(this.graph.getNode(src), this.graph.getNode(dest));
 
-        if (ans == Integer.MAX_VALUE) {
+        resetInfo();
+        resetTags();
+        resetWeight();
+
+        if (ans == Double.MAX_VALUE) {
             return -1;
         }
         return ans;
@@ -123,11 +128,8 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         if (shortestPathDist(src, dest) == -1) {//if no such path
             return null;
         }
-        resetInfo();
-        resetTags();
-        resetWeight();
         double d = Dijkstra(this.graph.getNode(src), this.graph.getNode(dest));
-        if (d != Integer.MAX_VALUE) {
+        if (d != Double.MAX_VALUE) {
             int stop = this.graph.getNode(src).getKey(); // were to stop - when we get to the src node
             int ptr = this.graph.getNode(dest).getKey(); // start from the last node
             while (ptr != stop) {
@@ -138,21 +140,64 @@ public class GA implements DirectedWeightedGraphAlgorithms {
             NodeData first = this.graph.getNode(stop);
             ans.add(0, first);
         }
+        resetInfo();
+        resetTags();
+        resetWeight();
         return ans;
     }
 
     /**
      * Finds the NodeData which minimizes the max distance to all the other nodes.
      * Assuming the graph isConnected, else return null.
-     * See: https://en.wikipedia.org/wiki/Graph_center
+     * source: https://codeforces.com/blog/entry/17974
      *
-     * @return the Node data to which the max shortest path to all the other nodes
-     *         is minimized.
+     * @return the Node data which have max the shortest path to all the other nodes
+     * is minimized.
      */
     @Override
     public NodeData center() {
-        // TODO Auto-generated method stub
+        if (this.isConnected()) {
+
+            int minKey = findAvg();
+            NodeData center = this.graph.getNode(minKey);
+            return center;
+        }
         return null;
+
+    }
+
+
+    /**
+     * this method iterate all the nodes in the graph and find his degree
+     * we're using two loops to iterate all the nodes in the graph and calculate their avg dist to each node
+     * the key of the NodeData which minimizes the max distance to all the other nodes is saved in static integer
+     *
+     * @return HashMap <nodeKey, degree>
+     */
+    private int findAvg() {
+
+        double min = Double.MAX_VALUE;
+        int minKey = 0;
+
+        for (Iterator<NodeData> outer = this.graph.nodeIter(); outer.hasNext(); ) {
+            double countDeg = 0;//count the shortest path to all the nodes in the graph
+            Iterator<NodeData> inner = this.graph.nodeIter();
+            int fatherKey = outer.next().getKey();
+            //System.out.println("father: " + fatherKey);
+            while (inner.hasNext()) {
+                int sonKey = inner.next().getKey();
+                if (sonKey != fatherKey) {
+                    //  System.out.println("son : " + sonKey);
+                    countDeg += this.shortestPathDist(fatherKey, sonKey);
+                }
+            }
+            countDeg = (countDeg / this.graph.nodeSize()); //the avg dist to all the node in the graph
+            if (countDeg < min) {   //if the node is smaller than the min
+                min = countDeg;
+                minKey = fatherKey;
+            }
+        }
+        return minKey;
     }
 
     /**
@@ -299,7 +344,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
     private void resetWeight() {
         Iterator<NodeData> it = this.graph.nodeIter();
         while (it.hasNext()) {
-            it.next().setWeight(Integer.MAX_VALUE);
+            it.next().setWeight(Double.MAX_VALUE);
         }
     }
 
