@@ -16,7 +16,6 @@ public class CNode implements NodeData{
     private String info;
     private int tag;
 
-
     public CNode(int uniqueKey, CGeo g, double weight, String info, int tag) {
         this.key = uniqueKey;
         this.location = new CGeo(g);

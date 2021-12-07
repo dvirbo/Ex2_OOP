@@ -15,6 +15,7 @@ import static FileHandling.CExport.GAsave;
 public class GA implements DirectedWeightedGraphAlgorithms {
 
     private DirectedWeightedGraph graph;
+    //  private HashMap<Integer, Integer> nodesDegree = new HashMap<>(this.graph.nodeSize());
 
     /**
      * Inits the graph on which this set of algorithms operates on.
@@ -144,15 +145,50 @@ public class GA implements DirectedWeightedGraphAlgorithms {
     /**
      * Finds the NodeData which minimizes the max distance to all the other nodes.
      * Assuming the graph isConnected, else return null.
-     * See: https://en.wikipedia.org/wiki/Graph_center
+     * source: https://codeforces.com/blog/entry/17974
      *
-     * @return the Node data to which the max shortest path to all the other nodes
-     *         is minimized.
+     * @return the Node data which have max the shortest path to all the other nodes
+     * is minimized.
      */
     @Override
     public NodeData center() {
-        // TODO Auto-generated method stub
+        if (this.isConnected()) {
+            int minKey = findAvg();
+            NodeData center = this.graph.getNode(minKey);
+            return center;
+        }
         return null;
+
+    }
+
+
+    /**
+     * this method iterate all the nodes in the graph and find his degree
+     * we're using two loops to iterate all the nodes in the graph and calculate their avg dist to each node
+     * the key of the NodeData which minimizes the max distance to all the other nodes is saved in static integer
+     *
+     * @return HashMap <nodeKey, degree>
+     */
+    private int findAvg() {
+
+        double min = Double.MAX_VALUE;
+        int minKey = 0;
+
+        for (Iterator<NodeData> outer = this.graph.nodeIter(); outer.hasNext(); ) {
+            double countDeg = 0;//count the shortest path to all the nodes in the graph
+            NodeData outPointer = outer.next(); //the curr node in the iterator
+
+            for (Iterator<NodeData> innerPointer = this.graph.nodeIter(); innerPointer.hasNext(); ) {
+                NodeData temp = innerPointer.next();
+                countDeg += this.shortestPathDist(outPointer.getKey(), temp.getKey());
+            }
+            countDeg = (countDeg / this.graph.nodeSize()); //the avg dist to all the node in the graph
+            if (countDeg < min) {   //if the node is smaller than the min
+                min = countDeg;
+                minKey = outPointer.getKey();
+            }
+        }
+        return minKey;
     }
 
     /**

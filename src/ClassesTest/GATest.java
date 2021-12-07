@@ -10,6 +10,8 @@ import Interfaces.NodeData;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -92,6 +94,29 @@ class GATest {
 
     @Test
     void center() {
+        DirectedWeightedGraph gg = new G();
+        DirectedWeightedGraphAlgorithms gga = new GA();
+
+        for (int i = 1; i < 4; i++) {
+            NodeData n = new CNode(i, new CGeo(i, i, i), 0, "White", -1);
+            gg.addNode(n);
+        }
+        gg.connect(1, 2, 1.3);
+        gg.connect(2, 1, 1.3);
+        gg.connect(1, 3, 2.7);
+        gg.connect(3, 1, 1.0);
+
+        gga.init(gg);
+
+        Iterator<NodeData> iter = gg.nodeIter();
+        while (iter.hasNext()) {
+            Iterator<NodeData> iter1 = gg.nodeIter();
+            System.out.println(iter.next().getKey());
+            while (iter1.hasNext()) {
+                System.out.println(iter1.next().getKey());
+
+            }
+        }
     }
 
     @Test
