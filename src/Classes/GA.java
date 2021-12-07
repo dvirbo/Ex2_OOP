@@ -46,7 +46,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      */
     @Override
     public DirectedWeightedGraph copy() {
-        return new G((G) this.graph);
+        return new G( this.graph);
     }
 
     /**
