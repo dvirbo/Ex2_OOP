@@ -10,7 +10,6 @@ import Interfaces.NodeData;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,7 +21,7 @@ class GATest {
 
     @BeforeAll
     static void createG() {
-//1-5
+        // 1-5
         for (int i = 1; i < 6; i++) {
             NodeData n = new CNode(i, new CGeo(i, i, i), 0, "White", -1);
             g.addNode(n);
@@ -45,20 +44,19 @@ class GATest {
 
         DirectedWeightedGraph gCopy = new G((G) g);
         DirectedWeightedGraphAlgorithms gaCopy = new GA();
-        gaCopy.init(gCopy);  //reset the graph by init
-        assertEquals(gCopy, gaCopy.getGraph()); //equals cause
+        gaCopy.init(gCopy); // reset the graph by init
+        assertEquals(gCopy, gaCopy.getGraph()); // equals cause
 
         DirectedWeightedGraph gc = gaCopy.copy(); // check the copy
         assertEquals(gc.toString(), gCopy.toString());
 
     }
 
-
     @Test
     void isConnected() {
 
-        assertTrue(ga.isConnected()); //the graph that made BeforeAll
-        //build another graph that not connected
+        assertTrue(ga.isConnected()); // the graph that made BeforeAll
+        // build another graph that not connected
         NodeData nCheck1 = new CNode(6, new CGeo(6, 6, 6), 6 + 1.1, "White", -1);
         NodeData nCheck2 = new CNode(7, new CGeo(7, 7, 7), 7 + 1.1, "White", -1);
         DirectedWeightedGraph g1 = new G();
@@ -82,7 +80,7 @@ class GATest {
     }
 
     /**
-     * return list<NodeData> of  the shortest Path in the graph
+     * return list<NodeData> of the shortest Path in the graph
      */
     @Test
     void shortestPath() {
@@ -108,15 +106,37 @@ class GATest {
 
         gga.init(gg);
 
-        Iterator<NodeData> iter = gg.nodeIter();
-        while (iter.hasNext()) {
-            Iterator<NodeData> iter1 = gg.nodeIter();
-            System.out.println(iter.next().getKey());
-            while (iter1.hasNext()) {
-                System.out.println(iter1.next().getKey());
+        System.out.println(gga.center());
 
-            }
-        }
+        // example
+        // Iterator<NodeData> iter = gg.nodeIter();
+        // while (iter.hasNext()) {
+        // Iterator<NodeData> iter1 = gg.nodeIter();
+        // int fatherKey = iter.next().getKey();
+        // System.out.println(fatherKey);
+        // System.out.println("father ^ sons :");
+        // while (iter1.hasNext()) {
+        // int sonKey = iter1.next().getKey();
+        // if (sonKey != fatherKey) {
+        // System.out.println("son : " + sonKey);
+        // }
+        // }
+        // }
+
+        // example 2
+        // for (Iterator<NodeData> outer = gg.nodeIter(); outer.hasNext();) {
+        // Iterator<NodeData> inner = gg.nodeIter();
+        // int fatherKey = outer.next().getKey();
+        // System.out.println(fatherKey);
+        // System.out.println("father ^ sons :");
+        // while (inner.hasNext()) {
+        // int sonKey = inner.next().getKey();
+        // if (sonKey != fatherKey) {
+        // System.out.println("son : " + sonKey);
+        // }
+        // }
+        // }
+
     }
 
     @Test

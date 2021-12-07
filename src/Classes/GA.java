@@ -174,18 +174,22 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         double min = Double.MAX_VALUE;
         int minKey = 0;
 
-        for (Iterator<NodeData> outer = this.graph.nodeIter(); outer.hasNext(); ) {
+        for (Iterator<NodeData> outer = this.graph.nodeIter(); outer.hasNext();) {
             double countDeg = 0;//count the shortest path to all the nodes in the graph
-            NodeData outPointer = outer.next(); //the curr node in the iterator
-
-            for (Iterator<NodeData> innerPointer = this.graph.nodeIter(); innerPointer.hasNext(); ) {
-                NodeData temp = innerPointer.next();
-                countDeg += this.shortestPathDist(outPointer.getKey(), temp.getKey());
+            Iterator<NodeData> inner = this.graph.nodeIter();
+            int fatherKey = outer.next().getKey();
+            System.out.println("father: " + fatherKey);
+            while (inner.hasNext()) {
+                int sonKey = inner.next().getKey();
+                if (sonKey != fatherKey) {
+                    System.out.println("son : " + sonKey);
+                    countDeg += this.shortestPathDist(fatherKey ,sonKey);
+                }
             }
             countDeg = (countDeg / this.graph.nodeSize()); //the avg dist to all the node in the graph
             if (countDeg < min) {   //if the node is smaller than the min
                 min = countDeg;
-                minKey = outPointer.getKey();
+                minKey = fatherKey;
             }
         }
         return minKey;
