@@ -28,7 +28,7 @@ class GATest {
         }
         g.connect(1, 2, 1.1);
         g.connect(1, 4, 1.2);
-        g.connect(2, 3, 4);
+        g.connect(2, 3, 4.0);
         g.connect(3, 4, 1.4);
         g.connect(3, 1, 1.6);
         g.connect(4, 5, 1.8);
@@ -120,10 +120,8 @@ class GATest {
 
 
         gga.init(gg);
-
-        System.out.println(gga.center());
-
-
+        NodeData center = gga.center();
+        assertEquals(2, center.getKey());
 
     }
 

@@ -96,7 +96,8 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         resetInfo();
         resetTags();
         resetWeight();
-        if (ans == Integer.MAX_VALUE) {
+
+        if (ans == Double.MAX_VALUE) {
             return -1;
         }
         return ans;
@@ -343,7 +344,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
     private void resetWeight() {
         Iterator<NodeData> it = this.graph.nodeIter();
         while (it.hasNext()) {
-            it.next().setWeight(Integer.MAX_VALUE);
+            it.next().setWeight(Double.MAX_VALUE);
         }
     }
 
