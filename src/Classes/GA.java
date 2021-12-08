@@ -5,6 +5,7 @@ import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
 import Interfaces.EdgeData;
 import Interfaces.NodeData;
+import org.w3c.dom.Node;
 
 import java.io.File;
 import java.util.*;
@@ -86,15 +87,9 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         if (src == dest) {
             return 0;
         }
-        resetInfo();
-        resetTags();
-        resetWeight();
 
         double ans = Dijkstra(this.graph.getNode(src), this.graph.getNode(dest));
 
-        resetInfo();
-        resetTags();
-        resetWeight();
 
         if (ans == Double.MAX_VALUE) {
             return -1;
@@ -154,52 +149,106 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      * @return the Node data which have max the shortest path to all the other nodes
      * is minimized.
      */
+
     @Override
     public NodeData center() {
-        if (this.isConnected()) {
-
-            int minKey = findAvg();
-            NodeData center = this.graph.getNode(minKey);
-            return center;
+        if (!isConnected()) {
+            return null;
         }
-        return null;
 
-    }
+        double minimumW = Double.MAX_VALUE;
+        NodeData centerN = null;
 
-    /**
-     * this method iterate all the nodes in the graph and find his degree
-     * we're using two loops to iterate all the nodes in the graph and calculate
-     * their avg dist to each node
-     * the key of the NodeData which minimizes the max distance to all the other
-     * nodes is saved in static integer
-     *
-     * @return HashMap <nodeKey, degree>
-     */
-    private int findAvg() {
+        for (Iterator<NodeData> iter = this.graph.nodeIter(); iter.hasNext(); ) {
 
-        double min = Double.MAX_VALUE;
-        int minKey = 0;
+            NodeData node = iter.next();
+            double temp = 0.0;
 
-        for (Iterator<NodeData> outer = this.graph.nodeIter(); outer.hasNext(); ) {
-            double countDeg = 0;// count the shortest path to all the nodes in the graph
-            Iterator<NodeData> inner = this.graph.nodeIter();
-            int fatherKey = outer.next().getKey();
-            // System.out.println("father: " + fatherKey);
-            while (inner.hasNext()) {
-                int sonKey = inner.next().getKey();
-                if (sonKey != fatherKey) {
-                    // System.out.println("son : " + sonKey);
-                    countDeg += this.shortestPathDist(fatherKey, sonKey);
+            resetInfo();
+            resetTags();
+            resetWeight();
+
+            shortestPathDist(node.getKey(), 0);
+
+
+            for (Iterator<NodeData> iter2 = this.graph.nodeIter(); iter2.hasNext(); ) {
+
+                NodeData node2 = iter2.next();
+                if (node2.getWeight() > temp) {
+                    temp = node.getWeight();
                 }
             }
-            countDeg = (countDeg / this.graph.nodeSize()); // the avg dist to all the node in the graph
-            if (countDeg < min) { // if the node is smaller than the min
-                min = countDeg;
-                minKey = fatherKey;
+            if (temp < minimumW) {
+                minimumW = temp;
+                centerN = node;
             }
         }
-        return minKey;
+        return centerN;
     }
+
+//    @Override
+//    public NodeData center() {
+//        if (this.isConnected()) {
+//            int center = -1;
+//            resetTags();
+//            List<Chelper> list = new LinkedList<>();
+//
+//            Iterator<NodeData> iterator = this.graph.nodeIter();
+//            while (iterator.hasNext()) {
+//                NodeData node = iterator.next();
+//                Chelper h = DijkstraCenter(node);
+//                list.add(h);
+//            }
+//            double min = Double.MAX_VALUE;
+//
+//            for (Chelper h : list) {
+//                if (min > h.w) {
+//                    min = h.w;
+//                    center = h.src;
+//                }
+//            }
+//
+//            return graph.getNode(center);
+//
+//        }
+//        return null;
+//    }
+//
+//    private Chelper DijkstraCenter(NodeData src) {
+//        Chelper bigestWieght = new Chelper(src.getKey(), 0, Double.MIN_VALUE);
+//        PriorityQueue<NodeData> pq = new PriorityQueue<>(this.graph.nodeSize(),
+//                Comparator.comparingDouble(NodeData::getWeight));
+//        resetWeight();
+//        resetTags();
+//        src.setWeight(0.0); // init the src node
+//        pq.add(src);
+//        NodeData pointerNode;
+//        while (!pq.isEmpty()) {
+//            pointerNode = pq.poll();
+//            Iterator<EdgeData> edgeIter = this.graph.edgeIter(pointerNode.getKey()); // iterate all the edges that connect to the pointer
+//            while (edgeIter.hasNext()) {
+//                EdgeData curr = edgeIter.next(); // current edge in the iterator
+//                NodeData neighborNode = this.graph.getNode(curr.getDest()); // create a neighbor node
+//                if (neighborNode.getTag() == -1) { // check if we already visit the node
+//                    if (pointerNode.getWeight() + curr.getWeight() < neighborNode.getWeight()) { // compare between the
+//                        neighborNode.setWeight(pointerNode.getWeight() + curr.getWeight());
+//
+//                        neighborNode.setTag(1); // checked
+//                    }
+//                    pq.add(neighborNode);
+//                }
+//            }
+//            pointerNode.setTag(1);
+//        }
+//
+//        for (int i = 0; i < this.graph.nodeSize(); i++) {
+//            if (bigestWieght.w < this.graph.getNode(i).getWeight()) {
+//                bigestWieght.w = this.graph.getNode(i).getWeight();
+//                bigestWieght.src = this.graph.getNode(i).getKey();
+//            }
+//        }
+//        return bigestWieght;
+//    }
 
     /**
      * Computes a list of consecutive nodes which go over all the nodes in cities.
@@ -331,6 +380,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         return false;
     }
 
+
     /**
      * Creates a PriorityQueue with the specified initial capacity (nodeSize in the
      * graph),
@@ -344,31 +394,24 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      */
     private double Dijkstra(NodeData src, NodeData dest) {
         double shortestPath = Integer.MAX_VALUE;
-        PriorityQueue<NodeData> pq = new PriorityQueue<>(this.graph.nodeSize(),
-                Comparator.comparingDouble(NodeData::getWeight));
-        src.setWeight(0.0); // init the src node
+        PriorityQueue<NodeData> pq = new PriorityQueue<>(this.graph.nodeSize(), Comparator.comparingDouble(NodeData::getWeight));
+        src.setWeight(0.0); //init the src node
         pq.add(src);
         while (!pq.isEmpty()) {
             NodeData pointerNode = pq.poll();
-            Iterator<EdgeData> it = this.graph.edgeIter(pointerNode.getKey()); // iterate all the edges that connect to
-            // pointerNode
+            Iterator<EdgeData> it = this.graph.edgeIter(pointerNode.getKey()); //iterate all the edges that connect to pointerNode
             while (it.hasNext()) {
-                EdgeData curr = it.next(); // current edge in the iterator
-                NodeData neighborNode = this.graph.getNode(curr.getDest()); // create a neighbor node
-                if (Objects.equals(neighborNode.getInfo(), "White")) { // check if we already visit the node
-                    if (pointerNode.getWeight() + curr.getWeight() < neighborNode.getWeight()) { // compare between the
-                        // neighbor node w and
-                        // pointerNode + the
-                        // edge that connect to
-                        // the neighbor
-                        neighborNode.setWeight(
-                                Math.min(pointerNode.getWeight() + curr.getWeight(), neighborNode.getWeight()));
-                        neighborNode.setTag(pointerNode.getKey()); // to track where he came from
+                EdgeData curr = it.next(); //current edge in the iterator
+                NodeData neighborNode = this.graph.getNode(curr.getDest()); //create a neighbor node
+                if (Objects.equals(neighborNode.getInfo(), "White")) { //check if we already visit the node
+                    if (pointerNode.getWeight() + curr.getWeight() < neighborNode.getWeight()) { // compare between the neighbor node w and pointerNode + the edge that connect to the neighbor
+                        neighborNode.setWeight(Math.min(pointerNode.getWeight() + curr.getWeight(), neighborNode.getWeight()));
+                        neighborNode.setTag(pointerNode.getKey()); //to track where he came from
                     }
                     pq.add(neighborNode);
                 }
             }
-            pointerNode.setInfo("Black"); // after we check all pointerNode neighbors make him black - not relevant
+            pointerNode.setInfo("Black"); //after we check all pointerNode neighbors make him black - not relevant
             if (pointerNode.getKey() == dest.getKey()) {// if we get to the dest node
                 return pointerNode.getWeight();
             }
