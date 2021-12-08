@@ -14,8 +14,7 @@ import static FileHandling.CExport.GAsave;
 public class GA implements DirectedWeightedGraphAlgorithms {
 
     private DirectedWeightedGraph graph;
-    // private HashMap<Integer, Integer> nodesDegree = new
-    // HashMap<>(this.graph.nodeSize());
+
 
     /**
      * Inits the graph on which this set of algorithms operates on.
@@ -80,7 +79,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      * @param src  - start node
      * @param dest - end (target) node
      * @return the shortestPath if existed. ath between src to dest
-     *         * Note:
+     * * Note:
      */
     @Override
     public double shortestPathDist(int src, int dest) {
@@ -154,7 +153,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      * source: https://codeforces.com/blog/entry/17974
      *
      * @return the Node data which have max the shortest path to all the other nodes
-     *         is minimized.
+     * is minimized.
      */
     @Override
     public NodeData center() {
@@ -182,7 +181,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         double min = Double.MAX_VALUE;
         int minKey = 0;
 
-        for (Iterator<NodeData> outer = this.graph.nodeIter(); outer.hasNext();) {
+        for (Iterator<NodeData> outer = this.graph.nodeIter(); outer.hasNext(); ) {
             double countDeg = 0;// count the shortest path to all the nodes in the graph
             Iterator<NodeData> inner = this.graph.nodeIter();
             int fatherKey = outer.next().getKey();
@@ -212,21 +211,26 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      */
     @Override
     public List<NodeData> tsp(List<NodeData> cities) {
-        // TODO Auto-generated method stub
-        DirectedWeightedGraph g = new G();
-        cities.forEach((node) -> {
-            g.addNode(new CNode(node));
+        G gTsp = new G(); //build new graph
+        cities.forEach((node) -> {  //iterate all the nodes in the list
+            gTsp.addNode(new CNode(node));
+        });
+
+        cities.forEach((node) -> {  //iterate all the nodes in the list
+            gTsp.addNode(new CNode(node));
             Iterator<EdgeData> iter = this.graph.edgeIter(node.getKey());
-            for (; iter.hasNext();) {
+            while (iter.hasNext()) { //iter all the
                 EdgeData e = iter.next();
-                g.connect(e.getSrc(), e.getDest(), e.getWeight());      
+                cities.forEach((city) -> {
+                    if (city.getKey() == e.getDest()) { // if cities contain the dest
+                        System.out.println(e.getSrc() +":" + e.getDest() + ":" + e.getWeight());
+                        gTsp.connect(e.getSrc(), e.getDest(), e.getWeight());
+                        System.out.println(gTsp.getEdge(e.getSrc(), e.getDest()));
+                    }
+                });
             }
         });
 
-        
-
-
-        
 
         return null;
     }
@@ -318,7 +322,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      *
      * @param n node that the search start from
      * @return true if the number of nodes that visited and count are equals to the
-     *         sum of the nodes in the graph
+     * sum of the nodes in the graph
      */
     private boolean bfs(NodeData n) {
         Queue<NodeData> queue = new LinkedList<>();
@@ -374,5 +378,22 @@ public class GA implements DirectedWeightedGraphAlgorithms {
             it.next().setWeight(Double.MAX_VALUE);
         }
     }
+//
+//    //        System.out.println("***");
+//    // prining the Edges
+//    Iterator<EdgeData> edgeiter = gTsp.edgeIter();
+//        while(edgeiter.hasNext())    {
+//        EdgeData e = edgeiter.next();
+////            System.out.println(e);
+//    }
+//
+//    //        System.out.println("***");
+//    // returning the nodelist
+//    List<NodeData> nodereturnList = new LinkedList<>();
+//    var nodeiter = gTsp.nodeIter();
+//        while (nodeiter.hasNext()) {
+//        NodeData n = nodeiter.next();
+//        nodereturnList.add(n);
+//    }
 
 }

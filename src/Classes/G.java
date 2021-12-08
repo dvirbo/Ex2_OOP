@@ -105,12 +105,13 @@ public class G implements DirectedWeightedGraph {
         if (w < 0) {
             throw new RuntimeException("Only Positive Numbers");
         }
-        if (!nodes.containsKey(src) || !nodes.containsKey(dest) || src == dest) {
-            return;
+        if (nodes.containsKey(src) && nodes.containsKey(dest) && src != dest) {
+            EdgeData e = new CEdge(src, dest, w);
+            this.edges.put("src_" + src + "_dest_" + dest, e);
+            modeCount++;
         }
-        EdgeData e = new CEdge(src, dest, w);
-        this.edges.put("src_" + src + "_dest_" + dest, e);
-        modeCount++;
+        return;
+
     }
 
     /**
