@@ -1,14 +1,13 @@
-package gui;
+package gui.graph;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import static gui.buttons.MenuBarExample.scaleImageIcon;
 
-public class GFrame extends JFrame implements KeyListener , ActionListener {
+public class GFrame extends JFrame implements KeyListener, ActionListener {
     GraphPanel panel;
     JMenuBar menuBar;
     JMenu fileMenu;
@@ -24,7 +23,8 @@ public class GFrame extends JFrame implements KeyListener , ActionListener {
 
     public GFrame() {
         super();
-
+        ImageIcon image = new ImageIcon("./src/gui/resources/logo.png");
+        this.setIconImage(image.getImage());
         panel = new GraphPanel();
         this.add(panel);
         this.addKeyListener(this);
@@ -36,9 +36,9 @@ public class GFrame extends JFrame implements KeyListener , ActionListener {
         saveIcon = new ImageIcon("./resources/save.png");
         exitIcon = new ImageIcon("./resources/exit.jpg");
 
-        loadIcon = scaleImageIcon(loadIcon,20,20);
-        saveIcon = scaleImageIcon(saveIcon,20,20);
-        exitIcon = scaleImageIcon(exitIcon,20,20);
+        loadIcon = scaleImageIcon(loadIcon, 20, 20);
+        saveIcon = scaleImageIcon(saveIcon, 20, 20);
+        exitIcon = scaleImageIcon(exitIcon, 20, 20);
 
         menuBar = new JMenuBar();
 
@@ -77,7 +77,6 @@ public class GFrame extends JFrame implements KeyListener , ActionListener {
         this.setJMenuBar(menuBar);
 
 
-
         this.setVisible(true);
     }
 
@@ -93,7 +92,7 @@ public class GFrame extends JFrame implements KeyListener , ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode()==32){
+        if (e.getKeyCode() == 32) {
             panel.reset();
             this.repaint();
         }
@@ -108,13 +107,13 @@ public class GFrame extends JFrame implements KeyListener , ActionListener {
     public void actionPerformed(ActionEvent e) {
 
 
-        if(e.getSource()==loadItem) {
+        if (e.getSource() == loadItem) {
             System.out.println("you loaded a file");
         }
-        if(e.getSource()==saveItem) {
+        if (e.getSource() == saveItem) {
             System.out.println("you saved a file");
         }
-        if(e.getSource()==exitItem) {
+        if (e.getSource() == exitItem) {
             System.exit(0);
         }
     }

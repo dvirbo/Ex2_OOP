@@ -1,4 +1,4 @@
-package gui;
+package gui.graph;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +21,7 @@ public class GraphPanel extends JPanel implements MouseListener {
         message = "To add a Node Press on the Screen";
     }
 
-    void reset() {
+    public void reset() {
         points = new LinkedList<Point2D>();
         this.repaint();
     }
