@@ -19,13 +19,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class GATest {
     private static final DirectedWeightedGraph g = new G();
     private static final DirectedWeightedGraphAlgorithms ga = new GA();
+    private static List<NodeData> myList = new LinkedList<>();
 
     @BeforeAll
     static void createG() {
-        // 1-5
         for (int i = 1; i < 6; i++) {
             NodeData n = new CNode(i, new CGeo(i, i, i), 0, "White", -1);
             g.addNode(n);
+            myList.add(i-1,n);
         }
         g.connect(1, 2, 1.1);
         g.connect(1, 4, 1.2);
@@ -133,48 +134,52 @@ class GATest {
     @Test
     @Order(6)
     void tsp() {
-//        DirectedWeightedGraph g1 = new G();
-//        NodeData n1 = new CNode(1, new CGeo(1.0, 2.0, 3.0), 0, "White", -1);
-//        NodeData n2 = new CNode(2, new CGeo(3.0, 4.0, 5.0), 0, "White", -1);
-//        g1.addNode(n1);
-//        g1.addNode(n2);
-//        g1.connect(1, 2, 500);
-//        g1.connect(2, 1, 1);
-//        List<NodeData> list1 = new LinkedList<>();
-//        list1.add(n2);
-//        list1.add(n1);
+
+//        List<NodeData> tspList = ga.tsp(myList);
+//        System.out.println(tspList.toString());
+
+        DirectedWeightedGraph g1 = new G();
+        NodeData n1 = new CNode(1, new CGeo(1.0, 2.0, 3.0), 0, "White", -1);
+        NodeData n2 = new CNode(2, new CGeo(3.0, 4.0, 5.0), 0, "White", -1);
+        g1.addNode(n1);
+        g1.addNode(n2);
+        g1.connect(1, 2, 500);
+        g1.connect(2, 1, 1);
+        List<NodeData> list1 = new LinkedList<>();
+        list1.add(n2);
+        list1.add(n1);
+
+        DirectedWeightedGraphAlgorithms ga1 = new GA();
+        ga1.init(g1);
+        assertEquals(list1, ga1.tsp(list1));
+
+//        G graphTsp = new G();
 //
-//        DirectedWeightedGraphAlgorithms ga1 = new GA();
-//        ga1.init(g1);
-//        assertEquals(list1, ga1.tsp(list1));
-
-        G graphTsp = new G();
-
-        var g1 = new CGeo(1, 2, 3);
-        var g2 = new CGeo(1, 2, 3);
-        var g3 = new CGeo(1, 2, 3);
-        var g4 = new CGeo(2, 1, 3);
-        var n1 = new CNode(1, g1, 1.0, "White", -1);
-        var n2 = new CNode(2, g2, 2.0, "White", -1);
-        var n3 = new CNode(3, g3, 2.0, "White", -1);
-        var n4 = new CNode(4, g4, 2.0, "White", -1);
-        graphTsp.addNode(n1);
-        graphTsp.addNode(n2);
-        graphTsp.addNode(n3);
-        graphTsp.addNode(n4);
-        graphTsp.connect(1, 2, 1.0);
-        graphTsp.connect(2, 4, 1.0);
-        graphTsp.connect(1, 4, 1.0);
-        graphTsp.connect(1, 3, 1.0);
-
-
-        List<NodeData> cities = new LinkedList<>();
-        cities.add(n1);
-        cities.add(n2);
-        cities.add(n3);
-        GA gaTsp = new GA();
-        gaTsp.init(graphTsp);
-        System.out.println(gaTsp.tsp(cities));
+//        var g1 = new CGeo(1, 2, 3);
+//        var g2 = new CGeo(1, 2, 3);
+//        var g3 = new CGeo(1, 2, 3);
+//        var g4 = new CGeo(2, 1, 3);
+//        var n1 = new CNode(1, g1, 1.0, "White", -1);
+//        var n2 = new CNode(2, g2, 2.0, "White", -1);
+//        var n3 = new CNode(3, g3, 2.0, "White", -1);
+//        var n4 = new CNode(4, g4, 2.0, "White", -1);
+//        graphTsp.addNode(n1);
+//        graphTsp.addNode(n2);
+//        graphTsp.addNode(n3);
+//        graphTsp.addNode(n4);
+//        graphTsp.connect(1, 2, 1.0);
+//        graphTsp.connect(2, 4, 1.0);
+//        graphTsp.connect(1, 4, 1.0);
+//        graphTsp.connect(1, 3, 1.0);
+//
+//
+//        List<NodeData> cities = new LinkedList<>();
+//        cities.add(n1);
+//        cities.add(n2);
+//        cities.add(n3);
+//        GA gaTsp = new GA();
+//        gaTsp.init(graphTsp);
+//        System.out.println(gaTsp.tsp(cities));
 
 
     }
