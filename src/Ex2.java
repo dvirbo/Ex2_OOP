@@ -1,13 +1,14 @@
 import Classes.G;
+import Classes.GA;
 import FileHandling.StoreNE;
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
 
 import static FileHandling.CImport.importJson;
 
-
 /**
- * This class is the main class for Ex2 - your implementation will be tested using this class.
+ * This class is the main class for Ex2 - your implementation will be tested
+ * using this class.
  */
 public class Ex2 {
     /**
@@ -30,9 +31,9 @@ public class Ex2 {
      * @return
      */
     public static DirectedWeightedGraphAlgorithms getGrapgAlgo(String json_file) {
-        DirectedWeightedGraphAlgorithms ans = null;
+        DirectedWeightedGraphAlgorithms ans = new GA();
         // ****** Add your code here ******
-        importJson(json_file);
+        ans.init(getGrapg(json_file));
         // ********************************
         return ans;
     }
@@ -44,12 +45,10 @@ public class Ex2 {
      */
     public static void runGUI(String json_file) {
         DirectedWeightedGraphAlgorithms alg = getGrapgAlgo(json_file);
-        // ****** Add your code here ******
-        //
-        // ********************************
-    }
+        
+    }   
 
     public static void main(String[] args) {
-        getGrapg("./json_data/G1.json");
+        getGrapgAlgo("./json_data/G3.json");
     }
 }
