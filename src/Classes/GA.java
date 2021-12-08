@@ -156,14 +156,38 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      */
     @Override
     public NodeData center() {
-        if (this.isConnected()) {
-
-            int minKey = findAvg();
-            NodeData center = this.graph.getNode(minKey);
-            return center;
+        if (!isConnected()) {
+            return null;
         }
-        return null;
 
+        double minimumW = Double.MAX_VALUE;
+        NodeData centerN = null;
+
+        for (Iterator<NodeData> iter = this.graph.nodeIter(); iter.hasNext(); ) {
+
+            NodeData node = iter.next();
+            double temp = 0.0;
+
+            resetInfo();
+            resetTags();
+            resetWeight();
+
+            shortestPathDist(node.getKey(), 0);
+
+
+            for (Iterator<NodeData> iter2 = this.graph.nodeIter(); iter2.hasNext(); ) {
+
+                NodeData node2 = iter2.next();
+                if (node2.getWeight() > temp) {
+                    temp = node.getWeight();
+                }
+            }
+            if (temp < minimumW) {
+                minimumW = temp;
+                centerN = node;
+            }
+        }
+        return centerN;
     }
 
 
