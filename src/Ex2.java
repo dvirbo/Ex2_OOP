@@ -33,7 +33,9 @@ public class Ex2 {
     public static DirectedWeightedGraphAlgorithms getGrapgAlgo(String json_file) {
         DirectedWeightedGraphAlgorithms ans = new GA();
         // ****** Add your code here ******
+
         ans.init(getGrapg(json_file));
+        System.out.println(ans.center());
         // ********************************
         return ans;
     }
