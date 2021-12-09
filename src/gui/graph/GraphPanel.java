@@ -21,10 +21,10 @@ public class GraphPanel extends JPanel implements MouseListener {
     private final DirectedWeightedGraphAlgorithms ga;
     private final DirectedWeightedGraph graph;
     private final LinkedList<Line> lines;
-    String message;
-    private LinkedList<Point2D> points;
     private final int width;
     private final int height;
+    String message;
+    private LinkedList<Point2D> points;
 
     public GraphPanel(DirectedWeightedGraphAlgorithms ga, GFrame frame) {
         super();
@@ -84,7 +84,7 @@ public class GraphPanel extends JPanel implements MouseListener {
         // int y = e.getY();
         // Point2D p = new Point2D.Double(x, y);
         // points.add(p);
-        repaint();
+//        repaint();
         // System.out.println("mousePressed");
 
     }

@@ -1,6 +1,11 @@
 package gui.graph;
 
+import Classes.G;
+import Classes.GA;
+import FileHandling.StoreNE;
+import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
+import gui.windows.TspCalcWin;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,14 +13,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 
+import static FileHandling.CImport.importJson;
 import static gui.buttons.MenuBarExample.scaleImageIcon;
 
 public class GFrame extends JFrame implements KeyListener, ActionListener {
+    JMenuItem tspItem;
+    JMenu AlgoMenu;
     GraphPanel panel;
     JMenuBar menuBar;
     JMenu fileMenu;
-    JMenu editMenu;
     JMenu helpMenu;
     JMenuItem loadItem;
     JMenuItem saveItem;
@@ -24,6 +32,7 @@ public class GFrame extends JFrame implements KeyListener, ActionListener {
     ImageIcon saveIcon;
     ImageIcon exitIcon;
     DirectedWeightedGraphAlgorithms ga;
+    DirectedWeightedGraph graph;
 
     public GFrame(DirectedWeightedGraphAlgorithms ga) {
         super();
@@ -42,11 +51,11 @@ public class GFrame extends JFrame implements KeyListener, ActionListener {
         this.setIconImage(image.getImage());
 
         panel = new GraphPanel(ga, this);
-        
+
         this.add(panel);
-       
+
         this.addKeyListener(this);
-        
+
 
         loadIcon = new ImageIcon("./resources/load.jpg");
         saveIcon = new ImageIcon("./resources/save.png");
@@ -59,19 +68,19 @@ public class GFrame extends JFrame implements KeyListener, ActionListener {
         menuBar = new JMenuBar();
 
         fileMenu = new JMenu("File");
-        editMenu = new JMenu("Edit");
         helpMenu = new JMenu("Help");
+        AlgoMenu = new JMenu("Algorithms");
 
         loadItem = new JMenuItem("Load");
         saveItem = new JMenuItem("Save");
         exitItem = new JMenuItem("Exit");
+        tspItem = new JMenuItem("Tsp");
 
         loadItem.setIcon(loadIcon);
         saveItem.setIcon(saveIcon);
         exitItem.setIcon(exitIcon);
 
         fileMenu.setMnemonic(KeyEvent.VK_F); // Alt + f for file
-        editMenu.setMnemonic(KeyEvent.VK_E); // Alt + e for edit
         helpMenu.setMnemonic(KeyEvent.VK_H); // Alt + h for help
         loadItem.setMnemonic(KeyEvent.VK_L); // l for load
         saveItem.setMnemonic(KeyEvent.VK_S); // s for save
@@ -81,13 +90,17 @@ public class GFrame extends JFrame implements KeyListener, ActionListener {
         fileMenu.add(saveItem);
         fileMenu.add(exitItem);
 
+        AlgoMenu.add(tspItem);
+
+
         menuBar.add(fileMenu);
-        menuBar.add(editMenu);
         menuBar.add(helpMenu);
+        menuBar.add(AlgoMenu);
 
         loadItem.addActionListener(this);
         saveItem.addActionListener(this);
         exitItem.addActionListener(this);
+        tspItem.addActionListener(this);
 
         this.setJMenuBar(menuBar);
 
@@ -117,14 +130,37 @@ public class GFrame extends JFrame implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == loadItem) {
-            
-// ga.load(file)
+            JFileChooser fileChooser = new JFileChooser();
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                StoreNE ne = importJson(selectedFile.getPath());
+                if (ne != null) {
+                    this.graph = new G(ne.nodes, ne.edges);
+                    this.ga = new GA();
+                    ga.init(this.graph);
+                    this.getContentPane().remove(panel);
+                    panel = new GraphPanel(ga, this);
+                    this.add(panel);
+                    this.getContentPane().invalidate();
+                    this.getContentPane().validate();
+
+
+                    this.add(panel);
+                }
+
+
+            }
         }
         if (e.getSource() == saveItem) {
-            
+            ga.save("GraphOutPut.json");
         }
         if (e.getSource() == exitItem) {
             System.exit(0);
+        }
+
+        if (e.getSource() == tspItem) {
+            new TspCalcWin(ga);
         }
     }
 }

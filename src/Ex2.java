@@ -56,7 +56,7 @@ public class Ex2 {
     public static void main(String[] args) {
 //        getGrapgAlgo("C:/Users/dolev/Desktop/1000Nodes.json");
 //        getGrapgAlgo("./json_data/G1.json");
-        runGUI("./json_data/G3.json");
+        runGUI("./json_data/G1.json");
 
     }
 }

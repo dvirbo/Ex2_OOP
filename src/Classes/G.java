@@ -45,12 +45,29 @@ public class G implements DirectedWeightedGraph {
         this.nodes = new HashMap<>();
         this.edges = new HashMap<>();
         other.nodes.forEach((key, value) -> this.addNode(new CNode(value)));
-        other.edges.forEach((key, value) -> this.connect(Integer.parseInt(key.substring(4, 5)), Integer.parseInt(key.substring(key.length() - 1)),
-                value.getWeight()));
+        other.edges.forEach((key, edge) -> this.connect(edge.getSrc(), edge.getSrc(), edge.getWeight()));
         this.modeCount = other.getMC();
         it_change = 0;
         first_time = true;
 
+    }
+
+    public G(DirectedWeightedGraph other) {
+        this.nodes = new HashMap<>();
+        this.edges = new HashMap<>();
+        var niter = other.nodeIter();
+        while (niter.hasNext()) {
+            var node = niter.next();
+            this.addNode(new CNode(node));
+        }
+        var eiter = other.edgeIter();
+        while (eiter.hasNext()) {
+            var e = eiter.next();
+            this.connect(e.getSrc(), e.getDest(), e.getWeight());
+        }
+        this.modeCount = other.getMC();
+        it_change = 0;
+        first_time = true;
     }
 
 //    /**
