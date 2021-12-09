@@ -34,7 +34,6 @@ public class Ex2 {
         DirectedWeightedGraphAlgorithms ans = new GA();
         // ****** Add your code here ******
         ans.init(getGrapg(json_file));
-        System.out.println(ans.shortestPathDist(1, 12));
         System.out.println(ans.center());
         // ********************************
         return ans;
@@ -53,6 +52,6 @@ public class Ex2 {
     }
 
     public static void main(String[] args) {
-        getGrapgAlgo("./json_data/G1.json");
+        getGrapgAlgo("C:\\Users\\Dvir\\Desktop\\LargeConnectedGraphs");
     }
 }
