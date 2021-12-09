@@ -53,6 +53,6 @@ public class Ex2 {
     }
 
     public static void main(String[] args) {
-        getGrapgAlgo("./json_data/G3.json");
+        getGrapgAlgo("./json_data/G1.json");
     }
 }

@@ -7,24 +7,26 @@ import Classes.GA;
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
 import Interfaces.NodeData;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class GATest {
     private static final DirectedWeightedGraph g = new G();
     private static final DirectedWeightedGraphAlgorithms ga = new GA();
+    private static List<NodeData> myList = new LinkedList<>();
 
     @BeforeAll
     static void createG() {
-        // 1-5
         for (int i = 1; i < 6; i++) {
             NodeData n = new CNode(i, new CGeo(i, i, i), 0, "White", -1);
             g.addNode(n);
+            myList.add(i-1,n);
         }
         g.connect(1, 2, 1.1);
         g.connect(1, 4, 1.2);
@@ -40,6 +42,7 @@ class GATest {
      * checking: init, getGraph and copy methods
      */
     @Test
+    @Order(1)
     void init_getGraph_copy() {
 
         DirectedWeightedGraph gCopy = new G((G) g);
@@ -53,6 +56,7 @@ class GATest {
     }
 
     @Test
+    @Order(2)
     void isConnected() {
 
         assertTrue(ga.isConnected()); // the graph that made BeforeAll
@@ -71,6 +75,7 @@ class GATest {
      * return the shortestPathDist (double)
      */
     @Test
+    @Order(3)
     void shortestPathDist() {
         double ans = ga.shortestPathDist(1, 3);
         assertEquals(ans, 4.0);
@@ -82,6 +87,7 @@ class GATest {
      * return list<NodeData> of the shortest Path in the graph
      */
     @Test
+    @Order(4)
     void shortestPath() {
         List<NodeData> ans = ga.shortestPath(1, 3);
         assertEquals(ans.size(), 4);
@@ -90,6 +96,7 @@ class GATest {
     }
 
     @Test
+    @Order(5)
     void center() {
         DirectedWeightedGraph gg = new G();
         DirectedWeightedGraphAlgorithms gga = new GA();
@@ -130,7 +137,6 @@ class GATest {
         gg.connect(3, 5, 1.0);
         gg.connect(5, 3, 1.0);
 
-
         gga.init(gg);
         NodeData center = gga.center();
         assertEquals(2, center.getKey());
@@ -138,15 +144,70 @@ class GATest {
     }
 
     @Test
+    @Order(6)
     void tsp() {
+
+//        List<NodeData> tspList = ga.tsp(myList);
+//        System.out.println(tspList.toString());
+
+        DirectedWeightedGraph g1 = new G();
+        NodeData n1 = new CNode(1, new CGeo(1.0, 2.0, 3.0), 0, "White", -1);
+        NodeData n2 = new CNode(2, new CGeo(3.0, 4.0, 5.0), 0, "White", -1);
+        g1.addNode(n1);
+        g1.addNode(n2);
+        g1.connect(1, 2, 500);
+        g1.connect(2, 1, 1);
+        List<NodeData> list1 = new LinkedList<>();
+        list1.add(n2);
+        list1.add(n1);
+
+        DirectedWeightedGraphAlgorithms ga1 = new GA();
+        ga1.init(g1);
+        assertEquals(list1, ga1.tsp(list1));
+
+//        G graphTsp = new G();
+//
+//        var g1 = new CGeo(1, 2, 3);
+//        var g2 = new CGeo(1, 2, 3);
+//        var g3 = new CGeo(1, 2, 3);
+//        var g4 = new CGeo(2, 1, 3);
+//        var n1 = new CNode(1, g1, 1.0, "White", -1);
+//        var n2 = new CNode(2, g2, 2.0, "White", -1);
+//        var n3 = new CNode(3, g3, 2.0, "White", -1);
+//        var n4 = new CNode(4, g4, 2.0, "White", -1);
+//        graphTsp.addNode(n1);
+//        graphTsp.addNode(n2);
+//        graphTsp.addNode(n3);
+//        graphTsp.addNode(n4);
+//        graphTsp.connect(1, 2, 1.0);
+//        graphTsp.connect(2, 4, 1.0);
+//        graphTsp.connect(1, 4, 1.0);
+//        graphTsp.connect(1, 3, 1.0);
+//
+//
+//        List<NodeData> cities = new LinkedList<>();
+//        cities.add(n1);
+//        cities.add(n2);
+//        cities.add(n3);
+//        GA gaTsp = new GA();
+//        gaTsp.init(graphTsp);
+//        System.out.println(gaTsp.tsp(cities));
+
+
     }
 
     @Test
+    @Order(7)
     void save() {
     }
 
     @Test
+    @Order(8)
     void load() {
-    //    ga.load("./json_data/G1.json");
+
+        ga.load("./json_data/G1.json");
+
+
     }
+
 }

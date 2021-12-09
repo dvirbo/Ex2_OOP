@@ -235,10 +235,98 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      * the lower the better.
      * See: https://en.wikipedia.org/wiki/Travelling_salesman_problem
      */
+    /**
+     * Computes a list of consecutive nodes which go over all the nodes in cities.
+     * the sum of the weights of all the consecutive (pairs) of nodes (directed) is
+     * the "cost" of the solution -
+     * the lower the better.
+     * See: https://en.wikipedia.org/wiki/Travelling_salesman_problem
+     */
     @Override
     public List<NodeData> tsp(List<NodeData> cities) {
-        // TODO Auto-generated method stub
-        return null;
+        G gTsp = new G(); //build new graph
+        cities.forEach((node) -> {  //iterate all the nodes in the list
+            gTsp.addNode(new CNode(node));
+        });
+
+        cities.forEach((node) -> {  //iterate all the nodes in the list
+            gTsp.addNode(new CNode(node));
+            Iterator<EdgeData> iter = this.graph.edgeIter(node.getKey());
+            while (iter.hasNext()) { //iter all the
+                EdgeData e = iter.next();
+                cities.forEach((city) -> {
+                    if (city.getKey() == e.getDest()) { // if cities contain the dest
+                        //System.out.println(e.getSrc() + ":" + e.getDest() + ":" + e.getWeight());
+                        gTsp.connect(e.getSrc(), e.getDest(), e.getWeight());
+                        // System.out.println(gTsp.getEdge(e.getSrc(), e.getDest()));
+                    }
+                });
+            }
+        });
+        GA gaTsp = new GA();
+        gaTsp.init(gTsp);
+
+        resetInfo();
+        resetTags();
+        resetWeight();
+
+        List<NodeData> bestWay = new LinkedList<>();
+
+        cities.get(0).setTag(1);//check.
+        bestWay.add(cities.get(0)); // add the first node in the list
+        NodeData prev;
+        NodeData next;
+
+        while (gaTsp.visitNode(cities)) {
+            double dist = Double.MAX_VALUE;
+            prev = null;
+            next = null;
+
+            for (NodeData pointer : bestWay) { //for every node in the list
+                Iterator<EdgeData> iter = gTsp.edgeIter(pointer.getKey()); //iterate all the
+                while (iter.hasNext()) {
+                    EdgeData edgeToNeighbor = iter.next();
+
+                    NodeData neighborNode = gTsp.getNode(edgeToNeighbor.getDest());
+
+                    if (neighborNode.getTag() == -1 && edgeToNeighbor.getWeight() < dist) {
+                        dist = edgeToNeighbor.getWeight();
+                        next = neighborNode;
+                        prev = pointer;
+                    }
+                }
+            }
+
+            if (next != null) {
+
+                NodeData newNext = next;
+                cities.forEach((city) -> {
+                    if (newNext.getKey() == city.getKey()) {
+                        city.setTag(1);
+                    }
+                });
+                gTsp.getNode(next.getKey()).setTag(1);
+                bestWay.add(bestWay.indexOf(prev) + 1, next);
+            }
+        }
+
+        return bestWay;
+    }
+
+    /**
+     * this method check if we visit
+     *
+     * @param cities
+     * @return
+     */
+    private boolean visitNode(List<NodeData> cities) {
+
+        for (NodeData city : cities) {
+            if (city.getTag() == -1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
