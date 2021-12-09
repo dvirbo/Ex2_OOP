@@ -34,11 +34,9 @@ public class Ex2 {
         DirectedWeightedGraphAlgorithms ans = new GA();
         // ****** Add your code here ******
         ans.init(getGrapg(json_file));
-        for (var iter =  ans.getGraph().nodeIter(); iter.hasNext();){
-            System.out.println(iter.next());
-        }
-//        System.out.println(ans.center());
-        System.out.println(ans.shortestPathDist(8, 2));
+        System.out.println(ans.shortestPathDist(1, 12));
+        System.out.println(ans.center());
+
         // ********************************
         return ans;
     }
@@ -54,6 +52,8 @@ public class Ex2 {
     }
 
     public static void main(String[] args) {
-        getGrapgAlgo("./json_data/G2.json");
+
+        getGrapgAlgo("./json_data/G3.json");
+
     }
 }
