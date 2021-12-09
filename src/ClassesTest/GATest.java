@@ -9,7 +9,6 @@ import Interfaces.DirectedWeightedGraphAlgorithms;
 import Interfaces.NodeData;
 import org.junit.jupiter.api.*;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,14 +18,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class GATest {
     private static final DirectedWeightedGraph g = new G();
     private static final DirectedWeightedGraphAlgorithms ga = new GA();
-    private static List<NodeData> myList = new LinkedList<>();
+    private static final List<NodeData> myList = new LinkedList<>();
 
     @BeforeAll
     static void createG() {
         for (int i = 1; i < 6; i++) {
             NodeData n = new CNode(i, new CGeo(i, i, i), 0, "White", -1);
             g.addNode(n);
-            myList.add(i-1,n);
+            myList.add(i - 1, n);
         }
         g.connect(1, 2, 1.1);
         g.connect(1, 4, 1.2);
@@ -44,6 +43,7 @@ class GATest {
     @Test
     @Order(1)
     void init_getGraph_copy() {
+
 
         DirectedWeightedGraph gCopy = new G((G) g);
         DirectedWeightedGraphAlgorithms gaCopy = new GA();
@@ -199,6 +199,8 @@ class GATest {
     @Test
     @Order(7)
     void save() {
+
+
     }
 
     @Test

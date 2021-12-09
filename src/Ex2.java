@@ -3,6 +3,7 @@ import Classes.GA;
 import FileHandling.StoreNE;
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
+import gui.graph.GFrame;
 
 import static FileHandling.CImport.importJson;
 
@@ -16,25 +17,26 @@ public class Ex2 {
      * for testing: "Ex2/data/G1.json"
      *
      * @param json_file - a json file (e.g., G1.json - G3.gson)
-     * @return
+     * @return ans - DirectedWeightedGraph
      */
     public static DirectedWeightedGraph getGrapg(String json_file) {
         StoreNE ne = importJson(json_file);
-        DirectedWeightedGraph ans = new G(ne.nodes, ne.edges);
-        return ans;
+        if (ne != null) {
+            return new G(ne.nodes, ne.edges);
+        }
+        return null;
     }
 
     /**
      * This static function will be used to ClassesTest your implementation
      *
      * @param json_file - a json file (e.g., G1.json - G3.gson)
-     * @return
+     * @return ans - DirectedWeightedGraphAlgorithms
      */
     public static DirectedWeightedGraphAlgorithms getGrapgAlgo(String json_file) {
         DirectedWeightedGraphAlgorithms ans = new GA();
         // ****** Add your code here ******
         ans.init(getGrapg(json_file));
-        System.out.println(ans.center());
         // ********************************
         return ans;
     }
@@ -47,11 +49,14 @@ public class Ex2 {
     public static void runGUI(String json_file) {
         DirectedWeightedGraphAlgorithms alg = getGrapgAlgo(json_file);
         // ****** Add your code here ******
-        //
+        new GFrame(alg);
         // ********************************
     }
 
     public static void main(String[] args) {
-        getGrapgAlgo("C:\\Users\\Dvir\\Desktop\\LargeConnectedGraphs");
+//        getGrapgAlgo("C:/Users/dolev/Desktop/1000Nodes.json");
+//        getGrapgAlgo("./json_data/G1.json");
+        runGUI("./json_data/G3.json");
+
     }
 }

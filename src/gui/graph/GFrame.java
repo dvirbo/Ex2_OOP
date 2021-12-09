@@ -1,10 +1,14 @@
 package gui.graph;
 
+import Interfaces.DirectedWeightedGraphAlgorithms;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 import static gui.buttons.MenuBarExample.scaleImageIcon;
 
 public class GFrame extends JFrame implements KeyListener, ActionListener {
@@ -19,18 +23,30 @@ public class GFrame extends JFrame implements KeyListener, ActionListener {
     ImageIcon loadIcon;
     ImageIcon saveIcon;
     ImageIcon exitIcon;
+    DirectedWeightedGraphAlgorithms ga;
 
-
-    public GFrame() {
+    public GFrame(DirectedWeightedGraphAlgorithms ga) {
         super();
+        this.setTitle("OOPEx2_Dvir&Dolev");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        this.ga = ga;
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = (int) dim.getHeight();
+        int width = (int) dim.getWidth();
+        this.setSize((int) (width * 0.8), (int) (height * 0.9));
+
+
         ImageIcon image = new ImageIcon("./src/gui/resources/logo.png");
         this.setIconImage(image.getImage());
-        panel = new GraphPanel();
+
+        panel = new GraphPanel(ga, this);
+        
         this.add(panel);
+       
         this.addKeyListener(this);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setUndecorated(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
 
         loadIcon = new ImageIcon("./resources/load.jpg");
         saveIcon = new ImageIcon("./resources/save.png");
@@ -49,7 +65,6 @@ public class GFrame extends JFrame implements KeyListener, ActionListener {
         loadItem = new JMenuItem("Load");
         saveItem = new JMenuItem("Save");
         exitItem = new JMenuItem("Exit");
-
 
         loadItem.setIcon(loadIcon);
         saveItem.setIcon(saveIcon);
@@ -76,14 +91,9 @@ public class GFrame extends JFrame implements KeyListener, ActionListener {
 
         this.setJMenuBar(menuBar);
 
-
         this.setVisible(true);
     }
 
-
-    public static void main(String[] args) {
-        new GFrame();
-    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -106,12 +116,12 @@ public class GFrame extends JFrame implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-
         if (e.getSource() == loadItem) {
-            System.out.println("you loaded a file");
+            
+// ga.load(file)
         }
         if (e.getSource() == saveItem) {
-            System.out.println("you saved a file");
+            
         }
         if (e.getSource() == exitItem) {
             System.exit(0);

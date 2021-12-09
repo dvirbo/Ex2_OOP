@@ -80,7 +80,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      * @param src  - start node
      * @param dest - end (target) node
      * @return the shortestPath if existed. ath between src to dest
-     * * Note:
+     * * Note: Due to problems with weight calculation we decided we will make diffrent functions
      */
     @Override
     public double shortestPathDist(int src, int dest) {
@@ -96,11 +96,15 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         return ans;
     }
 
+
     /**
+     * Computes the length of the shortest path between 2 nodes
+     * we use Dijkstra algorithm to compute that.
      *
-     * @param src
-     * @param dest
-     * @return
+     * @param src  - start node
+     * @param dest - end (target) node
+     * @return the shortestPath if existed. ath between src to dest
+     * * Note:
      */
     public double shortestPathCenter(int src, int dest) {
 
@@ -154,7 +158,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      *
      * @param src  - start node
      * @param dest - end (target) node
-     * @return
+     * @return List<NodeData> shortestPath of nodes
      */
     @Override
     public List<NodeData> shortestPath(int src, int dest) {
@@ -227,14 +231,6 @@ public class GA implements DirectedWeightedGraphAlgorithms {
     }
 
 
-
-    /**
-     * Computes a list of consecutive nodes which go over all the nodes in cities.
-     * the sum of the weights of all the consecutive (pairs) of nodes (directed) is
-     * the "cost" of the solution -
-     * the lower the better.
-     * See: https://en.wikipedia.org/wiki/Travelling_salesman_problem
-     */
     /**
      * Computes a list of consecutive nodes which go over all the nodes in cities.
      * the sum of the weights of all the consecutive (pairs) of nodes (directed) is
@@ -250,7 +246,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         });
 
         cities.forEach((node) -> {  //iterate all the nodes in the list
-            gTsp.addNode(new CNode(node));
+//            gTsp.addNode(new CNode(node));
             Iterator<EdgeData> iter = this.graph.edgeIter(node.getKey());
             while (iter.hasNext()) { //iter all the
                 EdgeData e = iter.next();
@@ -266,9 +262,9 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         GA gaTsp = new GA();
         gaTsp.init(gTsp);
 
-        resetInfo();
-        resetTags();
-        resetWeight();
+        gaTsp.resetInfo();
+        gaTsp.resetTags();
+        gaTsp.resetWeight();
 
         List<NodeData> bestWay = new LinkedList<>();
 
@@ -314,10 +310,10 @@ public class GA implements DirectedWeightedGraphAlgorithms {
     }
 
     /**
-     * this method check if we visit
+     * this method check if we visited all the cities
      *
-     * @param cities
-     * @return
+     * @param cities - list of Nodes we need to check if visiting
+     * @return boolean when we finish visiting then reaturn false;
      */
     private boolean visitNode(List<NodeData> cities) {
 
@@ -359,7 +355,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
                 return true;
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return false;
     }

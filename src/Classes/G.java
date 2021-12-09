@@ -44,13 +44,9 @@ public class G implements DirectedWeightedGraph {
     public G(G other) {
         this.nodes = new HashMap<>();
         this.edges = new HashMap<>();
-        other.nodes.forEach((key, value) -> {
-            this.addNode(new CNode(value));
-        });
-        other.edges.forEach((key, value) -> {
-            this.connect(Integer.parseInt(key.substring(4, 5)), Integer.parseInt(key.substring(key.length() - 1)),
-                    value.getWeight());
-        });
+        other.nodes.forEach((key, value) -> this.addNode(new CNode(value)));
+        other.edges.forEach((key, value) -> this.connect(Integer.parseInt(key.substring(4, 5)), Integer.parseInt(key.substring(key.length() - 1)),
+                value.getWeight()));
         this.modeCount = other.getMC();
         it_change = 0;
         first_time = true;
@@ -128,8 +124,7 @@ public class G implements DirectedWeightedGraph {
         }
         if (it_change == modeCount) {
             List<NodeData> list = new ArrayList<>(this.nodes.values());
-            Iterator<NodeData> it = list.iterator();
-            return it;
+            return list.iterator();
         }
         throw new RuntimeException("graph changed since the iterator was constructed");
     }
@@ -168,8 +163,8 @@ public class G implements DirectedWeightedGraph {
         }
         if (it_change == modeCount) {
             List<EdgeData> edgeList = new ArrayList<>();
-            this.edges.values().forEach((Edg)-> {
-                if(Edg.getSrc() == node_id){
+            this.edges.values().forEach((Edg) -> {
+                if (Edg.getSrc() == node_id) {
                     edgeList.add(Edg);
                 }
             });
@@ -182,14 +177,13 @@ public class G implements DirectedWeightedGraph {
     public NodeData removeNode(int NodeId) {
         if (this.nodes.containsKey(NodeId)) {
             NodeData n = new CNode(this.nodes.get(NodeId));
-
             for (String key : this.edges.keySet()) {
                 String strSrc = Integer.toString(NodeId);
                 if (key.substring(4, 5).equals(strSrc)) {
                     removeEdge(NodeId, Integer.parseInt(key.substring(key.length() - 1)));
                 }
             }
-    this.nodes.remove(NodeId);
+            this.nodes.remove(NodeId);
             modeCount++;
 
             return n;
