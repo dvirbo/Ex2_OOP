@@ -1,18 +1,73 @@
-## Getting Started
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+# Ex2 OOP Ariel university
 
-## Folder Structure
+A brief description of what this project does and who it's for
 
-The workspace contains two folders by default, where:
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Authors
 
-## Dependency Management
+- [@dvir borochov](https://github.com/dvirbo)
+- [@Dolev Dublon](https://github.com/dolev146)
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+
+
+
+## Documentation
+
+[Documentation](https://linktodocumentation)
+
+
+## Algorithm explanation 
+
+- Additional browser support
+
+- Add more integrations
+
+
+## Usage/Examples
+
+```javascript
+import Component from 'my-project'
+
+function App() {
+  return <Component />
+}
+```
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/dvirbo/Ex2_OOP.git
+```
+
+Go to the project directory
+
+```bash
+  cd Ex2_OOP
+```
+
+Start the server
+
+```bash
+  java -jar Ex2.jar G1.json 
+```
+
+
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  npm run test
+```
+
+
+## Screenshots
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+

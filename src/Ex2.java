@@ -6,9 +6,9 @@ import Interfaces.DirectedWeightedGraphAlgorithms;
 
 import static FileHandling.CImport.importJson;
 
-
 /**
- * This class is the main class for Ex2 - your implementation will be tested using this class.
+ * This class is the main class for Ex2 - your implementation will be tested
+ * using this class.
  */
 public class Ex2 {
     /**
@@ -36,6 +36,7 @@ public class Ex2 {
         ans.init(getGrapg(json_file));
         System.out.println(ans.shortestPathDist(1, 12));
         System.out.println(ans.center());
+
         // ********************************
         return ans;
     }
@@ -47,12 +48,12 @@ public class Ex2 {
      */
     public static void runGUI(String json_file) {
         DirectedWeightedGraphAlgorithms alg = getGrapgAlgo(json_file);
-        // ****** Add your code here ******
-        //
-        // ********************************
+
     }
 
     public static void main(String[] args) {
+
         getGrapgAlgo("./json_data/G3.json");
+
     }
 }

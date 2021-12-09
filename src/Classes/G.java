@@ -12,13 +12,12 @@ import java.util.List;
 public class G implements DirectedWeightedGraph {
 
     public HashMap<Integer, NodeData> nodes;
-    public HashMap<String, EdgeData> edges;  // String ="src_" + src + "_dest_" + dest
+    public HashMap<String, EdgeData> edges; // String ="src_" + src + "_dest_" + dest
 
     public int modeCount;
 
     int it_change;
     boolean first_time;
-
 
     /**
      * constructor
@@ -41,31 +40,32 @@ public class G implements DirectedWeightedGraph {
 
     }
 
-    public G(G other) {
+    public G(DirectedWeightedGraph other) {
         this.nodes = new HashMap<>();
         this.edges = new HashMap<>();
-        other.nodes.forEach((key, value) -> {
-            this.addNode(new CNode(value));
-        });
-        other.edges.forEach((key, value) -> {
-            this.connect(Integer.parseInt(key.substring(4, 5)), Integer.parseInt(key.substring(key.length() - 1)),
-                    value.getWeight());
-        });
+        for (Iterator<NodeData> iter = other.nodeIter(); iter.hasNext();) {
+            NodeData node = iter.next();
+            nodes.put(node.getKey(), new CNode(node));
+        }
+        for (Iterator<EdgeData> iter = other.edgeIter(); iter.hasNext();) {
+            EdgeData edge = iter.next();
+            edges.put("src_" + edge.getSrc() + "_dest_" + edge.getDest(), new CEdge(edge));
+        }
         this.modeCount = other.getMC();
         it_change = 0;
         first_time = true;
 
     }
 
-//    /**
-//     *
-//     * @param i
-//     * @param j
-//     * @return
-//     */
-//    public boolean hasEdge(int i, int j) {
-//        return edges.containsKey("src_" + i + "_dest_" + j);
-//    }
+    // /**
+    // *
+    // * @param i
+    // * @param j
+    // * @return
+    // */
+    // public boolean hasEdge(int i, int j) {
+    // return edges.containsKey("src_" + i + "_dest_" + j);
+    // }
 
     @Override
     public NodeData getNode(int key) {
@@ -93,29 +93,32 @@ public class G implements DirectedWeightedGraph {
 
     /**
      * this function connect 2 nodes by create new edge between them
-     * eventually, we add the new  edge to outEdges hashMap
+     * eventually, we add the new edge to outEdges hashMap
      *
      * @param src  - the source of the edge.
      * @param dest - the destination of the edge.
-     * @param w    - positive weight representing the cost (aka time, price, etc) between src-->dest.
+     * @param w    - positive weight representing the cost (aka time, price, etc)
+     *             between src-->dest.
      */
     @Override
     public void connect(int src, int dest, double w) {
         if (w < 0) {
             throw new RuntimeException("Only Positive Numbers");
         }
-        if (!nodes.containsKey(src) || !nodes.containsKey(dest) || src == dest) {
-            return;
+        if (nodes.containsKey(src) && nodes.containsKey(dest) && src != dest) {
+            EdgeData e = new CEdge(src, dest, w);
+            this.edges.put("src_" + src + "_dest_" + dest, e);
+            modeCount++;
         }
-        EdgeData e = new CEdge(src, dest, w);
-        edges.put("src_" + src + "_dest_" + dest, e);
-        modeCount++;
+        return;
+
     }
 
     /**
      * This method returns an Iterator for the
      * collection representing all the nodes in the graph.
-     * Note: if the graph was changed since the iterator was constructed - a RuntimeException should be thrown.
+     * Note: if the graph was changed since the iterator was constructed - a
+     * RuntimeException should be thrown.
      *
      * @return Iterator<node_data>
      */
@@ -136,7 +139,8 @@ public class G implements DirectedWeightedGraph {
 
     /**
      * This method returns an Iterator for all the edges in this graph.
-     * Note: if any of the edges going out of this node were changed since the iterator was constructed - a RuntimeException should be thrown.
+     * Note: if any of the edges going out of this node were changed since the
+     * iterator was constructed - a RuntimeException should be thrown.
      *
      * @return Iterator<EdgeData>
      */
@@ -155,8 +159,10 @@ public class G implements DirectedWeightedGraph {
     }
 
     /**
-     * This method returns an Iterator for edges getting out of the given node (all the edges starting (source) at the given node).
-     * Note: if the graph was changed since the iterator was constructed - a RuntimeException should be thrown.
+     * This method returns an Iterator for edges getting out of the given node (all
+     * the edges starting (source) at the given node).
+     * Note: if the graph was changed since the iterator was constructed - a
+     * RuntimeException should be thrown.
      *
      * @return Iterator<EdgeData>
      */
@@ -168,8 +174,8 @@ public class G implements DirectedWeightedGraph {
         }
         if (it_change == modeCount) {
             List<EdgeData> edgeList = new ArrayList<>();
-            this.edges.values().forEach((Edg)-> {
-                if(Edg.getSrc() == node_id){
+            this.edges.values().forEach((Edg) -> {
+                if (Edg.getSrc() == node_id) {
                     edgeList.add(Edg);
                 }
             });
@@ -183,13 +189,13 @@ public class G implements DirectedWeightedGraph {
         if (this.nodes.containsKey(NodeId)) {
             NodeData n = new CNode(this.nodes.get(NodeId));
 
-            for (String key : this.edges.keySet()) {
-                String strSrc = Integer.toString(NodeId);
-                if (key.substring(4, 5).equals(strSrc)) {
-                    removeEdge(NodeId, Integer.parseInt(key.substring(key.length() - 1)));
-                }
-            }
-    this.nodes.remove(NodeId);
+
+            this.edges.entrySet().removeIf((entry) -> {
+                modeCount++;
+                return Integer.toString(NodeId).equals(entry.getKey().substring(4, 5));
+            });
+          
+            this.nodes.remove(NodeId);
             modeCount++;
 
             return n;

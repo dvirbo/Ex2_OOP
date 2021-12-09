@@ -1,14 +1,12 @@
 package Classes;
 
-import java.util.HashMap;
 import java.util.Objects;
-// import java.util.Objects;
 
-import Interfaces.EdgeData;
+
 import Interfaces.GeoLocation;
 import Interfaces.NodeData;
 
-public class CNode implements NodeData{
+public class CNode implements NodeData {
 
     private int key;
     private GeoLocation location;
@@ -38,7 +36,7 @@ public class CNode implements NodeData{
         String[] arr = pos.split(",");
         this.location = new CGeo(Double.parseDouble(arr[0]), Double.parseDouble(arr[1]), 0.0);
         this.weight = 0;
-        this.info = "white";
+        this.info = "White";
         this.tag = -1;
     }
 
@@ -100,7 +98,6 @@ public class CNode implements NodeData{
                 ", tag=" + tag +
                 '}';
     }
-
 
     /**
      * @param o - an Object.

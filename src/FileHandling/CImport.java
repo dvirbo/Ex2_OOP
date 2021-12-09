@@ -1,6 +1,6 @@
 package FileHandling;
 
-// import CImport.StoreNE;
+
 
 import Classes.CEdge;
 import Classes.CNode;
@@ -19,6 +19,9 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+//https://www.youtube.com/watch?v=HSuVtkdej8Q&t=1139s&ab_channel=BrianFraser 
+// all the code here is according to this ^ video 
 
 public class CImport {
     public static StoreNE importJson(String json_file) {

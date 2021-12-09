@@ -22,7 +22,7 @@ public class CEdge implements EdgeData {
         this.src = s;
         this.dest = d;
         this.w = w;
-        this.info = "white";
+        this.info = "White";
         this.tag = -1;
     }
 
@@ -57,9 +57,8 @@ public class CEdge implements EdgeData {
 
     @Override
     public String getInfo() {
-        return  this.info;
+        return this.info;
     }
-
 
     @Override
     public void setInfo(String s) {
@@ -73,22 +72,24 @@ public class CEdge implements EdgeData {
 
     @Override
     public void setTag(int t) {
-       this.tag = t;
+        this.tag = t;
     }
 
     @Override
     public String toString() {
-        return  "CEdge{ " +
-        "src="+ this.src +
-        ", w="+ this.w + 
-        ", dest=" + this.dest+
-        '}';
+        return "CEdge{ " +
+                "src=" + this.src +
+                ", w=" + this.w +
+                ", dest=" + this.dest +
+                '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         CEdge edge = (CEdge) o;
         return src == edge.src &&
                 dest == edge.dest &&
@@ -101,6 +102,5 @@ public class CEdge implements EdgeData {
     public int hashCode() {
         return Objects.hash(src, dest, w, info, tag);
     }
-
 
 }
