@@ -72,7 +72,6 @@ class GATest {
      */
     @Test
     void shortestPathDist() {
-
         double ans = ga.shortestPathDist(1, 3);
         assertEquals(ans, 4.0);
         ans = ga.shortestPathDist(1, 1);
@@ -94,6 +93,19 @@ class GATest {
     void center() {
         DirectedWeightedGraph gg = new G();
         DirectedWeightedGraphAlgorithms gga = new GA();
+
+//        NodeData n1 = new CNode(1, new CGeo(1, 1, 1), 0, "White", -1);
+//        NodeData n2 = new CNode(2, new CGeo(2, 2, 2), 0, "White", -1);
+//        NodeData n3 = new CNode(3, new CGeo(3, 3, 3), 0, "White", -1);
+//        gg.addNode(n1);
+//        gg.addNode(n2);
+//        gg.addNode(n3);
+//
+//        gg.connect(1, 2, 500.0);
+//        gg.connect(2, 1, 1.0);
+//        gg.connect(2, 3, 1.0);
+//        gg.connect(3, 2, 500.0);
+
 
         for (int i = 0; i < 9; i++) {
             NodeData n = new CNode(i, new CGeo(i, i, i), 0, "White", -1);
@@ -135,6 +147,6 @@ class GATest {
 
     @Test
     void load() {
-        ga.load("./json_data/G1.json");
+    //    ga.load("./json_data/G1.json");
     }
 }
