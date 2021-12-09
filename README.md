@@ -1,7 +1,37 @@
 
 # Ex2 OOP Ariel university
 
-The theme of the project is  Design and implementation of directed and weighted graphs in Java.
+The theme of the project is  Design and implementation of directed and weighted graphs in Java.\
+the project contain six packages: 
+    
+        Interfaces: contain all the Interfaces that we implemented - 
+            NodeData: This interface represents the set of operations applicable on a node (vertex) in a (directional) weighted graph.
+            EdgeData: represents the set of operations applicable on a directional edge(src,dest) in a (directional) weighted graph.
+            GeoLocation: represents a geo location <x,y,z>, (aka Point3D).
+            DirectedWeightedGraph: represents a Directional Weighted Graph.
+            DirectedWeightedGraphAlgorithms: represents a Directed (positive) Weighted Graph with Different algorithms.
+
+        Classes: the heart of the project - 
+            CEdge: implement EdgeData. 
+            CNode: implement NodeData.
+            CGeo: implement GeoLocation.
+            G: implement DirectedWeightedGraph.
+            GA: implement DirectedWeightedGraphAlgorithms.
+        
+        ClassesTest: Junit 5 test to all the above Classes.
+
+        FileHandling: save & load to/from a json files and DirectedWeightedGraph.
+            CExport:
+            CImport:
+            StoreNE:
+        
+        gui: Responsible for the graphical interface we present.
+
+ Last but not least, Ex2: the main class for Ex2 - the implementation will be tested using this class.
+  
+
+
+    
 
 
 
@@ -21,16 +51,24 @@ The theme of the project is  Design and implementation of directed and weighted 
 4. Ex2 all submitted: https://docs.google.com/spreadsheets/d/1Is8cuBjo1bOAvPoeLIQ5VCLWvlilEAOzVzv6tbIt-u8/edit?usp=sharing
 ## Documentation
 
-Graph Implementation in Java using HashMap: https://progressivecoder.com/graph-implementation-in-java-using-hashmap/ , https://algorithms.tutorialhorizon.com/implement-graph-using-map-java/
-create and work with Java Swing: https://www.guru99.com/java-swing-gui.html
+Graph Implementation in Java using HashMap: https://progressivecoder.com/graph-implementation-in-java-using-hashmap \
+create and work with Java Swing: https://www.guru99.com/java-swing-gui.html \
+Deserializing JSON: https://www.youtube.com/watch?v=HSuVtkdej8Q&t=1139s
+
 ## UML
 ![src](https://user-images.githubusercontent.com/73783656/145378693-9f518c95-3c60-4ee2-921d-5b8daddfaee9.png)
 
-## Algorithm explanation 
-
-- Additional browser support
-
-- Add more integrations
+## Main algorithmes 
+- create a grpah (it's aptional to add vertexes and edges)
+- init: Inits the graph on which this set of algorithms operates on
+- copy: Compute a deep copy of a weighted graph.
+- Isconected: check if the graph is strongly connected (there is a valid path from each node to each other node).
+- shortestPathDist: Computes the length of the shortest path between source vertex to destination vertex consider the weight
+- shortestPath: returns list of nodes of the shortest path between source vertex to destination vertex consider the weight of each edge.
+- center: Finds the node which minimizes the max distance to all the other nodes.
+- tsp: Computes a list of consecutive nodes which go over all the nodes in cities.
+- save: save your graph in JSON format.
+- load: load a graph from a JSON format.
 
 
 ## Usage/Examples
