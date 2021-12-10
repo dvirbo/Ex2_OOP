@@ -44,7 +44,6 @@ class GATest {
     @Order(1)
     void init_getGraph_copy() {
 
-
         DirectedWeightedGraph gCopy = new G((G) g);
         DirectedWeightedGraphAlgorithms gaCopy = new GA();
         gaCopy.init(gCopy); // reset the graph by init
@@ -101,18 +100,17 @@ class GATest {
         DirectedWeightedGraph gg = new G();
         DirectedWeightedGraphAlgorithms gga = new GA();
 
-//        NodeData n1 = new CNode(1, new CGeo(1, 1, 1), 0, "White", -1);
-//        NodeData n2 = new CNode(2, new CGeo(2, 2, 2), 0, "White", -1);
-//        NodeData n3 = new CNode(3, new CGeo(3, 3, 3), 0, "White", -1);
-//        gg.addNode(n1);
-//        gg.addNode(n2);
-//        gg.addNode(n3);
-//
-//        gg.connect(1, 2, 500.0);
-//        gg.connect(2, 1, 1.0);
-//        gg.connect(2, 3, 1.0);
-//        gg.connect(3, 2, 500.0);
-
+        // NodeData n1 = new CNode(1, new CGeo(1, 1, 1), 0, "White", -1);
+        // NodeData n2 = new CNode(2, new CGeo(2, 2, 2), 0, "White", -1);
+        // NodeData n3 = new CNode(3, new CGeo(3, 3, 3), 0, "White", -1);
+        // gg.addNode(n1);
+        // gg.addNode(n2);
+        // gg.addNode(n3);
+        //
+        // gg.connect(1, 2, 500.0);
+        // gg.connect(2, 1, 1.0);
+        // gg.connect(2, 3, 1.0);
+        // gg.connect(3, 2, 500.0);
 
         for (int i = 0; i < 9; i++) {
             NodeData n = new CNode(i, new CGeo(i, i, i), 0, "White", -1);
@@ -147,12 +145,12 @@ class GATest {
     @Order(6)
     void tsp() {
 
-//        List<NodeData> tspList = ga.tsp(myList);
-//        System.out.println(tspList.toString());
+        // List<NodeData> tspList = ga.tsp(myList);
+        // System.out.println(tspList.toString());
 
         DirectedWeightedGraph g1 = new G();
-        NodeData n1 = new CNode(1, new CGeo(1.0, 2.0, 3.0), 0, "White", -1);
-        NodeData n2 = new CNode(2, new CGeo(3.0, 4.0, 5.0), 0, "White", -1);
+        NodeData n1 = new CNode(1, new CGeo(1.0, 2.0, 3.0), Double.MAX_VALUE, "White", -1);
+        NodeData n2 = new CNode(2, new CGeo(3.0, 4.0, 5.0), Double.MAX_VALUE, "White", -1);
         g1.addNode(n1);
         g1.addNode(n2);
         g1.connect(1, 2, 500);
@@ -165,51 +163,97 @@ class GATest {
         ga1.init(g1);
         assertEquals(list1, ga1.tsp(list1));
 
-//        G graphTsp = new G();
-//
-//        var g1 = new CGeo(1, 2, 3);
-//        var g2 = new CGeo(1, 2, 3);
-//        var g3 = new CGeo(1, 2, 3);
-//        var g4 = new CGeo(2, 1, 3);
-//        var n1 = new CNode(1, g1, 1.0, "White", -1);
-//        var n2 = new CNode(2, g2, 2.0, "White", -1);
-//        var n3 = new CNode(3, g3, 2.0, "White", -1);
-//        var n4 = new CNode(4, g4, 2.0, "White", -1);
-//        graphTsp.addNode(n1);
-//        graphTsp.addNode(n2);
-//        graphTsp.addNode(n3);
-//        graphTsp.addNode(n4);
-//        graphTsp.connect(1, 2, 1.0);
-//        graphTsp.connect(2, 4, 1.0);
-//        graphTsp.connect(1, 4, 1.0);
-//        graphTsp.connect(1, 3, 1.0);
-//
-//
-//        List<NodeData> cities = new LinkedList<>();
-//        cities.add(n1);
-//        cities.add(n2);
-//        cities.add(n3);
-//        GA gaTsp = new GA();
-//        gaTsp.init(graphTsp);
-//        System.out.println(gaTsp.tsp(cities));
+        // G graphTsp = new G();
+        //
+        // var g1 = new CGeo(1, 2, 3);
+        // var g2 = new CGeo(1, 2, 3);
+        // var g3 = new CGeo(1, 2, 3);
+        // var g4 = new CGeo(2, 1, 3);
+        // var n1 = new CNode(1, g1, 1.0, "White", -1);
+        // var n2 = new CNode(2, g2, 2.0, "White", -1);
+        // var n3 = new CNode(3, g3, 2.0, "White", -1);
+        // var n4 = new CNode(4, g4, 2.0, "White", -1);
+        // graphTsp.addNode(n1);
+        // graphTsp.addNode(n2);
+        // graphTsp.addNode(n3);
+        // graphTsp.addNode(n4);
+        // graphTsp.connect(1, 2, 1.0);
+        // graphTsp.connect(2, 4, 1.0);
+        // graphTsp.connect(1, 4, 1.0);
+        // graphTsp.connect(1, 3, 1.0);
+        //
+        //
+        // List<NodeData> cities = new LinkedList<>();
+        // cities.add(n1);
+        // cities.add(n2);
+        // cities.add(n3);
+        // GA gaTsp = new GA();
+        // gaTsp.init(graphTsp);
+        // System.out.println(gaTsp.tsp(cities));
 
+        DirectedWeightedGraphAlgorithms GAlgo = new GA();
+        GAlgo.load("./json_data/G1.json");
+        List<NodeData> list4 = new LinkedList<>();
+        list4.add(GAlgo.getGraph().getNode(0));
+        list4.add(GAlgo.getGraph().getNode(1));
+        list4.add(GAlgo.getGraph().getNode(5));
+        list4.add(GAlgo.getGraph().getNode(7));
+
+        System.out.println(list4);
 
     }
 
     @Test
     @Order(7)
     void save() {
-
-
+        DirectedWeightedGraph saveGraph = new G();
+        NodeData n1 = new CNode(0, new CGeo(1.0, 2.0, 3.0), Double.MAX_VALUE, "White", -1);
+        NodeData n2 = new CNode(1, new CGeo(3.0, 4.0, 5.0), Double.MAX_VALUE, "White", -1);
+        saveGraph.addNode(n1);
+        saveGraph.addNode(n2);
+        saveGraph.connect(0, 1, 500);
+        saveGraph.connect(1, 0, 1);
+        DirectedWeightedGraphAlgorithms saveGA = new GA();
+        saveGA.init(saveGraph);
+        saveGA.save("./json_data/saveTest.json");
+        assertTrue(true);
     }
 
     @Test
     @Order(8)
     void load() {
 
-        ga.load("./json_data/G1.json");
+        DirectedWeightedGraph saveGraph = new G();
+        NodeData n1 = new CNode(0, new CGeo(1.0, 2.0, 3.0), Double.MAX_VALUE, "White", -1);
+        NodeData n2 = new CNode(1, new CGeo(3.0, 4.0, 5.0), Double.MAX_VALUE, "White", -1);
+        saveGraph.addNode(n1);
+        saveGraph.addNode(n2);
+        saveGraph.connect(0, 1, 500);
+        saveGraph.connect(1, 0, 1);
+        DirectedWeightedGraphAlgorithms saveGA = new GA();
+        saveGA.init(saveGraph);
+
+
+        DirectedWeightedGraphAlgorithms loadGA = new GA();
+        loadGA.load("./json_data/saveTest.json");
+        var loadG = loadGA.getGraph();
+        var nodeiter = loadG.nodeIter();
+        int i = 0;
+        while (nodeiter.hasNext()) {
+            var node = nodeiter.next();
+            assertEquals(saveGraph.getNode(i), node);
+            i++;
+        }
+        var edgeIter = loadG.edgeIter();
+        var edgeIter2 = saveGraph.edgeIter();
+        while (edgeIter.hasNext()) {
+            var edge = edgeIter.next();
+            var edge2 = edgeIter2.next();
+            assertEquals(edge2, edge);
+        }
 
 
     }
+
 
 }

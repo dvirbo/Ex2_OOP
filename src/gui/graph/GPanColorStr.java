@@ -10,10 +10,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
 
-// draw arrow 
-/// https://stackoverflow.com/questions/4112701/drawing-a-line-with-arrow-in-java 
-
-public class GraphPanel extends JPanel implements MouseListener {
+public class GPanColorStr extends JPanel implements MouseListener {
 
     private final int ARR_SIZE = 4;
     private final LinkedList<Line> lines;
@@ -22,7 +19,7 @@ public class GraphPanel extends JPanel implements MouseListener {
     String message;
     private LinkedList<Point2D> points;
 
-    public GraphPanel(GFrame frame) {
+    public GPanColorStr(GFrame frame) {
         super();
         this.setBackground(new Color(243, 228, 162)); // change color of background
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -181,10 +178,20 @@ public class GraphPanel extends JPanel implements MouseListener {
                     (int) p.getY());
         }
 
-        lines.forEach((l) ->
-                drawArrow(g, l.x1, l.y1, l.x2, l.y2)
-        );
-    }
+        lines.forEach((l) -> {
 
+            if (l.x2 > l.x1) {
+                g.setColor(new Color(183, 24, 48));
+                g.drawString(l.w, (int) ((l.x2 + l.x1) / 2) + 50, (int) ((l.y2 + l.y1) / 2) + 50);
+                drawArrow(g, l.x1 + 5, l.y1 + 5, l.x2 + 5, l.y2 + 5);
+            } else {
+                g.setColor(new Color(28, 119, 23));
+                g.drawString(l.w, (int) ((l.x2 + l.x1) / 2), (int) ((l.y2 + l.y1) / 2));
+                drawArrow(g, l.x1, l.y1, l.x2, l.y2);
+            }
+
+
+        });
+    }
 
 }

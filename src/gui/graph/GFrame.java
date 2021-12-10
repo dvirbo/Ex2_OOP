@@ -19,6 +19,9 @@ import static FileHandling.CImport.importJson;
 import static gui.buttons.MenuBarExample.scaleImageIcon;
 
 public class GFrame extends JFrame implements KeyListener, ActionListener {
+    public static DirectedWeightedGraphAlgorithms statiGA;
+    public static DirectedWeightedGraph graph;
+    JMenu editMenu;
     JMenuItem tspItem;
     JMenu AlgoMenu;
     GraphPanel panel;
@@ -31,31 +34,45 @@ public class GFrame extends JFrame implements KeyListener, ActionListener {
     ImageIcon loadIcon;
     ImageIcon saveIcon;
     ImageIcon exitIcon;
-    DirectedWeightedGraphAlgorithms ga;
-    DirectedWeightedGraph graph;
+
+    /// TODO 
+    JMenuItem redEdgeItem;
+    JMenuItem blueEdgeItem;
+    JMenuItem addNode;
+    JMenuItem removeNode;
+    JMenuItem centerItem;
+    JMenuItem showEdgeWeight;
+    JMenuItem showNodeGeoLocation;
+    JMenuItem showNodeIndex;
+    JMenuItem addEdge;
+    JMenuItem removeEdge;
+    JMenuItem shortestPathDist;
+    JMenuItem isConnected;
+    JMenuItem explainItem;
+    JLabel explainEdges;
+
 
     public GFrame(DirectedWeightedGraphAlgorithms ga) {
         super();
         this.setTitle("OOPEx2_Dvir&Dolev");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.ga = ga;
+        statiGA = ga;
+        graph = ga.getGraph();
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         int height = (int) dim.getHeight();
         int width = (int) dim.getWidth();
         this.setSize((int) (width * 0.8), (int) (height * 0.9));
 
-
         ImageIcon image = new ImageIcon("./src/gui/resources/logo.png");
         this.setIconImage(image.getImage());
 
-        panel = new GraphPanel(ga, this);
+        panel = new GraphPanel(this);
 
         this.add(panel);
 
         this.addKeyListener(this);
-
 
         loadIcon = new ImageIcon("./resources/load.jpg");
         saveIcon = new ImageIcon("./resources/save.png");
@@ -69,12 +86,15 @@ public class GFrame extends JFrame implements KeyListener, ActionListener {
 
         fileMenu = new JMenu("File");
         helpMenu = new JMenu("Help");
+        editMenu = new JMenu("Edit");
         AlgoMenu = new JMenu("Algorithms");
 
         loadItem = new JMenuItem("Load");
         saveItem = new JMenuItem("Save");
         exitItem = new JMenuItem("Exit");
         tspItem = new JMenuItem("Tsp");
+        centerItem = new JMenuItem("center");
+        explainItem = new JMenuItem("explain color");
 
         loadItem.setIcon(loadIcon);
         saveItem.setIcon(saveIcon);
@@ -91,11 +111,13 @@ public class GFrame extends JFrame implements KeyListener, ActionListener {
         fileMenu.add(exitItem);
 
         AlgoMenu.add(tspItem);
-
+        AlgoMenu.add(centerItem);
+        helpMenu.add(explainItem);
 
         menuBar.add(fileMenu);
         menuBar.add(helpMenu);
         menuBar.add(AlgoMenu);
+        menuBar.add(editMenu);
 
         loadItem.addActionListener(this);
         saveItem.addActionListener(this);
@@ -104,9 +126,9 @@ public class GFrame extends JFrame implements KeyListener, ActionListener {
 
         this.setJMenuBar(menuBar);
 
+
         this.setVisible(true);
     }
-
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -136,31 +158,38 @@ public class GFrame extends JFrame implements KeyListener, ActionListener {
                 File selectedFile = fileChooser.getSelectedFile();
                 StoreNE ne = importJson(selectedFile.getPath());
                 if (ne != null) {
-                    this.graph = new G(ne.nodes, ne.edges);
-                    this.ga = new GA();
-                    ga.init(this.graph);
+                    graph = new G(ne.nodes, ne.edges);
+                    statiGA = new GA();
+                    statiGA.init(graph);
                     this.getContentPane().remove(panel);
-                    panel = new GraphPanel(ga, this);
+                    panel = new GraphPanel(this);
                     this.add(panel);
                     this.getContentPane().invalidate();
                     this.getContentPane().validate();
 
-
                     this.add(panel);
                 }
-
 
             }
         }
         if (e.getSource() == saveItem) {
-            ga.save("GraphOutPut.json");
+            statiGA.save("GraphOutPut.json");
         }
         if (e.getSource() == exitItem) {
             System.exit(0);
         }
 
         if (e.getSource() == tspItem) {
-            new TspCalcWin(ga);
+            new TspCalcWin();
+        }
+
+        if (e.getSource() == tspItem) {
+            new TspCalcWin();
+        }
+        if (e.getSource() == explainItem) {
+            JLabel explain = new JLabel("red edges go right , blue the opposite side");
+            explain.setBounds(67, 37, 292, 30);
+            this.add(explain);
         }
     }
 }
