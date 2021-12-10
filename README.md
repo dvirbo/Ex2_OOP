@@ -73,9 +73,10 @@ Deserializing JSON: https://www.youtube.com/watch?v=HSuVtkdej8Q&t=1139s
 
 ## Usage/Examples
 
+* Example of a test we did:\
+
 ![image_2021-12-10_10-26-33](https://user-images.githubusercontent.com/73783656/145543692-23f0db48-580c-4fe2-90fc-252460bb36fc.png)
 
-* Example of a test we did:\
  We built a graph whose center is 2 and checked if the algorithm finds it required
 
 ![‏‏לכידה78](https://user-images.githubusercontent.com/73783656/145544074-f76ff2a3-b4f0-46b4-b87e-b4422f9f4138.JPG)
