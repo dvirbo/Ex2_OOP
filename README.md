@@ -73,7 +73,7 @@ Deserializing JSON: https://www.youtube.com/watch?v=HSuVtkdej8Q&t=1139s
 
 ## Usage/Examples
 
-* Example of a test we did:\
+* Example of a test we did:
 
 ![image_2021-12-10_10-26-33](https://user-images.githubusercontent.com/73783656/145543692-23f0db48-580c-4fe2-90fc-252460bb36fc.png)
 
