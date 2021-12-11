@@ -3,17 +3,13 @@ import Classes.GA;
 import FileHandling.StoreNE;
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
-import Interfaces.NodeData;
 import gui.graph.GFrame;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static FileHandling.CImport.importJson;
 
-
 /**
- * This class is the main class for Ex2 - your implementation will be tested using this class.
+ * This class is the main class for Ex2 - your implementation will be tested
+ * using this class.
  */
 public class Ex2 {
     /**
@@ -41,7 +37,6 @@ public class Ex2 {
         DirectedWeightedGraphAlgorithms ans = new GA();
         // ****** Add your code here ******
         ans.init(getGrapg(json_file));
-
         // ********************************
         return ans;
     }
@@ -59,16 +54,18 @@ public class Ex2 {
     }
 
     public static void main(String[] args) {
-        var ans = getGrapgAlgo("./json_data/G1.json");
-        ArrayList<String> Slist = new ArrayList<>(Arrays.asList("0,1,5,7".split(",")));
-        ArrayList<NodeData> nodeList = new ArrayList<>();
-        DirectedWeightedGraph graph = ans.getGraph();
-        Slist.forEach((s) -> nodeList.add(graph.getNode(Integer.parseInt(s))));
-
-        System.out.println(ans.tsp(nodeList));
-//        getGrapgAlgo("C:/Users/dolev/Desktop/1000Nodes.json");
-//        getGrapgAlgo("./json_data/G1.json");
-        //runGUI("./json_data/G1.json");
+        var ans = getGrapgAlgo("./json_data/1000Nodes.json");
+        System.out.println("daniel");
+        System.out.println(ans.center());
+        // System.out.println(((GA) ans).bfs());
+        // לעשות bfs
+        // לוקח קודקוד אחד
+        // לבדוק שהוא הגיע לכולם
+        // אותו קודקוד לוקח עוד פעם
+        // ומפעיל bfs
+        // על הגרף ההופכי שלו
+        // מה זה אומר הופכי הופך את כל הכיוונים של הצלעות
+        // אם זה גם עובד סימן שהוא מחובר
 
     }
 }

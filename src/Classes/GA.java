@@ -46,7 +46,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      */
     @Override
     public DirectedWeightedGraph copy() {
-        return new G((G) this.graph);
+        return new G(this.graph);
     }
 
     /**
@@ -108,11 +108,10 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      */
     public double shortestPathCenter(int src, int dest) {
 
-        resetInfo();
-        resetTags();
-        resetWeight();
+        resetWeightInfo();
 
         double ans = DijkstraCenter(this.graph.getNode(src), this.graph.getNode(dest));
+//        System.out.println("dijerstra");
         if (ans == Double.MAX_VALUE) {
             return -1;
         }
@@ -202,8 +201,10 @@ public class GA implements DirectedWeightedGraphAlgorithms {
     @Override
     public NodeData center() {
         if (!isConnected()) {
+            System.out.println("isConnected False");
             return null;
         }
+        System.out.println("isConnected True");
         double minimumW = Double.MAX_VALUE;
         NodeData centerN = null;
         for (Iterator<NodeData> iter = this.graph.nodeIter(); iter.hasNext(); ) {
@@ -222,11 +223,9 @@ public class GA implements DirectedWeightedGraphAlgorithms {
                 minimumW = temp;
                 centerN = node;
             }
-
         }
-        resetTags();
-        resetInfo();
-        resetWeight();
+        System.out.println("finish");
+        resetAll();
         return centerN;
     }
 
@@ -381,19 +380,15 @@ public class GA implements DirectedWeightedGraphAlgorithms {
             while (it.hasNext()) {
                 EdgeData curr = it.next(); //current edge in the iterator
                 NodeData neighborNode = this.graph.getNode(curr.getDest()); //create a neighbor node
-                if (Objects.equals(neighborNode.getInfo(), "White")) { //check if we already visit the node
+                if (neighborNode.getInfo().equals("White")) { //check if we already visit the node
                     if (pointerNode.getWeight() + curr.getWeight() < neighborNode.getWeight()) { // compare between the neighbor node w and pointerNode + the edge that connect to the neighbor
-                        neighborNode.setWeight(Math.min(pointerNode.getWeight() + curr.getWeight(), neighborNode.getWeight()));
-                        neighborNode.setTag(pointerNode.getKey()); //to track where he came from
+                        neighborNode.setWeight(pointerNode.getWeight() + curr.getWeight());
+//                        neighborNode.setTag(pointerNode.getKey()); //to track where he came from
                     }
                     pq.add(neighborNode);
                 }
             }
-            pointerNode.setInfo("Black"); //after we check all pointerNode neighbors make him black - not relevant
-//            if (pointerNode.getKey() == dest.getKey()) {// if we get to the dest node
-//                return pointerNode.getWeight();
-//            }
-
+            pointerNode.setInfo("Black");
         }
         return shortestPath;
     }
@@ -405,7 +400,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      * @param n node that the search start from
      * @return true if the number of nodes that visited and count are equals to the sum of the nodes in the graph
      */
-    private boolean bfs(NodeData n) {
+    public boolean bfs(NodeData n) {
         resetTags();
         Queue<NodeData> queue = new LinkedList<>();
         n.setTag(1); //visit
@@ -421,7 +416,6 @@ public class GA implements DirectedWeightedGraphAlgorithms {
                     queue.add(AdjNode);
                     count++; //increase the counter
                 }
-
             }
 
         }
@@ -447,6 +441,27 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         Iterator<NodeData> it = this.graph.nodeIter();
         while (it.hasNext()) {
             it.next().setInfo("White");
+        }
+    }
+
+    private void resetWeightInfo() {
+        Iterator<NodeData> it = this.graph.nodeIter();
+
+        while (it.hasNext()) {
+            var node = it.next();
+            node.setInfo("White");
+            node.setWeight(Double.MAX_VALUE);
+        }
+    }
+
+    private void resetAll() {
+        Iterator<NodeData> it = this.graph.nodeIter();
+
+        while (it.hasNext()) {
+            var node = it.next();
+            node.setInfo("White");
+            node.setTag(-1);
+            node.setWeight(Double.MAX_VALUE);
         }
     }
 

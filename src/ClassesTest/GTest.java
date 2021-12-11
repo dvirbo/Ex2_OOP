@@ -39,8 +39,8 @@ class GTest {
         int node_in_g2 = graph2.nodeSize();
         assertEquals(node_in_g1, node_in_g2);
         assertFalse(graph1 == graph2);
-        assertFalse(graph1.nodes == graph2.nodes);
-        assertFalse(graph1.edges == graph2.edges);
+        assertFalse(graph1.Nodes == graph2.Nodes);
+        assertFalse(graph1.Edges == graph2.Edges);
 
     }
 
@@ -136,9 +136,9 @@ class GTest {
         NodeData node3 = new CNode(n3);
         graph.addNode(node3);
 
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            graph.nodeIter(); // trow RuntimeException: node were changed since the iterator was constructed
-        });
+        Exception exception = assertThrows(RuntimeException.class, () ->
+                graph.nodeIter() // trow RuntimeException: node were changed since the iterator was constructed
+        );
 
         String expectedMessage = "graph changed since the iterator was constructed";
         String actualMessage = exception.getMessage();
@@ -188,9 +188,9 @@ class GTest {
 
         graph.connect(n2.getKey(), n5.getKey(), 1.6);
 
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            graph.edgeIter();
-        });
+        Exception exception = assertThrows(RuntimeException.class, () ->
+                graph.edgeIter()
+        );
 
         String expectedMessage = "graph changed since the iterator was constructed";
         String actualMessage = exception.getMessage();
@@ -243,9 +243,9 @@ class GTest {
         NodeData node5 = new CNode(n5);
         graph.addNode(node5);
         // need to show dvir that if i remove the node id from the inside it is problem
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            graph.edgeIter(n1.getKey());
-        });
+        Exception exception = assertThrows(RuntimeException.class, () ->
+                graph.edgeIter(n1.getKey())
+        );
 
         String expectedMessage = "graph changed since the iterator was constructed";
         String actualMessage = exception.getMessage();
