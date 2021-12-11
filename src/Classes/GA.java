@@ -310,7 +310,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
             chosen = shortest(myDist);
 
             return allWays.get(chosen);
-        }
+       }
     }
 
     /**

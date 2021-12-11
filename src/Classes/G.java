@@ -36,7 +36,10 @@ public class G implements DirectedWeightedGraph {
         this.Nodes = new HashMap<>();
         this.Edges = new HashMap<>();
         this.EdgesById = new HashMap<>();
-        nodes.forEach((key, value) -> this.addNode(new CNode(value)));
+        nodes.forEach((key, value) -> {
+            this.addNode(new CNode(value));
+            this.EdgesById.put(key,new ArrayList<>());
+        });
         edges.forEach((key, edge) -> this.connect(edge.getSrc(), edge.getDest(), edge.getWeight()));
 
         // edges.forEach((key, edge) -> this.connect(edge.getSrc(), edge.getDest(),
@@ -51,7 +54,10 @@ public class G implements DirectedWeightedGraph {
 
         this.Nodes = new HashMap<>();
         this.Edges = new HashMap<>();
-        other.Nodes.forEach((key, value) -> this.addNode(new CNode(value)));
+        other.Nodes.forEach((key, value) -> {
+            this.addNode(new CNode(value));
+            this.EdgesById.put(key,new ArrayList<>());
+        });
         other.Edges.forEach((key, edge) -> this.connect(edge.getSrc(), edge.getDest(), edge.getWeight()));
         this.modeCount = other.getMC();
         it_change = 0;
@@ -67,6 +73,7 @@ public class G implements DirectedWeightedGraph {
         while (niter.hasNext()) {
             var node = niter.next();
             this.addNode(new CNode(node));
+            this.EdgesById.put(node.getKey(),new ArrayList<>());
         }
         var eiter = other.edgeIter();
         while (eiter.hasNext()) {
@@ -107,6 +114,7 @@ public class G implements DirectedWeightedGraph {
             if (!Nodes.containsKey(n.getKey())) {
                 NodeData nc = new CNode(n);
                 Nodes.put(n.getKey(), nc);
+                this.EdgesById.put(n.getKey(),new ArrayList<>());
                 modeCount++;
             }
         }

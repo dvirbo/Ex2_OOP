@@ -71,21 +71,21 @@ public class Ex2 {
         // על הגרף ההופכי שלו
         // מה זה אומר הופכי הופך את כל הכיוונים של הצלעות
         // אם זה גם עובד סימן שהוא מחובר
-        runGUI("./json_data/G2.json");
+      //  runGUI("./json_data/G2.json");
 
      //   var ans = getGrapgAlgo("./json_data/G1.json");
       //  var ans = getGrapgAlgo("./json_data/1000Nodes.json");
      //   System.out.println("daniel");
     //    System.out.println(ans.center());
-//       var ans = getGrapgAlgo("./json_data/G1.json");
-//        ArrayList<String> Slist = new ArrayList<>(Arrays.asList("0,1,5,7".split(",")));
-//        ArrayList<NodeData> nodeList = new ArrayList<>();
-//        DirectedWeightedGraph graph = ans.getGraph();
-//        Slist.forEach((s) -> nodeList.add(graph.getNode(Integer.parseInt(s))));
-//
-//        System.out.println(ans.tsp(nodeList));
+       var ans = getGrapgAlgo("./json_data/G1.json");
+        ArrayList<String> Slist = new ArrayList<>(Arrays.asList("0,1,5,7".split(",")));
+        ArrayList<NodeData> nodeList = new ArrayList<>();
+        DirectedWeightedGraph graph = ans.getGraph();
+        Slist.forEach((s) -> nodeList.add(graph.getNode(Integer.parseInt(s))));
 
-        runGUI("./json_data/G1.json");
+        System.out.println(ans.tsp(nodeList));
+
+   //     runGUI("./json_data/G1.json");
 
 
     }
