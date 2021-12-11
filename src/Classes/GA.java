@@ -201,10 +201,8 @@ public class GA implements DirectedWeightedGraphAlgorithms {
     @Override
     public NodeData center() {
         if (!isConnected()) {
-            System.out.println("isConnected False");
             return null;
         }
-        System.out.println("isConnected True");
         double minimumW = Double.MAX_VALUE;
         NodeData centerN = null;
         for (Iterator<NodeData> iter = this.graph.nodeIter(); iter.hasNext(); ) {
@@ -245,68 +243,106 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         });
 
         cities.forEach((node) -> {  //iterate all the nodes in the list
-//            gTsp.addNode(new CNode(node));
             Iterator<EdgeData> iter = this.graph.edgeIter(node.getKey());
             while (iter.hasNext()) { //iter all the
                 EdgeData e = iter.next();
                 cities.forEach((city) -> {
                     if (city.getKey() == e.getDest()) { // if cities contain the dest
-                        //System.out.println(e.getSrc() + ":" + e.getDest() + ":" + e.getWeight());
                         gTsp.connect(e.getSrc(), e.getDest(), e.getWeight());
-                        // System.out.println(gTsp.getEdge(e.getSrc(), e.getDest()));
                     }
                 });
             }
         });
         GA gaTsp = new GA();
         gaTsp.init(gTsp);
+        if (!gaTsp.isConnected()) {
+            return null;
+        } else { //if the new graph strongly connected:
+            int size = cities.size();
+            List<List<NodeData>> allWays = new LinkedList<>(); // list of lists of all exist path
+            double[] myDist = new double[size]; // List that will contain all the paths final weight.
 
-        gaTsp.resetInfo();
-        gaTsp.resetTags();
-        gaTsp.resetWeight();
+            for (int city = 0; city < size; city++) { //loop that iter all the cities
+                int current = city; //the current city
+                List<NodeData> path = new LinkedList<>(); //list of the curr path that we check
+                double[] dist = new double[size]; //array that contain all the final weight of the path
+                int temp;//?
+                int count = 0; // counter to check if we iter all the cities
+                NodeData ptr = cities.get(current); //
+                path.add(ptr);//add the first node (0)
+                while (count < size && path.size() < size) {
+                    // ptr = cities.get(current);
+                    temp = current; //
+                    for (int i = 0; i < size; i++) {
+                        int src = ptr.getKey();
+                        int dest = cities.get(i).getKey();
+                        if (src != dest) { // to avoid calc the path between same node
+                            dist[i] = shortestPathDist(src, dest);
+                        } else {
+                            dist[i] = Double.MAX_VALUE; //same node..
+                        }
 
-        List<NodeData> bestWay = new LinkedList<>();
+                        while (current == temp) {
+                            int lowest = shortest(dist); //take the closest city
+                            if (!path.contains(cities.get(lowest))) { //if the city isn't in the list-
+                                path.add(cities.get(lowest));
+                                count++;
+                                current = lowest;
 
-        cities.get(0).setTag(1);//check.
-        bestWay.add(cities.get(0)); // add the first node in the list
-        NodeData prev;
-        NodeData next;
+                            } else if (path.size() != size) {
+                                dist[lowest] = Double.MAX_VALUE;
+                            } else {
+                                break;
+                            }
+                        }
+                    }
 
-        while (gaTsp.visitNode(cities)) {
-            double dist = Double.MAX_VALUE;
-            prev = null;
-            next = null;
-
-            for (NodeData pointer : bestWay) { //for every node in the list
-                Iterator<EdgeData> iter = gTsp.edgeIter(pointer.getKey()); //iterate all the
-                while (iter.hasNext()) {
-                    EdgeData edgeToNeighbor = iter.next();
-
-                    NodeData neighborNode = gTsp.getNode(edgeToNeighbor.getDest());
-
-                    if (neighborNode.getTag() == -1 && edgeToNeighbor.getWeight() < dist) {
-                        dist = edgeToNeighbor.getWeight();
-                        next = neighborNode;
-                        prev = pointer;
+                    if (path.size() == size) { //finish iter all the cities from the current city
+                        allWays.add(path);
                     }
                 }
             }
 
-            if (next != null) {
+            int chosen;
+            for (int i = 0; i < allWays.size(); i++) {
+                myDist[i] = weightSum(allWays.get(i));
+            }
+            chosen = shortest(myDist);
 
-                NodeData newNext = next;
-                cities.forEach((city) -> {
-                    if (newNext.getKey() == city.getKey()) {
-                        city.setTag(1);
-                    }
-                });
-                gTsp.getNode(next.getKey()).setTag(1);
-                bestWay.add(bestWay.indexOf(prev) + 1, next);
+            return allWays.get(chosen);
+        }
+    }
+
+    /**
+     * calculate the total Weight of path
+     *
+     * @param cities list of nodes.
+     * @return sum of the weight.
+     */
+    private double weightSum(List<NodeData> cities) {
+        double Weight = 0.0;
+        for (int i = 0; i <= cities.size() - 2; i++) {
+            Weight = Weight + shortestPathDist(cities.get(i).getKey(), cities.get(i + 1).getKey());
+        }
+        return Weight;
+    }
+
+    /**
+     * @param dist - array that contain all the final weight of the path
+     * @return index that contain the lowest number.
+     */
+    private int shortest(double[] dist) {
+        double check = dist[0];
+        int lowest = 0;
+        for (int i = 1; i < dist.length; i++) {
+            if (dist[i] < check) {
+                check = dist[i];
+                lowest = i;
             }
         }
-
-        return bestWay;
+        return lowest;
     }
+
 
     /**
      * this method check if we visited all the cities
@@ -315,7 +351,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      * @return boolean when we finish visiting then reaturn false;
      */
     private boolean visitNode(List<NodeData> cities) {
-
+        double pathW = 0.0;
         for (NodeData city : cities) {
             if (city.getTag() == -1) {
                 return true;
