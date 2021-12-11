@@ -85,7 +85,7 @@ public class Ex2 {
 
         System.out.println(ans.tsp(nodeList));
 
-   //     runGUI("./json_data/G1.json");
+       // runGUI("./json_data/G1.json");
 
 
     }

@@ -238,8 +238,10 @@ public class GA implements DirectedWeightedGraphAlgorithms {
     @Override
     public List<NodeData> tsp(List<NodeData> cities) {
         G gTsp = new G(); //build new graph
+        var keysCities = new ArrayList<Integer>();
         cities.forEach((node) -> {  //iterate all the nodes in the list
             gTsp.addNode(new CNode(node));
+            keysCities.add(node.getKey());
         });
 
         cities.forEach((node) -> {  //iterate all the nodes in the list
