@@ -3,7 +3,11 @@ import Classes.GA;
 import FileHandling.StoreNE;
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
+import Interfaces.NodeData;
 import gui.graph.GFrame;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static FileHandling.CImport.importJson;
 
@@ -37,6 +41,7 @@ public class Ex2 {
         DirectedWeightedGraphAlgorithms ans = new GA();
         // ****** Add your code here ******
         ans.init(getGrapg(json_file));
+
         // ********************************
         return ans;
     }
@@ -54,9 +59,16 @@ public class Ex2 {
     }
 
     public static void main(String[] args) {
+        var ans = getGrapgAlgo("./json_data/G1.json");
+        ArrayList<String> Slist = new ArrayList<>(Arrays.asList("0,1,5,7".split(",")));
+        ArrayList<NodeData> nodeList = new ArrayList<>();
+        DirectedWeightedGraph graph = ans.getGraph();
+        Slist.forEach((s) -> nodeList.add(graph.getNode(Integer.parseInt(s))));
+
+        System.out.println(ans.tsp(nodeList));
 //        getGrapgAlgo("C:/Users/dolev/Desktop/1000Nodes.json");
 //        getGrapgAlgo("./json_data/G1.json");
-        runGUI("./json_data/G1.json");
+        //runGUI("./json_data/G1.json");
 
     }
 }
