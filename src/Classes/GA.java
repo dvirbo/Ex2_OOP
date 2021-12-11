@@ -257,10 +257,9 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         gaTsp.init(gTsp);
         if (!gaTsp.isConnected()) {
             return null;
-        }
-        else { //if the new graph strongly connected:
+        } else { //if the new graph strongly connected:
             int size = cities.size();
-            List<List<NodeData>> allPaths = new LinkedList<>(); // list of lists of all exist path
+            List<List<NodeData>> allWays = new LinkedList<>(); // list of lists of all exist path
             double[] myDist = new double[size]; // List that will contain all the paths final weight.
 
             for (int city = 0; city < size; city++) { //loop that iter all the cities
@@ -290,27 +289,27 @@ public class GA implements DirectedWeightedGraphAlgorithms {
                                 count++;
                                 current = lowest;
 
-                            } else if (path.size() == size) {
-                                break;
-                            } else {
+                            } else if (path.size() != size) {
                                 dist[lowest] = Double.MAX_VALUE;
+                            } else {
+                                break;
                             }
                         }
                     }
 
                     if (path.size() == size) { //finish iter all the cities from the current city
-                        allPaths.add(path);
+                        allWays.add(path);
                     }
                 }
             }
 
             int chosen;
-            for (int i = 0; i < allPaths.size(); i++) {
-                myDist[i] = weightSum(allPaths.get(i));
+            for (int i = 0; i < allWays.size(); i++) {
+                myDist[i] = weightSum(allWays.get(i));
             }
             chosen = shortest(myDist);
 
-            return allPaths.get(chosen);
+            return allWays.get(chosen);
         }
     }
 
@@ -323,7 +322,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
     private double weightSum(List<NodeData> cities) {
         double Weight = 0.0;
         for (int i = 0; i <= cities.size() - 2; i++) {
-            Weight += shortestPathDist(cities.get(i).getKey(), cities.get(i + 1).getKey());
+            Weight = Weight + shortestPathDist(cities.get(i).getKey(), cities.get(i + 1).getKey());
         }
         return Weight;
     }

@@ -58,17 +58,19 @@ public class Ex2 {
     }
 
     public static void main(String[] args) {
-       // var ans = getGrapgAlgo("./json_data/G2.json");
-        var ans = getGrapgAlgo("./json_data/1000Nodes.json");
+     //   var ans = getGrapgAlgo("./json_data/G1.json");
+      //  var ans = getGrapgAlgo("./json_data/1000Nodes.json");
      //   System.out.println("daniel");
-        System.out.println(ans.center());
-//        var ans = getGrapgAlgo("./json_data/G2.json");
+    //    System.out.println(ans.center());
+//       var ans = getGrapgAlgo("./json_data/G1.json");
 //        ArrayList<String> Slist = new ArrayList<>(Arrays.asList("0,1,5,7".split(",")));
 //        ArrayList<NodeData> nodeList = new ArrayList<>();
 //        DirectedWeightedGraph graph = ans.getGraph();
 //        Slist.forEach((s) -> nodeList.add(graph.getNode(Integer.parseInt(s))));
 //
 //        System.out.println(ans.tsp(nodeList));
+
+        runGUI("./json_data/G1.json");
 
     }
 }
