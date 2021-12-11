@@ -58,6 +58,21 @@ public class Ex2 {
     }
 
     public static void main(String[] args) {
+
+        // var ans = getGrapgAlgo("./json_data/1000Nodes.json");
+        // System.out.println("daniel");
+        // System.out.println(ans.center());
+        // System.out.println(((GA) ans).bfs());
+        // לעשות bfs
+        // לוקח קודקוד אחד
+        // לבדוק שהוא הגיע לכולם
+        // אותו קודקוד לוקח עוד פעם
+        // ומפעיל bfs
+        // על הגרף ההופכי שלו
+        // מה זה אומר הופכי הופך את כל הכיוונים של הצלעות
+        // אם זה גם עובד סימן שהוא מחובר
+        runGUI("./json_data/G2.json");
+
      //   var ans = getGrapgAlgo("./json_data/G1.json");
       //  var ans = getGrapgAlgo("./json_data/1000Nodes.json");
      //   System.out.println("daniel");
@@ -71,6 +86,7 @@ public class Ex2 {
 //        System.out.println(ans.tsp(nodeList));
 
         runGUI("./json_data/G1.json");
+
 
     }
 }

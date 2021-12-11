@@ -39,8 +39,8 @@ public class G implements DirectedWeightedGraph {
         nodes.forEach((key, value) -> this.addNode(new CNode(value)));
         edges.forEach((key, edge) -> this.connect(edge.getSrc(), edge.getDest(), edge.getWeight()));
 
-
-//        edges.forEach((key, edge) -> this.connect(edge.getSrc(),  edge.getDest(), edge.getWeight()));
+        // edges.forEach((key, edge) -> this.connect(edge.getSrc(), edge.getDest(),
+        // edge.getWeight()));
         this.modeCount = 0;
         it_change = 0;
         first_time = true;
@@ -48,7 +48,6 @@ public class G implements DirectedWeightedGraph {
 
     public G(G other) {
         this.EdgesById = new HashMap<>();
-
 
         this.Nodes = new HashMap<>();
         this.Edges = new HashMap<>();
@@ -141,7 +140,6 @@ public class G implements DirectedWeightedGraph {
             modeCount++;
         }
 
-
     }
 
     /**
@@ -206,9 +204,9 @@ public class G implements DirectedWeightedGraph {
             // NodeData node = this.getNode(node_id);
             // node.setInfo("2:White");
             // this.Edges.values().forEach((Edg) -> {
-            //     if (Edg.getSrc() == node_id) {
-            //         edgeList.add(Edg);
-            //     }
+            // if (Edg.getSrc() == node_id) {
+            // edgeList.add(Edg);
+            // }
             // });
             return EdgesById.get(node_id).iterator();
         }
@@ -221,8 +219,11 @@ public class G implements DirectedWeightedGraph {
             NodeData n = new CNode(this.Nodes.get(NodeId));
             for (String key : this.Edges.keySet()) {
                 String strSrc = Integer.toString(NodeId);
-                if (key.substring(4, 5).equals(strSrc)) {
-                    removeEdge(NodeId, Integer.parseInt(key.substring(key.length() - 1)));
+                if (key.startsWith(strSrc, 4)) {
+                    removeEdge(key);
+                }
+                if (key.endsWith(strSrc)) {
+                    removeEdge(key);
                 }
             }
             this.Nodes.remove(NodeId);
@@ -233,12 +234,20 @@ public class G implements DirectedWeightedGraph {
         return null;
     }
 
+    public void removeEdge(String key) {
+        Edges.remove(key);
+        modeCount++;
+
+    }
+
+
     @Override
     public EdgeData removeEdge(int src, int dest) {
         if (Edges.containsKey("src_" + src + "_dest_" + dest)) {
             // need to check if return by value or address
             EdgeData e = new CEdge(Edges.get("src_" + src + "_dest_" + dest));
             Edges.remove("src_" + src + "_dest_" + dest);
+            this.EdgesById.get(src).removeIf(edge -> edge.getDest() == dest);
             modeCount++;
             return e;
         }
