@@ -54,9 +54,9 @@ public class Ex2 {
     }
 
     public static void main(String[] args) {
-        var ans = getGrapgAlgo("./json_data/1000Nodes.json");
-        System.out.println("daniel");
-        System.out.println(ans.center());
+        // var ans = getGrapgAlgo("./json_data/1000Nodes.json");
+        // System.out.println("daniel");
+        // System.out.println(ans.center());
         // System.out.println(((GA) ans).bfs());
         // לעשות bfs
         // לוקח קודקוד אחד
@@ -66,6 +66,6 @@ public class Ex2 {
         // על הגרף ההופכי שלו
         // מה זה אומר הופכי הופך את כל הכיוונים של הצלעות
         // אם זה גם עובד סימן שהוא מחובר
-
+        runGUI("./json_data/G2.json");
     }
 }
