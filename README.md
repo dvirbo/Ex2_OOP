@@ -56,7 +56,7 @@ create and work with Java Swing: https://www.guru99.com/java-swing-gui.html \
 Deserializing JSON: https://www.youtube.com/watch?v=HSuVtkdej8Q&t=1139s
 
 ## UML
-![src](https://user-images.githubusercontent.com/73783656/145378693-9f518c95-3c60-4ee2-921d-5b8daddfaee9.png)
+![Classes](https://user-images.githubusercontent.com/73783656/145710069-7ad8bc5d-80bb-4c25-bb4c-a927f0caa715.png)
 
 ## Main algorithmes 
 - create a grpah (it's aptional to add vertexes and edges)

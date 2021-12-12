@@ -15,7 +15,6 @@ class JsonTest {
 
     @Test
     void getGrapg() {
-        G1Json.shortestPathCenter(2, 10);
     }
 
     @Test
