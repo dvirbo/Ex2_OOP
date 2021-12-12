@@ -73,10 +73,10 @@ public class Ex2 {
         // אם זה גם עובד סימן שהוא מחובר
       //  runGUI("./json_data/G2.json");
 
-        var ans = getGrapgAlgo("./json_data/G1.json");
+        var ans = getGrapgAlgo("./json_data/1000Nodes.json");
       //  var ans = getGrapgAlgo("./json_data/1000Nodes.json");
       //  System.out.println("daniel");
-        System.out.println(ans.center());
+        System.out.println(ans.shortestPathDist(790,830));
 //       var ans = getGrapgAlgo("./json_data/G1.json");
 //        ArrayList<String> Slist = new ArrayList<>(Arrays.asList("0,1,5,7".split(",")));
 //        ArrayList<NodeData> nodeList = new ArrayList<>();

@@ -100,7 +100,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      * Computes the length of the shortest path between 2 nodes
      * we use Dijkstra algorithm to compute that.
      *
-     * @param src  - start node
+     * @param src - start node
      * @return the shortestPath if existed. ath between src to dest
      * * Note:
      */
@@ -203,24 +203,24 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         double minimumW = Double.MAX_VALUE;
         NodeData centerN = null;
         Iterator<NodeData> iter = this.graph.nodeIter();
-        while (iter.hasNext()) {
-            NodeData node = iter.next();
-            double temp = 0.0;
 
-            shortestPathCenter(node.getKey());
+        while (iter.hasNext()) {
+            NodeData src = iter.next();
+            double max = Double.MIN_VALUE;
+
+            shortestPathCenter(src.getKey());
             Iterator<NodeData> iter2 = this.graph.nodeIter();
             while (iter2.hasNext()) {
-                NodeData node2 = iter2.next();
-                if (node2.getWeight() > temp) {
-                    temp = node2.getWeight();
+                NodeData dest = iter2.next();
+                if (dest.getWeight() > max) {
+                    max = dest.getWeight();
                 }
             }
-            if (temp < minimumW) {
-                minimumW = temp;
-                centerN = node;
+            if (max < minimumW) {
+                minimumW = max;
+                centerN = src;
             }
         }
-        resetAll();//?
         return centerN;
     }
 
@@ -229,7 +229,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      * and orders its elements according to the specified comparator (the weight of the nodes).
      * the explanation to the code is inside the code
      *
-     * @param src  the id of the sre node
+     * @param src the id of the sre node
      * @return the weight (double) of the shortest path between the src and the dest
      */
     public double DijkstraCenter(NodeData src) {
@@ -262,10 +262,10 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      * the sum of the weights of all the consecutive (pairs) of nodes (directed) is
      * the "cost" of the solution - the lower, the better.
      * At first, we create a new graph that made from all the nodes that we get in the list
-     *  then check if the graph is strongly connected
-     *  We use list of lists that contain all the optional path's and check which neighbor node wil be
-     *  the closest every iteration. lie that we make path and at the end we will choose the path that have
-     *  the lowest weight.
+     * then check if the graph is strongly connected
+     * We use list of lists that contain all the optional path's and check which neighbor node wil be
+     * the closest every iteration. lie that we make path and at the end we will choose the path that have
+     * the lowest weight.
      *
      * @param cities list of nodes.
      * @return the list that have the lowest weight .
@@ -414,8 +414,6 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         }
         return false;
     }
-
-
 
 
     /**
