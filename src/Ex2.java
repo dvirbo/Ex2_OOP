@@ -59,6 +59,9 @@ public class Ex2 {
 
     public static void main(String[] args) {
 
+<<<<<<< HEAD
+        runGUI("./json_data/G1.json");
+=======
         // var ans = getGrapgAlgo("./json_data/1000Nodes.json");
         // System.out.println("daniel");
         // System.out.println(ans.center());
@@ -87,6 +90,7 @@ public class Ex2 {
 
        // runGUI("./json_data/G1.json");
 
+>>>>>>> d446a842827b5080a96ae6c0a1527cbe646e735f
 
     }
 }

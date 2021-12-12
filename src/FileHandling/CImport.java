@@ -1,7 +1,5 @@
 package FileHandling;
 
-
-
 import Classes.CEdge;
 import Classes.CNode;
 import Classes.G;
@@ -27,72 +25,77 @@ public class CImport {
     public static StoreNE importJson(String json_file) {
 
         File input = new File(json_file);
-        try {
-            JsonElement fileElement = JsonParser.parseReader(new FileReader(input));
-            JsonObject fileObject = fileElement.getAsJsonObject();
+        if (input.exists() && !input.isDirectory()) {
+            try {
+                JsonElement fileElement = JsonParser.parseReader(new FileReader(input));
+                JsonObject fileObject = fileElement.getAsJsonObject();
 
-            // process all data:
-            JsonArray jsonArrayNodes = fileObject.get("Nodes").getAsJsonArray();
-            JsonArray jsonArrayEdges = fileObject.get("Edges").getAsJsonArray();
+                // process all data:
+                JsonArray jsonArrayNodes = fileObject.get("Nodes").getAsJsonArray();
+                JsonArray jsonArrayEdges = fileObject.get("Edges").getAsJsonArray();
 
-            List<NodeData> nodes = new ArrayList<>();
-            List<EdgeData> edges = new ArrayList<>();
+                List<NodeData> nodes = new ArrayList<>();
+                List<EdgeData> edges = new ArrayList<>();
 
-            for (JsonElement jnode : jsonArrayNodes) {
-                JsonObject nodeJsonObject = jnode.getAsJsonObject();
-                String pos = null;
-                if (nodeJsonObject.has("pos")) {
-                    pos = nodeJsonObject.get("pos").getAsString();
+                for (JsonElement jnode : jsonArrayNodes) {
+                    JsonObject nodeJsonObject = jnode.getAsJsonObject();
+                    String pos = null;
+                    if (nodeJsonObject.has("pos")) {
+                        pos = nodeJsonObject.get("pos").getAsString();
+                    }
+
+                    String id = null;
+                    if (nodeJsonObject.has("id")) {
+                        id = nodeJsonObject.get("id").getAsString();
+                    }
+
+                    NodeData node = new CNode(pos, id);
+                    nodes.add(node);
                 }
 
-                String id = null;
-                if (nodeJsonObject.has("id")) {
-                    id = nodeJsonObject.get("id").getAsString();
+                /// edges
+                for (JsonElement jedge : jsonArrayEdges) {
+                    JsonObject edgeJsonObject = jedge.getAsJsonObject();
+                    String src = null;
+                    if (edgeJsonObject.has("src")) {
+                        src = edgeJsonObject.get("src").getAsString();
+                    }
+
+                    String dest = null;
+                    if (edgeJsonObject.has("dest")) {
+                        dest = edgeJsonObject.get("dest").getAsString();
+                    }
+
+                    String w = null;
+                    if (edgeJsonObject.has("w")) {
+                        w = edgeJsonObject.get("w").getAsString();
+                    }
+
+                    CEdge edge = new CEdge(Integer.parseInt(src),
+                            Integer.parseInt(dest),
+                            Double.parseDouble(w));
+                    edges.add(edge);
                 }
 
-                NodeData node = new CNode(pos, id);
-                nodes.add(node);
+                HashMap<Integer, NodeData> hp_nodes = convertNodesList(nodes);
+                HashMap<String, EdgeData> hp_edges = convertEdgesList(edges);
+
+                StoreNE ne = new StoreNE(hp_nodes, hp_edges);
+                return ne;
+
+            } catch (FileNotFoundException e) {
+                System.err.println("Error file not found ");
+                e.printStackTrace();
+            } catch (Exception e) {
+                System.err.println("Error processing input file!");
+                e.printStackTrace();
             }
-
-            /// edges
-            for (JsonElement jedge : jsonArrayEdges) {
-                JsonObject edgeJsonObject = jedge.getAsJsonObject();
-                String src = null;
-                if (edgeJsonObject.has("src")) {
-                    src = edgeJsonObject.get("src").getAsString();
-                }
-
-                String dest = null;
-                if (edgeJsonObject.has("dest")) {
-                    dest = edgeJsonObject.get("dest").getAsString();
-                }
-
-                String w = null;
-                if (edgeJsonObject.has("w")) {
-                    w = edgeJsonObject.get("w").getAsString();
-                }
-
-                CEdge edge = new CEdge(Integer.parseInt(src),
-                        Integer.parseInt(dest),
-                        Double.parseDouble(w));
-                edges.add(edge);
-            }
-
-            HashMap<Integer, NodeData> hp_nodes = convertNodesList(nodes);
-            HashMap<String, EdgeData> hp_edges = convertEdgesList(edges);
-
-            StoreNE ne = new StoreNE(hp_nodes, hp_edges);
-            return ne;
-
-        } catch (FileNotFoundException e) {
-            System.err.println("Error file not found ");
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.err.println("Error processing input file!");
-            e.printStackTrace();
+        }else{
+            System.out.println("file not found");
+            return null;
         }
-
         return null;
+        
     }
 
     public static HashMap<Integer, NodeData> convertNodesList(List<NodeData> list) {
