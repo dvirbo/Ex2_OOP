@@ -4,10 +4,7 @@ import Interfaces.DirectedWeightedGraph;
 import Interfaces.EdgeData;
 import Interfaces.NodeData;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class G implements DirectedWeightedGraph {
 
@@ -38,7 +35,7 @@ public class G implements DirectedWeightedGraph {
         this.EdgesById = new HashMap<>();
         nodes.forEach((key, value) -> {
             this.addNode(new CNode(value));
-            this.EdgesById.put(key,new ArrayList<>());
+            this.EdgesById.put(key, new ArrayList<>());
         });
         edges.forEach((key, edge) -> this.connect(edge.getSrc(), edge.getDest(), edge.getWeight()));
 
@@ -56,7 +53,7 @@ public class G implements DirectedWeightedGraph {
         this.Edges = new HashMap<>();
         other.Nodes.forEach((key, value) -> {
             this.addNode(new CNode(value));
-            this.EdgesById.put(key,new ArrayList<>());
+            this.EdgesById.put(key, new ArrayList<>());
         });
         other.Edges.forEach((key, edge) -> this.connect(edge.getSrc(), edge.getDest(), edge.getWeight()));
         this.modeCount = other.getMC();
@@ -73,7 +70,7 @@ public class G implements DirectedWeightedGraph {
         while (niter.hasNext()) {
             var node = niter.next();
             this.addNode(new CNode(node));
-            this.EdgesById.put(node.getKey(),new ArrayList<>());
+            this.EdgesById.put(node.getKey(), new ArrayList<>());
         }
         var eiter = other.edgeIter();
         while (eiter.hasNext()) {
@@ -114,7 +111,7 @@ public class G implements DirectedWeightedGraph {
             if (!Nodes.containsKey(n.getKey())) {
                 NodeData nc = new CNode(n);
                 Nodes.put(n.getKey(), nc);
-                this.EdgesById.put(n.getKey(),new ArrayList<>());
+                this.EdgesById.put(n.getKey(), new ArrayList<>());
                 modeCount++;
             }
         }
@@ -225,15 +222,17 @@ public class G implements DirectedWeightedGraph {
     public NodeData removeNode(int NodeId) {
         if (this.Nodes.containsKey(NodeId)) {
             NodeData n = new CNode(this.Nodes.get(NodeId));
-            for (String key : this.Edges.keySet()) {
-                String strSrc = Integer.toString(NodeId);
-                if (key.startsWith(strSrc, 4)) {
-                    removeEdge(key);
+            String strSrc = Integer.toString(NodeId);
+            this.Edges.keySet().removeIf((str) ->{
+             String[] arr = str.split("_");
+                if (Arrays.asList(arr).contains(strSrc)) {
+                    return true;
                 }
-                if (key.endsWith(strSrc)) {
-                    removeEdge(key);
+                if (Arrays.asList(arr).contains(strSrc)) {
+                    return true;
                 }
-            }
+                return false;
+            });
             this.Nodes.remove(NodeId);
             modeCount++;
 
@@ -245,7 +244,6 @@ public class G implements DirectedWeightedGraph {
     public void removeEdge(String key) {
         Edges.remove(key);
         modeCount++;
-
     }
 
 
