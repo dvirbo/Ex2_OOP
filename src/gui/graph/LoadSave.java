@@ -18,6 +18,8 @@ import static gui.graph.GraphPanel.lines;
 public class LoadSave {
 
     public static boolean load(GFrame frame, GraphPanel panel) {
+        GraphPanel.NodeState = "showNodeLocation";
+        GraphPanel.EdgeState = "regularEdge";
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new java.io.File("."));
         fileChooser.setDialogTitle("load");
@@ -37,7 +39,7 @@ public class LoadSave {
                 graphNodes.forEach((key, node) -> GraphPanel.points.add(node));
                 lines.clear();
                 ((G) GFrame.GFrameG).Edges.forEach((key, edge) -> {
-                    var x1 = (int) Scale.scale(GFrame.GFrameG.getNode(edge.getSrc()).getLocation().x(), minMaxVal.minX,minMaxVal.maxX, 50, GFrame.width - 70);
+                    var x1 = (int) Scale.scale(GFrame.GFrameG.getNode(edge.getSrc()).getLocation().x(), minMaxVal.minX, minMaxVal.maxX, 50, GFrame.width - 70);
                     var x2 = (int) Scale.scale(GFrame.GFrameG.getNode(edge.getDest()).getLocation().x(), minMaxVal.minX, minMaxVal.maxX, 50, GFrame.width - 70);
                     var y1 = (int) Scale.scale(GFrame.GFrameG.getNode(edge.getSrc()).getLocation().y(), minMaxVal.minY, minMaxVal.maxY, 50, GFrame.height - 150);
                     var y2 = (int) Scale.scale(GFrame.GFrameG.getNode(edge.getDest()).getLocation().y(), minMaxVal.minY, minMaxVal.maxY, 50, GFrame.height - 150);

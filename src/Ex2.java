@@ -3,12 +3,8 @@ import Classes.GA;
 import FileHandling.StoreNE;
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
-import Interfaces.NodeData;
 import gui.graph.GFrame;
 
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static FileHandling.CImport.importJson;
 
@@ -59,20 +55,8 @@ public class Ex2 {
     }
 
     public static void main(String[] args) {
-//C:\Users\Dvir\Desktop\LargeConnectedGraphs
-         //  var ans = getGrapgAlgo("C:\\Users\\Dvir\\Desktop\\LargeConnectedGraphs/1000Nodes.json");
-         var ans = getGrapgAlgo("./json_data/G2.json");
-          // System.out.println("daniel");
-            System.out.println(ans.center());
-//0,1,5,7
-//       var ans = getGrapgAlgo("./json_data/G1.json");
-//        ArrayList<String> Slist = new ArrayList<>(Arrays.asList("0,1,5,7".split(",")));
-//        ArrayList<NodeData> nodeList = new ArrayList<>();
-//        DirectedWeightedGraph graph = ans.getGraph();
-//        Slist.forEach((s) -> nodeList.add(graph.getNode(Integer.parseInt(s))));
-//
-//        System.out.println(ans.tsp(nodeList));
-     //   runGUI("./json_data/G1.json");
+
+        runGUI(args[0]);
 
 
     }

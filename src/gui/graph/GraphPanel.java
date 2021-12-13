@@ -22,7 +22,7 @@ public class GraphPanel extends JPanel {
     static public List<NodeData> shortedPathNodes = new ArrayList<>();
     static public List<NodeData> nodesTsp = new ArrayList<>();
     static public HashMap<Integer, NodeData> graphNodes = new HashMap<>();
-    static public String NodeState = "regularNode";
+    static public String NodeState = "showNodeLocation";
     static public String EdgeState = "regularEdge";
     public String message ;
 
