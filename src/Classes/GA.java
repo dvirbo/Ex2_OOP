@@ -96,25 +96,6 @@ public class GA implements DirectedWeightedGraphAlgorithms {
     }
 
 
-    /**
-     * Computes the length of the shortest path between 2 nodes
-     * we use Dijkstra algorithm to compute that.
-     *
-     * @param src - start node
-     * @return the shortestPath if existed. ath between src to dest
-     * * Note:
-     */
-    public double shortestPathCenter(int src) {
-
-        resetWeightInfo();
-
-        double ans = DijkstraCenter(this.graph.getNode(src));
-        if (ans == Double.MAX_VALUE) {
-            return -1;
-        }
-        return ans;
-    }
-
     private double DijkstraDist(NodeData src, NodeData dest) {
 
         double shortestPath = Double.MAX_VALUE;
@@ -191,37 +172,44 @@ public class GA implements DirectedWeightedGraphAlgorithms {
     /**
      * Finds the NodeData which minimizes the max distance to all the other nodes.
      * Assuming the graph isConnected, else return null.
-     * source: https://codeforces.com/blog/entry/17974
      *
      * @return the Node data which have max the shortest path to all the other node is minimized.
      */
-    @Override
     public NodeData center() {
         if (!isConnected()) {
             return null;
         }
-        double minimumW = Double.MAX_VALUE;
-        NodeData centerN = null;
-        Iterator<NodeData> iter = this.graph.nodeIter();
+        Iterator<NodeData> nodeIter = graph.nodeIter();
+        NodeData ans = graph.getNode(0);
+        double minDist = Integer.MAX_VALUE;
 
-        while (iter.hasNext()) {
-            NodeData src = iter.next();
-            double max = Double.MIN_VALUE;
-
-            shortestPathCenter(src.getKey());
-            Iterator<NodeData> iter2 = this.graph.nodeIter();
-            while (iter2.hasNext()) {
-                NodeData dest = iter2.next();
-                if (dest.getWeight() > max) {
-                    max = dest.getWeight();
-                }
-            }
-            if (max < minimumW) {
-                minimumW = max;
-                centerN = src;
+        while (nodeIter.hasNext()) {
+            NodeData pointerNode = nodeIter.next();
+            double maxDist = maxPath(pointerNode.getKey());//return the max weight
+            if (maxDist < minDist) {
+                minDist = maxDist;
+                ans = pointerNode;
             }
         }
-        return centerN;
+        return ans;
+    }
+
+    /**
+     * calc the max path by using DijkstraCenter from the src node
+     * @param src node
+     * @return the max weight of path
+     */
+    private double maxPath(int src) {
+        double maxWeight = Integer.MIN_VALUE;
+        DijkstraCenter(this.graph.getNode(src));
+        Iterator<NodeData> nodeIter = this.graph.nodeIter();
+        while (nodeIter.hasNext()) {
+            double currWeight = nodeIter.next().getWeight();
+            if (currWeight > maxWeight) {
+                maxWeight = currWeight;
+            }
+        }
+        return maxWeight;
     }
 
     /**
@@ -233,7 +221,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      * @return the weight (double) of the shortest path between the src and the dest
      */
     public double DijkstraCenter(NodeData src) {
-
+        resetAll();
         double shortestPath = Double.MAX_VALUE;
         PriorityQueue<NodeData> pq = new PriorityQueue<>(this.graph.nodeSize(), Comparator.comparingDouble(NodeData::getWeight));
         src.setWeight(0.0); //init the src node
@@ -261,131 +249,52 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      * Computes a list of consecutive nodes which go over all the nodes in cities.
      * the sum of the weights of all the consecutive (pairs) of nodes (directed) is
      * the "cost" of the solution - the lower, the better.
-     * At first, we create a new graph that made from all the nodes that we get in the list
-     * then check if the graph is strongly connected
-     * We use list of lists that contain all the optional path's and check which neighbor node wil be
-     * the closest every iteration. lie that we make path and at the end we will choose the path that have
-     * the lowest weight.
      *
      * @param cities list of nodes.
      * @return the list that have the lowest weight .
      */
     @Override
     public List<NodeData> tsp(List<NodeData> cities) {
-        boolean check = subConnected(cities);
 
-        if (!check) {
-            return null;
-        } else { //if the new graph strongly connected:
-            int size = cities.size();
-            List<List<NodeData>> allWays = new LinkedList<>(); // list of lists of all exist path
-            double[] myDist = new double[size]; // List that will contain all the paths final weight.
-
-            for (int city = 0; city < size; city++) { //loop that iter all the cities
-                int current = city; //the current city
-                List<NodeData> path = new LinkedList<>(); //list of the curr path that we check
-                double[] dist = new double[size]; //array that contain all the final weight of the path
-                int temp;
-                int count = 0; // counter to check if we iter all the cities
-                NodeData ptr = cities.get(current); //
-                path.add(ptr);//add the first node (0)
-                while (count < size && path.size() < size) {
-                    // ptr = cities.get(current);
-                    temp = current; //
-                    for (int i = 0; i < size; i++) {
-                        int src = ptr.getKey();
-                        int dest = cities.get(i).getKey();
-                        if (src != dest) { // to avoid calc the path between same node
-                            dist[i] = shortestPathDist(src, dest);
-                        } else {
-                            dist[i] = Double.MAX_VALUE; //same node..
-                        }
-
-                        while (current == temp) {
-                            int lowest = shortest(dist); //take the closest city
-                            if (!path.contains(cities.get(lowest))) { //if the city isn't in the list-
-                                path.add(cities.get(lowest));
-                                count++;
-                                current = lowest;
-
-                            } else if (path.size() != size) {
-                                dist[lowest] = Double.MAX_VALUE;
-                            } else {
-                                break;
-                            }
-                        }
-                    }
-
-                    if (path.size() == size) { //finish iter all the cities from the current city
-                        allWays.add(path);
-                    }
-                }
+        List<NodeData> bestWay = new ArrayList<>();
+        NodeData pointerNode = cities.remove(0);
+        bestWay.add(pointerNode);
+        while (!cities.isEmpty()) { //check if we iter all the cities
+            NodeData chosen = findPath(cities, pointerNode.getKey()); //return the closest node to src
+            if (chosen != pointerNode) {
+                List<NodeData> path = shortestPath(pointerNode.getKey(), chosen.getKey());
+                path.remove(0); //because we start with 0
+                bestWay.addAll(path); //add the list that we got
+                cities.remove(chosen);
+                pointerNode = chosen;
+            } else {
+                return null; // there isn't path
             }
-
-            int chosen;
-            for (int i = 0; i < allWays.size(); i++) {
-                myDist[i] = weightSum(allWays.get(i));
-            }
-            chosen = shortest(myDist);
-
-            return allWays.get(chosen);
         }
+
+        return bestWay;
+
     }
 
+
     /**
-     * this method check if there is a path between each node to other in the list of the nodes that we got
-     * id there isn't - we can't generate any path and return false.
-     * we check from the first node to all the other and then from all the other to him
-     * @param cities - list of nodes
-     * @return true - if there is path in the graph
+     * this method choose the closest node that in the list to the src node by using Dijkstra
+     *
+     * @param cities list of nodes
+     * @param src    the node that check
+     * @return the closest node from the list
      */
-    private boolean subConnected(List<NodeData> cities) {
-        boolean ans = true;
-        double exist = 0.0;
-        int p = cities.get(0).getKey(); //first node in the list
-        for (int i = 1; i < cities.size(); i++) {
-            exist = shortestPathDist(p, cities.get(i).getKey());
-            if (exist <= 0) {
-                ans = false;
-            }
-        }
-        for (int j = 1; j < cities.size(); j++) {
-            exist = shortestPathDist(cities.get(j).getKey(), p);
-            if (exist <= 0) {
-                ans = false;
+    private NodeData findPath(List<NodeData> cities, int src) {
+        double min = Integer.MAX_VALUE;
+        DijkstraCenter(this.graph.getNode(src));
+        NodeData ans = this.graph.getNode(src);
+        for (NodeData node : cities) {
+            if (node.getWeight() < min) {
+                min = node.getWeight();
+                ans = node;
             }
         }
         return ans;
-    }
-
-    /**
-     * calculate the total Weight of path
-     *
-     * @param cities list of nodes.
-     * @return sum of the weight.
-     */
-    private double weightSum(List<NodeData> cities) {
-        double Weight = 0.0;
-        for (int i = 0; i <= cities.size() - 2; i++) {
-            Weight = Weight + shortestPathDist(cities.get(i).getKey(), cities.get(i + 1).getKey());
-        }
-        return Weight;
-    }
-
-    /**
-     * @param dist - array that contain all the final weight of the path
-     * @return index that contain the lowest number.
-     */
-    private int shortest(double[] dist) {
-        double check = dist[0];
-        int lowest = 0;
-        for (int i = 1; i < dist.length; i++) {
-            if (dist[i] < check) {
-                check = dist[i];
-                lowest = i;
-            }
-        }
-        return lowest;
     }
 
     /**
@@ -444,7 +353,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
             while (it.hasNext()) {
                 var edge = it.next();
                 var edgeNeighbor = edge.getDest();
-                NodeData AdjNode = this.graph.getNode(edgeNeighbor ); //get the neighbor nodes
+                NodeData AdjNode = this.graph.getNode(edgeNeighbor); //get the neighbor nodes
                 if (AdjNode.getTag() == -1) { //check his tag - if we didn't visit yet:
                     AdjNode.setTag(1); //change to visit
                     queue.add(AdjNode);
