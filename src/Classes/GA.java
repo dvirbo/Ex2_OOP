@@ -272,27 +272,9 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      */
     @Override
     public List<NodeData> tsp(List<NodeData> cities) {
-        G gTsp = new G(); //build new graph
-        var keysCities = new ArrayList<Integer>();
-        cities.forEach((node) -> {  //iterate all the nodes in the list
-            gTsp.addNode(new CNode(node));
-            keysCities.add(node.getKey());
-        });
+        boolean check = subConnected(cities);
 
-        cities.forEach((node) -> {  //iterate all the nodes in the list
-            Iterator<EdgeData> iter = this.graph.edgeIter(node.getKey());
-            while (iter.hasNext()) { //iter all the
-                EdgeData e = iter.next();
-                cities.forEach((city) -> {
-                    if (city.getKey() == e.getDest()) { // if cities contain the dest
-                        gTsp.connect(e.getSrc(), e.getDest(), e.getWeight());
-                    }
-                });
-            }
-        });
-        GA gaTsp = new GA();
-        gaTsp.init(gTsp);
-        if (!gaTsp.isConnected()) {
+        if (!check) {
             return null;
         } else { //if the new graph strongly connected:
             int size = cities.size();
@@ -348,6 +330,32 @@ public class GA implements DirectedWeightedGraphAlgorithms {
 
             return allWays.get(chosen);
         }
+    }
+
+    /**
+     * this method check if there is a path between each node to other in the list of the nodes that we got
+     * id there isn't - we can't generate any path and return false
+     * we check from the first node to all the other and then from all the other to him
+     * @param cities - list of nodes
+     * @return true - if there is path in the graph
+     */
+    private boolean subConnected(List<NodeData> cities) {
+        boolean ans = true;
+        double exist = 0.0;
+        int p = cities.get(0).getKey(); //first node in the list
+        for (int i = 1; i < cities.size(); i++) {
+            exist = shortestPathDist(p, cities.get(i).getKey());
+            if (exist <= 0) {
+                ans = false;
+            }
+        }
+        for (int j = 1; j < cities.size(); j++) {
+            exist = shortestPathDist(cities.get(j).getKey(), p);
+            if (exist <= 0) {
+                ans = false;
+            }
+        }
+        return ans;
     }
 
     /**

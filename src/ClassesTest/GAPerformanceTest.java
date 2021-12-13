@@ -46,8 +46,8 @@ class GAPerformanceTest {
         List<NodeData> list4 = new LinkedList<>();
         list4.add(GAlgo.getGraph().getNode(0));
         list4.add(GAlgo.getGraph().getNode(1));
-        list4.add(GAlgo.getGraph().getNode(5));
-        list4.add(GAlgo.getGraph().getNode(17));
+        list4.add(GAlgo.getGraph().getNode(2));
+        list4.add(GAlgo.getGraph().getNode(3));
         List<NodeData> ans =  GAlgo.tsp(list4);
         System.out.println(ans.toString());
 
