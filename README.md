@@ -3,21 +3,21 @@
 The theme of the project is  Design and implementation of directed and weighted graphs in Java.\
 the project contain six packages:
 
-           Interfaces: contain all the Interfaces that we implemented - 
-            NodeData: This interface represents the set of operations applicable on a node (vertex) in a (directional) weighted graph.
-            EdgeData: represents the set of operations applicable on a directional edge(src,dest) in a (directional) weighted graph.
-            GeoLocation: represents a geo location <x,y,z>, (aka Point3D).
-            DirectedWeightedGraph: represents a Directional Weighted Graph.
-            DirectedWeightedGraphAlgorithms: represents a Directed (positive) Weighted Graph with Different algorithms.
+- Interfaces: contain all the Interfaces that we implemented - 
+- NodeData: This interface represents the set of operations applicable on a node (vertex) in a (directional) weighted graph.
+- EdgeData: represents the set of operations applicable on a directional edge(src,dest) in a (directional) weighted graph.
+- GeoLocation: represents a geo location <x,y,z>, (aka Point3D).
+- DirectedWeightedGraph: represents a Directional Weighted Graph.
+-  DirectedWeightedGraphAlgorithms: represents a Directed (positive) Weighted Graph with Different algorithms.
 
-        Classes: the heart of the project - 
-            CEdge: implement EdgeData. 
-            CNode: implement NodeData.
-            CGeo: implement GeoLocation.
-            G: implement DirectedWeightedGraph.
-            GA: implement DirectedWeightedGraphAlgorithms.
+### Classes: the heart of the project - 
+- CEdge: implement EdgeData. 
+- CNode: implement NodeData.
+- CGeo: implement GeoLocation.
+- G: implement DirectedWeightedGraph.
+- GA: implement DirectedWeightedGraphAlgorithms.
         
-        ClassesTest: Junit 5 test to all the above Classes.
+- ClassesTest: Junit 5 test to all the above Classes.
 
 
 Last but not least, Ex2: the main class for Ex2 - the implementation will be tested using this class.
@@ -56,12 +56,12 @@ src
 3. Submit form: https://docs.google.com/forms/d/e/1FAIpQLScmgk5yGtBSPvkb1YitSogv7quqSo8HqY-vKcEq656Yh9oRAg/viewform?usp=sf_link
 4. Ex2 all submitted: https://docs.google.com/spreadsheets/d/1Is8cuBjo1bOAvPoeLIQ5VCLWvlilEAOzVzv6tbIt-u8/edit?usp=sharing
 
-## Documentation
+## Bibliography
 
-center implementation https://codeforces.com/blog/entry/17974
-Graph Implementation in Java using HashMap: https://progressivecoder.com/graph-implementation-in-java-using-hashmap \
-create and work with Java Swing: https://www.guru99.com/java-swing-gui.html \
-Deserializing JSON: https://www.youtube.com/watch?v=HSuVtkdej8Q&t=1139s
+1. center implementation https://codeforces.com/blog/entry/17974
+2. Graph Implementation in Java using HashMap: https://progressivecoder.com/graph-implementation-in-java-using-hashmap 
+3. create and work with Java Swing: https://www.guru99.com/java-swing-gui.html \
+4. Deserializing JSON: https://www.youtube.com/watch?v=HSuVtkdej8Q&t=1139s
 
 ## UML
 ![Classes](https://user-images.githubusercontent.com/73783656/145710069-7ad8bc5d-80bb-4c25-bb4c-a927f0caa715.png)
