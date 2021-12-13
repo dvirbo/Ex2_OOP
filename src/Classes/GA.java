@@ -117,7 +117,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
 
     private double DijkstraDist(NodeData src, NodeData dest) {
 
-        double shortestPath = Integer.MAX_VALUE;
+        double shortestPath = Double.MAX_VALUE;
         PriorityQueue<NodeData> pq = new PriorityQueue<>(this.graph.nodeSize(), Comparator.comparingDouble(NodeData::getWeight));
         src.setWeight(0.0); //init the src node
         pq.add(src);
@@ -173,7 +173,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         resetTags();
         resetWeight();
         double d = DijkstraDist(this.graph.getNode(src), this.graph.getNode(dest));
-        if (d != Integer.MAX_VALUE) {
+        if (d != Double.MAX_VALUE) {
             int stop = this.graph.getNode(src).getKey(); // were to stop - when we get to the src node
             int ptr = this.graph.getNode(dest).getKey(); // start from the last node
             while (ptr != stop) {
@@ -234,7 +234,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
      */
     public double DijkstraCenter(NodeData src) {
 
-        double shortestPath = Integer.MAX_VALUE;
+        double shortestPath = Double.MAX_VALUE;
         PriorityQueue<NodeData> pq = new PriorityQueue<>(this.graph.nodeSize(), Comparator.comparingDouble(NodeData::getWeight));
         src.setWeight(0.0); //init the src node
         pq.add(src);
@@ -431,9 +431,12 @@ public class GA implements DirectedWeightedGraphAlgorithms {
         queue.add(n);
         while (!queue.isEmpty()) { //contain all the nodes that we need to check
             NodeData np = queue.poll();
-            Iterator<EdgeData> it = this.graph.edgeIter(np.getKey());
+            var key = np.getKey();
+            Iterator<EdgeData> it = this.graph.edgeIter(key);
             while (it.hasNext()) {
-                NodeData AdjNode = this.graph.getNode(it.next().getDest()); //get the neighbor nodes
+                var edge = it.next();
+                var edgeNeighbor = edge.getDest();
+                NodeData AdjNode = this.graph.getNode(edgeNeighbor ); //get the neighbor nodes
                 if (AdjNode.getTag() == -1) { //check his tag - if we didn't visit yet:
                     AdjNode.setTag(1); //change to visit
                     queue.add(AdjNode);

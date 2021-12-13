@@ -6,12 +6,13 @@ import Classes.G;
 import Classes.GA;
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
+import Interfaces.NodeData;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.util.ArrayList;
+
 
 import static gui.buttons.MenuBarExample.scaleImageIcon;
 
@@ -22,9 +23,9 @@ public class GFrame extends JFrame implements ActionListener {
     GraphPanel panel;
     JMenuBar menuBar;
     JMenu fileMenu;
-     JMenu NodeMenu;
-     JMenu EdgeMenu;
-     JMenu AlgoMenu;
+    JMenu NodeMenu;
+    JMenu EdgeMenu;
+    JMenu AlgoMenu;
     // JMenu helpMenu;
     ImageIcon loadIcon;
     ImageIcon saveIcon;
@@ -136,7 +137,7 @@ public class GFrame extends JFrame implements ActionListener {
         exitItem.setIcon(exitIcon);
 
         this.setJMenuBar(menuBar);
-        
+
         fileMenu.add(loadItem);
         fileMenu.add(saveItem);
         fileMenu.add(exitItem);
@@ -162,6 +163,7 @@ public class GFrame extends JFrame implements ActionListener {
 
         this.setVisible(true);
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -195,7 +197,10 @@ public class GFrame extends JFrame implements ActionListener {
         }
         // ******** */
         if (e.getSource() == centerItem) {
-
+            JOptionPane.showMessageDialog(null, "finding center", "center", JOptionPane.PLAIN_MESSAGE);
+            GraphPanel.centerNode = GFrame.GFrameGA.center();
+            GraphPanel.NodeState = "showCenterNode";
+            repaint();
         }
         // ******** */
         if (e.getSource() == explainItem) {
@@ -204,11 +209,10 @@ public class GFrame extends JFrame implements ActionListener {
         // ******** */
         if (e.getSource() == addNodeItem) {
             int key = Integer.parseInt(JOptionPane.showInputDialog("key :  ? "));
-            double x =  Double.parseDouble(JOptionPane.showInputDialog(" x :  ? "));
-            double y =  Double.parseDouble(JOptionPane.showInputDialog(" y :  ? "));
-            Change.addNode(key,x,y);
+            double x = Double.parseDouble(JOptionPane.showInputDialog(" x :  ? "));
+            double y = Double.parseDouble(JOptionPane.showInputDialog(" y :  ? "));
+            Change.addNode(key, x, y);
             repaint();
-
         }
         // ******** */
         if (e.getSource() == removeNodeItem) {
@@ -243,24 +247,44 @@ public class GFrame extends JFrame implements ActionListener {
         if (e.getSource() == removeEdgeItem) {
             int src = Integer.parseInt(JOptionPane.showInputDialog("src :  ? "));
             int dest = Integer.parseInt(JOptionPane.showInputDialog(" dest :  ? "));
-            Change.removeEdge( src, dest);
+            Change.removeEdge(src, dest);
             repaint();
         }
         // ******** */
         if (e.getSource() == shortestPathDistItem) {
-
+            int src = Integer.parseInt(JOptionPane.showInputDialog("src :  ? "));
+            int dest = Integer.parseInt(JOptionPane.showInputDialog(" dest :  ? "));
+            double result = GFrame.GFrameGA.shortestPathDist(src, dest);
+            if ((int) Math.floor(result) != -1) {
+                JOptionPane.showMessageDialog(null, "result : " + String.valueOf(result), "shortest path dist ()", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, " no Path ", "shortest path dist ()", JOptionPane.WARNING_MESSAGE);
+            }
         }
         // ******** */
         if (e.getSource() == isConnectedItem) {
-
+            if (GFrame.GFrameGA.isConnected()) {
+                JOptionPane.showMessageDialog(null, "Graph connected", "is connected ()", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Graph Not! connected", "is connected ()", JOptionPane.WARNING_MESSAGE);
+            }
         }
         // ******** */
         if (e.getSource() == shortestPathItem) {
+            int src = Integer.parseInt(JOptionPane.showInputDialog("src :  ? "));
+            int dest = Integer.parseInt(JOptionPane.showInputDialog(" dest :  ? "));
+            var result = GFrame.GFrameGA.shortestPath(src, dest);
+            GraphPanel.shortedPathNodes = result;
+            GraphPanel.NodeState = "showShortestPathNode";
+            repaint();
 
         }
         // ******** */
         if (e.getSource() == tspItem) {
-
+            String input = (JOptionPane.showInputDialog("insert Id seperated by comma : for example : 1,2,3 "));
+            tspCalc.tspCalc(input);
+            GraphPanel.NodeState ="showTspNode";
+            repaint();
         }
         // ******** */
         if (e.getSource() == regularNodeViewItem) {
