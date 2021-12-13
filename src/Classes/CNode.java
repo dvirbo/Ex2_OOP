@@ -13,7 +13,7 @@ public class CNode implements NodeData {
     private String info;
     private int tag;
 
-    public CNode(int uniqueKey, CGeo g, double weight, String info, int tag) {
+    public CNode(int uniqueKey, CGeo g, double weight, String info, int tag ) {
         this.key = uniqueKey;
         this.location = new CGeo(g);
         this.weight = weight;
@@ -99,32 +99,32 @@ public class CNode implements NodeData {
     }
 
 
-    /**
-     * @param o - an Object.
-     * @return true if the arguments are equal to each other and false otherwise.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        CNode node = (CNode) o;
-        return key == node.key &&
-                Double.compare(node.weight, weight) == 0 &&
-                tag == node.tag &&
-                Objects.equals(location, node.location) &&
-                Objects.equals(info, node.info);
-    }
+   /**
+    * @param o - an Object.
+    * @return true if the arguments are equal to each other and false otherwise.
+    */
+   @Override
+   public boolean equals(Object o) {
+       if (this == o)
+           return true;
+       if (o == null || getClass() != o.getClass())
+           return false;
+       CNode node = (CNode) o;
+       return key == node.key &&
+               Double.compare(node.weight, weight) == 0 &&
+               tag == node.tag &&
+               Objects.equals(location, node.location) &&
+               Objects.equals(info, node.info);
+   }
 
-    /**
-     * Override hashcode
-     *
-     * @return hashcode.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(key, location.x(), location.y(), location.z(), weight, info, tag);
-    }
+   /**
+    * Override hashcode
+    *
+    * @return hashcode.
+    */
+   @Override
+   public int hashCode() {
+       return Objects.hash(key, location.x(), location.y(), location.z(), weight, info, tag);
+   }
 
 }

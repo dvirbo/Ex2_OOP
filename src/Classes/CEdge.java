@@ -85,22 +85,22 @@ public class CEdge implements EdgeData {
         '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CEdge edge = (CEdge) o;
-        return src == edge.src &&
-                dest == edge.dest &&
-                Double.compare(edge.w, w) == 0 &&
-                tag == edge.tag &&
-                Objects.equals(info, edge.info);
-    }
+   @Override
+   public boolean equals(Object o) {
+       if (this == o) return true;
+       if (o == null || getClass() != o.getClass()) return false;
+       CEdge edge = (CEdge) o;
+       return src == edge.src &&
+               dest == edge.dest &&
+               Double.compare(edge.w, w) == 0 &&
+               tag == edge.tag &&
+               Objects.equals(info, edge.info);
+   }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(src, dest, w, info, tag);
-    }
+   @Override
+   public int hashCode() {
+       return Objects.hash(src, dest, w, info, tag);
+   }
 
 
 }
