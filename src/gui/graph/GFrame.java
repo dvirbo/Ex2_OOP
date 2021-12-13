@@ -6,12 +6,10 @@ import Classes.G;
 import Classes.GA;
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
-import Interfaces.NodeData;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 
 import static gui.buttons.MenuBarExample.scaleImageIcon;
@@ -26,7 +24,6 @@ public class GFrame extends JFrame implements ActionListener {
     JMenu NodeMenu;
     JMenu EdgeMenu;
     JMenu AlgoMenu;
-    // JMenu helpMenu;
     ImageIcon loadIcon;
     ImageIcon saveIcon;
     ImageIcon exitIcon;
@@ -34,10 +31,7 @@ public class GFrame extends JFrame implements ActionListener {
     JMenuItem loadItem;
     JMenuItem saveItem;
     JMenuItem exitItem;
-    JMenuItem redEdgeItem;
-    JMenuItem BlueEdgeItem;
     JMenuItem centerItem;
-    JMenuItem explainItem;
     JMenuItem addNodeItem;
     JMenuItem removeNodeItem;
     JMenuItem showEdgeWeightItem;
@@ -94,10 +88,7 @@ public class GFrame extends JFrame implements ActionListener {
         loadItem = new JMenuItem("Load");
         saveItem = new JMenuItem("Save");
         exitItem = new JMenuItem("Exit");
-        redEdgeItem = new JMenuItem("show red Edge");
-        BlueEdgeItem = new JMenuItem("show blue Edge");
         centerItem = new JMenuItem("center ()");
-        explainItem = new JMenuItem("explain the color");
         addNodeItem = new JMenuItem("add Node()");
         removeNodeItem = new JMenuItem("remove Node()");
         showEdgeWeightItem = new JMenuItem("show edges weight");
@@ -114,10 +105,7 @@ public class GFrame extends JFrame implements ActionListener {
         loadItem.addActionListener(this);
         saveItem.addActionListener(this);
         exitItem.addActionListener(this);
-        redEdgeItem.addActionListener(this);
-        BlueEdgeItem.addActionListener(this);
         centerItem.addActionListener(this);
-        explainItem.addActionListener(this);
         addNodeItem.addActionListener(this);
         removeNodeItem.addActionListener(this);
         showEdgeWeightItem.addActionListener(this);
@@ -187,15 +175,7 @@ public class GFrame extends JFrame implements ActionListener {
         if (e.getSource() == exitItem) {
             System.exit(0);
         }
-        // ************** */
-        if (e.getSource() == redEdgeItem) {
 
-        }
-        // ******** */
-        if (e.getSource() == BlueEdgeItem) {
-
-        }
-        // ******** */
         if (e.getSource() == centerItem) {
             JOptionPane.showMessageDialog(null, "finding center", "center", JOptionPane.PLAIN_MESSAGE);
             GraphPanel.centerNode = GFrame.GFrameGA.center();
@@ -203,10 +183,7 @@ public class GFrame extends JFrame implements ActionListener {
             repaint();
         }
         // ******** */
-        if (e.getSource() == explainItem) {
 
-        }
-        // ******** */
         if (e.getSource() == addNodeItem) {
             int key = Integer.parseInt(JOptionPane.showInputDialog("key :  ? "));
             double x = Double.parseDouble(JOptionPane.showInputDialog(" x :  ? "));
@@ -256,7 +233,7 @@ public class GFrame extends JFrame implements ActionListener {
             int dest = Integer.parseInt(JOptionPane.showInputDialog(" dest :  ? "));
             double result = GFrame.GFrameGA.shortestPathDist(src, dest);
             if ((int) Math.floor(result) != -1) {
-                JOptionPane.showMessageDialog(null, "result : " + String.valueOf(result), "shortest path dist ()", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "result : " + result, "shortest path dist ()", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, " no Path ", "shortest path dist ()", JOptionPane.WARNING_MESSAGE);
             }
@@ -273,16 +250,15 @@ public class GFrame extends JFrame implements ActionListener {
         if (e.getSource() == shortestPathItem) {
             int src = Integer.parseInt(JOptionPane.showInputDialog("src :  ? "));
             int dest = Integer.parseInt(JOptionPane.showInputDialog(" dest :  ? "));
-            var result = GFrame.GFrameGA.shortestPath(src, dest);
-            GraphPanel.shortedPathNodes = result;
+            GraphPanel.shortedPathNodes = GFrame.GFrameGA.shortestPath(src, dest);
             GraphPanel.NodeState = "showShortestPathNode";
             repaint();
 
         }
         // ******** */
         if (e.getSource() == tspItem) {
-            String input = (JOptionPane.showInputDialog("insert Id seperated by comma : for example : 1,2,3 "));
-            tspCalc.tspCalc(input);
+            String input = (JOptionPane.showInputDialog("insert Id separated by comma : for example : 1,2,3 "));
+            tspCalc.tspConvert(input);
             GraphPanel.NodeState ="showTspNode";
             repaint();
         }

@@ -3,11 +3,8 @@ import Classes.GA;
 import FileHandling.StoreNE;
 import Interfaces.DirectedWeightedGraph;
 import Interfaces.DirectedWeightedGraphAlgorithms;
-import Interfaces.NodeData;
 import gui.graph.GFrame;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static FileHandling.CImport.importJson;
 

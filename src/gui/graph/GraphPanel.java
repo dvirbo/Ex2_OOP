@@ -18,18 +18,13 @@ public class GraphPanel extends JPanel {
     public static final int ARR_SIZE = 4;
     static public LinkedList<NodeData> points = new LinkedList<>();
     static public LinkedList<Line> lines = new LinkedList<>();
-    static public boolean redEdges;
-    static public boolean blueEdges;
-    static public boolean showNodeIndex;
     static public NodeData centerNode;
-    static public boolean showEdgesWeight;
-    static public boolean showNodeGeoLocation;
     static public List<NodeData> shortedPathNodes = new ArrayList<>();
     static public List<NodeData> nodesTsp = new ArrayList<>();
     static public HashMap<Integer, NodeData> graphNodes = new HashMap<>();
     static public String NodeState = "regularNode";
     static public String EdgeState = "regularEdge";
-    public String message = "";
+    public String message ;
 
     public GraphPanel() {
         super();
@@ -40,9 +35,7 @@ public class GraphPanel extends JPanel {
             message = "";
             graphNodes = ((G) GFrame.GFrameG).Nodes;
             minMaxVal.getBorderValues();
-            graphNodes.forEach((key, node) -> {
-                points.add(node);
-            });
+            graphNodes.forEach((key, node) -> points.add(node));
             ((G) GFrame.GFrameG).Edges.forEach((key, edge) -> {
                 var x1 = (int) Scale.scale(GFrame.GFrameG.getNode(edge.getSrc()).getLocation().x(), minMaxVal.minX, minMaxVal.maxX, 50, GFrame.width - 70);
                 var x2 = (int) Scale.scale(GFrame.GFrameG.getNode(edge.getDest()).getLocation().x(), minMaxVal.minX, minMaxVal.maxX, 50, GFrame.width - 70);
@@ -61,46 +54,21 @@ public class GraphPanel extends JPanel {
         g.setColor(Color.black);
 
         switch (NodeState) {
-            case "regularNode":
-                DrawNode.drawNodesRegular(g);
-                break;
-            case "showNodeID":
-                DrawNode.drawNodesID(g);
-                break;
-            case "showNodeLocation":
-                DrawNode.drawNodesGeoLocation(g);
-                break;
-            case "showCenterNode":
-                DrawNode.drawNodesCenter(g);
-                break;
-            case "showShortestPathNode":
-                DrawTspShortestPath.ShortestPathDraw(g);
-                break;
-                case "showTspNode":
-                DrawTspShortestPath.TspDraw(g);
-                break;
-            default:
-                break;
+            case "regularNode" -> DrawNode.drawNodesRegular(g);
+            case "showNodeID" -> DrawNode.drawNodesID(g);
+            case "showNodeLocation" -> DrawNode.drawNodesGeoLocation(g);
+            case "showCenterNode" -> DrawNode.drawNodesCenter(g);
+            case "showShortestPathNode" -> DrawTspShortestPath.ShortestPathDraw(g);
+            case "showTspNode" -> DrawTspShortestPath.TspDraw(g);
+            default -> {
+            }
         }
 
         switch (EdgeState) {
-            case "regularEdge":
-                DrawEdges.drawEdgesRegular(g);
-                break;
-            case "showRedEdges":
-                // drawNodesID(g);
-                break;
-            case "showBlueEdges":
-                // drawNodesGeoLocation(g);
-                break;
-            case "showEdgesWeight":
-                DrawEdges.drawEdgesWeight(g);
-                break;
-            case "showAllColor":
-                // drawNodesGeoLocation(g);
-                break;
-            default:
-                break;
+            case "regularEdge" -> DrawEdges.drawEdgesRegular(g);
+            case "showEdgesWeight" -> DrawEdges.drawEdgesWeight(g);
+            default -> {
+            }
         }
 
     }
