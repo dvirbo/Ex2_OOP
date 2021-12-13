@@ -34,9 +34,7 @@ public class LoadSave {
                 GraphPanel.points.clear();
                 HashMap<Integer, NodeData> graphNodes = ((G) GFrame.GFrameG).Nodes;
                 minMaxVal.getBorderValues();
-                graphNodes.forEach((key, node) -> {
-                    GraphPanel.points.add(node);
-                });
+                graphNodes.forEach((key, node) -> GraphPanel.points.add(node));
                 lines.clear();
                 ((G) GFrame.GFrameG).Edges.forEach((key, edge) -> {
                     var x1 = (int) Scale.scale(GFrame.GFrameG.getNode(edge.getSrc()).getLocation().x(), minMaxVal.minX,minMaxVal.maxX, 50, GFrame.width - 70);

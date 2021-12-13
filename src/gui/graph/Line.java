@@ -5,7 +5,7 @@ public class Line {
     public double x2;
     public double y1;
     public double y2;
-    public String w = "";
+    public String w;
 
     public Line(double x1, double x2, double y1, double y2, double w) {
         this.x1 = x1;

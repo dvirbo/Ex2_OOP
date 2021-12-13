@@ -1,14 +1,13 @@
 package gui.graph;
 
-import java.util.HashMap;
-
 import Classes.CGeo;
 import Classes.CNode;
 import Classes.G;
 import Classes.GA;
-import Interfaces.DirectedWeightedGraph;
 import Interfaces.NodeData;
 import gui.Scale;
+
+import java.util.HashMap;
 
 import static gui.graph.GraphPanel.lines;
 
@@ -24,9 +23,7 @@ public class Change {
         GraphPanel.points.clear();
         HashMap<Integer, NodeData> graphNodes = ((G) GFrame.GFrameG).Nodes;
         minMaxVal.getBorderValues();
-        graphNodes.forEach((key, node) -> {
-            GraphPanel.points.add(node);
-        });
+        graphNodes.forEach((key, node) -> GraphPanel.points.add(node));
         lines.clear();
         ((G) GFrame.GFrameG).Edges.forEach((key, edge) -> {
             var x1 = (int) Scale.scale(GFrame.GFrameG.getNode(edge.getSrc()).getLocation().x(), minMaxVal.minX,
@@ -52,9 +49,7 @@ public class Change {
         GraphPanel.points.clear();
         HashMap<Integer, NodeData> graphNodes = ((G) GFrame.GFrameG).Nodes;
         minMaxVal.getBorderValues();
-        graphNodes.forEach((key, node) -> {
-            GraphPanel.points.add(node);
-        });
+        graphNodes.forEach((key, node) -> GraphPanel.points.add(node));
         lines.clear();
         ((G) GFrame.GFrameG).Edges.forEach((key, edge) -> {
             var x1 = (int) Scale.scale(GFrame.GFrameG.getNode(edge.getSrc()).getLocation().x(), minMaxVal.minX,
@@ -82,9 +77,7 @@ public class Change {
         GraphPanel.points.clear();
         HashMap<Integer, NodeData> graphNodes = ((G) GFrame.GFrameG).Nodes;
         minMaxVal.getBorderValues();
-        graphNodes.forEach((key, node) -> {
-            GraphPanel.points.add(node);
-        });
+        graphNodes.forEach((key, node) -> GraphPanel.points.add(node));
         lines.clear();
         ((G) GFrame.GFrameG).Edges.forEach((key, edge) -> {
             var x1 = (int) Scale.scale(GFrame.GFrameG.getNode(edge.getSrc()).getLocation().x(), minMaxVal.minX,
@@ -112,9 +105,7 @@ public class Change {
         GraphPanel.points.clear();
         HashMap<Integer, NodeData> graphNodes = ((G) GFrame.GFrameG).Nodes;
         minMaxVal.getBorderValues();
-        graphNodes.forEach((key, node) -> {
-            GraphPanel.points.add(node);
-        });
+        graphNodes.forEach((key, node) -> GraphPanel.points.add(node));
         lines.clear();
         ((G) GFrame.GFrameG).Edges.forEach((key, edge) -> {
             var x1 = (int) Scale.scale(GFrame.GFrameG.getNode(edge.getSrc()).getLocation().x(), minMaxVal.minX,

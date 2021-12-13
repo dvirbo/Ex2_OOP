@@ -205,15 +205,8 @@ public class G implements DirectedWeightedGraph {
             first_time = false;
         }
         if (it_change == modeCount) {
-            // List<EdgeData> edgeList = new ArrayList<>();
-            // NodeData node = this.getNode(node_id);
-            // node.setInfo("2:White");
-            // this.Edges.values().forEach((Edg) -> {
-            // if (Edg.getSrc() == node_id) {
-            // edgeList.add(Edg);
-            // }
-            // });
-            return EdgesById.get(node_id).iterator();
+
+            return this.EdgesById.get(node_id).iterator();
         }
         throw new RuntimeException("graph changed since the iterator was constructed");
     }
@@ -226,13 +219,14 @@ public class G implements DirectedWeightedGraph {
             this.Edges.keySet().removeIf((str) ->{
              String[] arr = str.split("_");
                 if (Arrays.asList(arr).contains(strSrc)) {
-                    return true;
-                }
-                if (Arrays.asList(arr).contains(strSrc)) {
+                    if(arr[3].equals(strSrc)){
+                        this.EdgesById.get(Integer.parseInt(arr[1])).removeIf((edge)->edge.getDest() == NodeId );
+                    }
                     return true;
                 }
                 return false;
             });
+            this.EdgesById.remove(NodeId);
             this.Nodes.remove(NodeId);
             modeCount++;
 

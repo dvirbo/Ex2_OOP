@@ -97,41 +97,41 @@ class GATest {
     @Test
     @Order(5)
     void center() {
-//        DirectedWeightedGraph gg = new G();
-//        DirectedWeightedGraphAlgorithms gga = new GA();
-//
-//
-//
-//        for (int i = 0; i < 9; i++) {
-//            NodeData n = new CNode(i, new CGeo(i, i, i), 0, "White", -1);
-//            gg.addNode(n);
-//        }
-//        gg.connect(0, 1, 1.0);
-//        gg.connect(1, 0, 1.0);
-//        gg.connect(1, 2, 1.0);
-//        gg.connect(2, 1, 1.0);
-//        gg.connect(2, 9, 1.0);
-//        gg.connect(9, 2, 1.0);
-//        gg.connect(2, 6, 1.0);
-//        gg.connect(6, 2, 1.0);
-//        gg.connect(6, 7, 1.0);
-//        gg.connect(7, 6, 1.0);
-//        gg.connect(6, 8, 1.0);
-//        gg.connect(8, 6, 1.0);
-//        gg.connect(2, 3, 1.0);
-//        gg.connect(3, 2, 1.0);
-//        gg.connect(3, 4, 1.0);
-//        gg.connect(4, 3, 1.0);
-//        gg.connect(3, 5, 1.0);
-//        gg.connect(5, 3, 1.0);
-//
-//        gga.init(gg);
-//        NodeData center = gga.center();
-//        assertEquals(2, center.getKey());
+        DirectedWeightedGraph gg = new G();
+        DirectedWeightedGraphAlgorithms gga = new GA();
 
-        DirectedWeightedGraphAlgorithms GAlgo = new GA();
 
-        GAlgo.center();
+
+        for (int i = 0; i < 9; i++) {
+            NodeData n = new CNode(i, new CGeo(i, i, i), 0, "White", -1);
+            gg.addNode(n);
+        }
+        gg.connect(0, 1, 1.0);
+        gg.connect(1, 0, 1.0);
+        gg.connect(1, 2, 1.0);
+        gg.connect(2, 1, 1.0);
+        gg.connect(2, 9, 1.0);
+        gg.connect(9, 2, 1.0);
+        gg.connect(2, 6, 1.0);
+        gg.connect(6, 2, 1.0);
+        gg.connect(6, 7, 1.0);
+        gg.connect(7, 6, 1.0);
+        gg.connect(6, 8, 1.0);
+        gg.connect(8, 6, 1.0);
+        gg.connect(2, 3, 1.0);
+        gg.connect(3, 2, 1.0);
+        gg.connect(3, 4, 1.0);
+        gg.connect(4, 3, 1.0);
+        gg.connect(3, 5, 1.0);
+        gg.connect(5, 3, 1.0);
+
+        gga.init(gg);
+        NodeData center = gga.center();
+        assertEquals(2, center.getKey());
+
+//        DirectedWeightedGraphAlgorithms GAlgo = new GA();
+
+//        GAlgo.center();
       //  System.out.println(n);
 
     }
@@ -248,7 +248,22 @@ class GATest {
         }
 
 
+
+
     }
 
+    @Test
+    @Order(9)
+    void shortestPathDistTestForMinus1() {
+        DirectedWeightedGraph NotConnectedG = new G();
+        NodeData n1 = new CNode(0, new CGeo(1.0, 2.0, 3.0), Double.MAX_VALUE, "White", -1);
+        NodeData n2 = new CNode(1, new CGeo(3.0, 4.0, 5.0), Double.MAX_VALUE, "White", -1);
+        NotConnectedG.addNode(n1);
+        NotConnectedG.addNode(n2);
+        DirectedWeightedGraphAlgorithms notConnectGA = new GA();
+        notConnectGA.init(NotConnectedG);
+        double result =  notConnectGA.shortestPathDist(0,1);
+        assertEquals(result,-1.0);
+    }
 
 }

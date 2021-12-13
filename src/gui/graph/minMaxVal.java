@@ -1,8 +1,5 @@
 package gui.graph;
 
-import Classes.G;
-import Interfaces.NodeData;
-
 public class minMaxVal {
     public static double minX = Double.MAX_VALUE;
     public static double maxX = Double.MIN_VALUE;
