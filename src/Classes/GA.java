@@ -334,7 +334,7 @@ public class GA implements DirectedWeightedGraphAlgorithms {
 
     /**
      * this method check if there is a path between each node to other in the list of the nodes that we got
-     * id there isn't - we can't generate any path and return false
+     * id there isn't - we can't generate any path and return false.
      * we check from the first node to all the other and then from all the other to him
      * @param cities - list of nodes
      * @return true - if there is path in the graph
