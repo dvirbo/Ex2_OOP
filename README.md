@@ -142,7 +142,9 @@ we used React concept of saving a single source of truth , because we had a lot 
 we used public static GFrameG in every function that need this information, so we don't need to pass parameter;
 see more information about how to get data from the gui in YouTube video
 
-![explanation](https://img.youtube.com/vi/BAqLrfdZ27Y/0.jpg)](https://www.youtube.com/watch?v=BAqLrfdZ27Y)
+
+[![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/62290677/145876651-1d1b17d5-c816-432c-bc1a-ee3f5f3630d1.png)](https://www.youtube.com/watch?v=BAqLrfdZ27Y)
+
 
 
 
