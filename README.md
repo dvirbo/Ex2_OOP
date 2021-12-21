@@ -25,6 +25,8 @@ the project contain six packages:
 
 Last but not least, Ex2: the main class for Ex2 - the implementation will be tested using this class.
 
+# Project structure Directories
+
 ```
 src
 |
@@ -38,9 +40,74 @@ src
 │   └───resources
 └───Interfaces
 ```
+# Project structure Files
 
-
-
+<ul>
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src">src</a>
+<ul>
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/Classes">Classes</a>
+<ul>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/Classes/CEdge.java">CEdge.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/Classes/CGeo.java">CGeo.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/Classes/CNode.java">CNode.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/Classes/G.java">G.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/Classes/GA.java">GA.javaa</a>  </li>
+</ul>
+</li> 
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/ClassesTest">ClassesTest</a>
+<ul>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/ClassesTest/CEdgeTest.java">CEdgeTest.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/ClassesTest/CGeoTest.java">CGeoTest.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/ClassesTest/CNodeTest.java">CNodeTest.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/ClassesTest/GTest.java">GTest.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/ClassesTest/GATest.java">GATest.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/ClassesTest/JsonTest.java">JsonTest.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/ClassesTest/GAPerformanceTest.java">GAPerformanceTest.java</a>  </li>
+</ul>  
+</li>
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/FileHandling">FileHandling</a>
+<ul>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/FileHandling/ArrNE.java">ArrNE.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/FileHandling/ArrNE.java">ArrNE.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/FileHandling/CExport.java">CExport.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/FileHandling/CImport.java">CImport.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/FileHandling/JsonEdge.java">JsonEdge.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/FileHandling/JsonNode.java">JsonNode.java</a>  </li>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/FileHandling/StoreNE.java">StoreNE.java</a>  </li>                       
+</li>
+</ul>  
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/Interfaces">Interfaces</a>
+<ul>
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/Interfaces/DirectedWeightedGraph.java">DirectedWeightedGraph.java</a>  </li> 
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/Interfaces/DirectedWeightedGraphAlgorithms.java">DirectedWeightedGraphAlgorithms.java</a>  </li> 
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/Interfaces/EdgeData.java">EdgeData.java</a>  </li> 
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/Interfaces/GeoLocation.java">GeoLocation.java</a>  </li> 
+<li> <a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/Interfaces/NodeData.java">NodeData.java</a>  </li> 
+</ul>        
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui">gui</a>
+<ul>
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui/buttons">buttons</a> 
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui/graph">graph</a> 
+<ul>
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui/graph/Change.java">Change.java</a> 
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui/graph/DrawEdges.java">DrawEdges.java</a> 
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui/graph/DrawNode.java">DrawNode.java</a> 
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui/graph/DrawTspShortestPath.java">DrawTspShortestPath.java</a> 
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui/graph/GFrame.java">GFrame.java</a> 
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui/graph/GraphPanel.java">GraphPanel.java</a> 
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui/graph/Line.java">Line.java</a> 
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui/graph/LoadSave.java">LoadSave.java</a> 
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui/graph/minMaxVal.java">minMaxVal.java</a> 
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui/graph/tspCalc.java">tspCalc.java</a>                                                                             
+</ul>
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui/resources">resources</a> 
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/gui/Scale.java">Scale.java</a> 
+</ul>
+</li>
+</li>
+<li><a href="https://github.com/dvirbo/Ex2_OOP/tree/main/src/Ex2.java">Ex2.java</a></li>
+</li>
+</ul>
 
 
 
